@@ -42,6 +42,10 @@ namespace MergeLegion.Core
             if (!ServiceLocator.Has<SaveService>()) return;
             if (paused) EndSession();
             else if (!_sessionOpen) BeginSession();
+            if (ServiceLocator.TryGet<Meta.PushScheduler>(out var push))
+            {
+                if (paused) push.Reschedule(); else push.CancelAll();
+            }
             EventBus.Publish(new AppPauseEvent(paused));
         }
 

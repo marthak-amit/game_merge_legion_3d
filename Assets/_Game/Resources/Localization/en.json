@@ -623,6 +623,738 @@
     {
       "key": "league.legend",
       "value": "Legend"
+    },
+    {
+      "key": "push.title",
+      "value": "Merge Legion"
+    },
+    {
+      "key": "push.castle_full",
+      "value": "Your castle's treasury is full! Come collect your coins."
+    },
+    {
+      "key": "push.chest_ready",
+      "value": "Your free chest is ready to open!"
+    },
+    {
+      "key": "push.daily_reward",
+      "value": "Your daily reward is waiting for you."
+    },
+    {
+      "key": "push.event_start",
+      "value": "The Weekend Showdown has started - play for exclusive rewards!"
+    },
+    {
+      "key": "tut.buy_first",
+      "value": "Tap to buy your first unit!"
+    },
+    {
+      "key": "tut.buy_second",
+      "value": "Buy another one!"
+    },
+    {
+      "key": "tut.merge",
+      "value": "Drag one unit onto the other to MERGE them!"
+    },
+    {
+      "key": "tut.fight",
+      "value": "Now press FIGHT!"
+    },
+    {
+      "key": "tut.skill",
+      "value": "Tap your Commander's skill to turn the tide!"
+    },
+    {
+      "key": "tut.research_open",
+      "value": "Open the Army tab to get permanent upgrades."
+    },
+    {
+      "key": "tut.research_buy",
+      "value": "Upgrade your Melee units' health!"
+    },
+    {
+      "key": "tut.chest",
+      "value": "Your free chest is ready - tap it!"
+    },
+    {
+      "key": "tut.commander_open",
+      "value": "Open the Commanders tab."
+    },
+    {
+      "key": "tut.commander_unlock",
+      "value": "Unlock Selene, the healer!"
+    },
+    {
+      "key": "tut.castle",
+      "value": "Your castle earns coins while you are away. Tap to collect!"
+    },
+    {
+      "key": "tut.missions",
+      "value": "Missions give you gems and chest keys every day."
+    },
+    {
+      "key": "common.collect",
+      "value": "Collect"
+    },
+    {
+      "key": "common.cancel",
+      "value": "Cancel"
+    },
+    {
+      "key": "common.ok",
+      "value": "OK"
+    },
+    {
+      "key": "common.close",
+      "value": "Close"
+    },
+    {
+      "key": "common.back",
+      "value": "Back"
+    },
+    {
+      "key": "common.claim",
+      "value": "Claim"
+    },
+    {
+      "key": "common.claimed",
+      "value": "Claimed"
+    },
+    {
+      "key": "common.free",
+      "value": "FREE"
+    },
+    {
+      "key": "common.locked",
+      "value": "Locked"
+    },
+    {
+      "key": "common.max",
+      "value": "MAX"
+    },
+    {
+      "key": "common.watch_ad",
+      "value": "Watch Ad"
+    },
+    {
+      "key": "common.buy",
+      "value": "Buy"
+    },
+    {
+      "key": "common.equip",
+      "value": "Equip"
+    },
+    {
+      "key": "common.equipped",
+      "value": "Equipped"
+    },
+    {
+      "key": "common.upgrade",
+      "value": "Upgrade"
+    },
+    {
+      "key": "common.unlock",
+      "value": "Unlock"
+    },
+    {
+      "key": "common.play",
+      "value": "Play"
+    },
+    {
+      "key": "common.open",
+      "value": "Open"
+    },
+    {
+      "key": "item.coins",
+      "value": "Coins"
+    },
+    {
+      "key": "item.gems",
+      "value": "Gems"
+    },
+    {
+      "key": "item.keys",
+      "value": "Chest keys"
+    },
+    {
+      "key": "item.bp_xp",
+      "value": "Battle Pass XP"
+    },
+    {
+      "key": "item.vip_days",
+      "value": "VIP days"
+    },
+    {
+      "key": "item.no_ads",
+      "value": "Ads removed"
+    },
+    {
+      "key": "item.shards",
+      "value": "{0} shards"
+    },
+    {
+      "key": "item.shards_any",
+      "value": "Commander shards"
+    },
+    {
+      "key": "chest.rates",
+      "value": "Drop rates"
+    },
+    {
+      "key": "chest.rolls",
+      "value": "Contains {0} random rewards"
+    },
+    {
+      "key": "chest.guaranteed",
+      "value": "Guaranteed {0}-{1} commander shards"
+    },
+    {
+      "key": "tab.army",
+      "value": "Army"
+    },
+    {
+      "key": "tab.commanders",
+      "value": "Heroes"
+    },
+    {
+      "key": "tab.home",
+      "value": "Home"
+    },
+    {
+      "key": "tab.shop",
+      "value": "Shop"
+    },
+    {
+      "key": "tab.missions",
+      "value": "Missions"
+    },
+    {
+      "key": "castle.title",
+      "value": "Castle - Level {0}"
+    },
+    {
+      "key": "castle.per_hour",
+      "value": "Income: {0} coins / hour"
+    },
+    {
+      "key": "castle.cap",
+      "value": "The castle stores up to {0} hours of coins."
+    },
+    {
+      "key": "castle.full",
+      "value": "Treasury full!"
+    },
+    {
+      "key": "castle.full_in",
+      "value": "Full in {0}"
+    },
+    {
+      "key": "castle.collect_x2",
+      "value": "Collect x2 ({0})"
+    },
+    {
+      "key": "castle.upgrade",
+      "value": "Upgrade ({0})"
+    },
+    {
+      "key": "login.title",
+      "value": "Daily Reward"
+    },
+    {
+      "key": "login.day",
+      "value": "Day {0}"
+    },
+    {
+      "key": "login.come_back",
+      "value": "Come back tomorrow"
+    },
+    {
+      "key": "spin.title",
+      "value": "Lucky Spin"
+    },
+    {
+      "key": "spin.free",
+      "value": "FREE SPIN!"
+    },
+    {
+      "key": "spin.ad",
+      "value": "Spin ({0} left)"
+    },
+    {
+      "key": "spin.rates",
+      "value": "Odds"
+    },
+    {
+      "key": "shop.thanks",
+      "value": "Thank you!"
+    },
+    {
+      "key": "shop.purchase_ok",
+      "value": "Your purchase was delivered."
+    },
+    {
+      "key": "shop.purchase_failed",
+      "value": "Purchase failed. You were not charged."
+    },
+    {
+      "key": "home.daily",
+      "value": "Daily"
+    },
+    {
+      "key": "home.spin",
+      "value": "Spin"
+    },
+    {
+      "key": "home.pass",
+      "value": "Pass"
+    },
+    {
+      "key": "home.event",
+      "value": "Event"
+    },
+    {
+      "key": "home.arena",
+      "value": "Arena"
+    },
+    {
+      "key": "home.board",
+      "value": "Ranks"
+    },
+    {
+      "key": "home.piggy",
+      "value": "Piggy"
+    },
+    {
+      "key": "home.offers",
+      "value": "Offers"
+    },
+    {
+      "key": "home.chests",
+      "value": "Chests"
+    },
+    {
+      "key": "toast.unlock_level",
+      "value": "Unlocks at level {0}"
+    },
+    {
+      "key": "toast.no_offers",
+      "value": "No offers right now"
+    },
+    {
+      "key": "toast.not_enough_gems",
+      "value": "Not enough gems!"
+    },
+    {
+      "key": "toast.not_ready",
+      "value": "Not ready yet"
+    },
+    {
+      "key": "chest.ads_left",
+      "value": "Ads left: {0}/{1}"
+    },
+    {
+      "key": "chest.keys_have",
+      "value": "Keys {0}/{1}"
+    },
+    {
+      "key": "chest.cost_keys",
+      "value": "{0} keys"
+    },
+    {
+      "key": "chest.cost_gems",
+      "value": "{0} gems"
+    },
+    {
+      "key": "chest.legendary_hint",
+      "value": "Best rewards"
+    },
+    {
+      "key": "arena.weekly_title",
+      "value": "Weekly League Reward"
+    },
+    {
+      "key": "arena.weekly_msg",
+      "value": "You reached {0} league last week. Claim your reward!"
+    },
+    {
+      "key": "army.intro",
+      "value": "Research is permanent and applies to every unit of that line."
+    },
+    {
+      "key": "research.hp",
+      "value": "Health"
+    },
+    {
+      "key": "research.damage",
+      "value": "Damage"
+    },
+    {
+      "key": "research.discount",
+      "value": "Buy discount"
+    },
+    {
+      "key": "toast.not_enough_shards",
+      "value": "Not enough shards - open chests to find more!"
+    },
+    {
+      "key": "cmd.shards",
+      "value": "Shards {0} / {1}"
+    },
+    {
+      "key": "shop.special",
+      "value": "Special"
+    },
+    {
+      "key": "shop.gems",
+      "value": "Gems"
+    },
+    {
+      "key": "shop.bundles",
+      "value": "Commander bundles"
+    },
+    {
+      "key": "shop.owned",
+      "value": "Owned"
+    },
+    {
+      "key": "shop.per_week",
+      "value": "/wk"
+    },
+    {
+      "key": "shop.vip_active",
+      "value": "VIP active: {0} left"
+    },
+    {
+      "key": "shop.vip_daily",
+      "value": "Daily {0} gems"
+    },
+    {
+      "key": "shop.legal",
+      "value": "Purchases are charged to your store account. Subscriptions renew weekly until cancelled in your store settings."
+    },
+    {
+      "key": "piggy.title",
+      "value": "Piggy Bank"
+    },
+    {
+      "key": "piggy.view",
+      "value": "Open"
+    },
+    {
+      "key": "piggy.break",
+      "value": "Break"
+    },
+    {
+      "key": "piggy.ready",
+      "value": "Break it open to collect all the gems!"
+    },
+    {
+      "key": "piggy.min",
+      "value": "Collect at least {0} gems to break it."
+    },
+    {
+      "key": "settings.restore",
+      "value": "Restore Purchases"
+    },
+    {
+      "key": "settings.restored",
+      "value": "Purchases restored: {0}"
+    },
+    {
+      "key": "missions.daily",
+      "value": "Daily"
+    },
+    {
+      "key": "missions.weekly",
+      "value": "Weekly"
+    },
+    {
+      "key": "missions.achievements",
+      "value": "Achievements"
+    },
+    {
+      "key": "missions.resets",
+      "value": "New missions in {0}"
+    },
+    {
+      "key": "missions.swap",
+      "value": "Swap"
+    },
+    {
+      "key": "missions.bonus_daily",
+      "value": "Complete all daily missions"
+    },
+    {
+      "key": "missions.bonus_weekly",
+      "value": "Complete all weekly missions"
+    },
+    {
+      "key": "missions.bonus_hint",
+      "value": "Bonus reward"
+    },
+    {
+      "key": "missions.bonus_title",
+      "value": "Bonus reward"
+    },
+    {
+      "key": "missions.all_done",
+      "value": "All tiers complete!"
+    },
+    {
+      "key": "missions.tier",
+      "value": "Tier {0}/{1}"
+    },
+    {
+      "key": "pass.title",
+      "value": "Battle Pass"
+    },
+    {
+      "key": "pass.unlock",
+      "value": "Unlock Premium"
+    },
+    {
+      "key": "pass.claim_all",
+      "value": "Claim all"
+    },
+    {
+      "key": "pass.free",
+      "value": "FREE"
+    },
+    {
+      "key": "pass.premium",
+      "value": "PREMIUM"
+    },
+    {
+      "key": "pass.season",
+      "value": "Season {0}  -  ends in {1}"
+    },
+    {
+      "key": "pass.tier",
+      "value": "Tier {0} / {1}"
+    },
+    {
+      "key": "pass.unlocked",
+      "value": "Premium unlocked!"
+    },
+    {
+      "key": "event.screen_title",
+      "value": "Weekend Event"
+    },
+    {
+      "key": "event.need",
+      "value": "{0} trophies"
+    },
+    {
+      "key": "event.ends_in",
+      "value": "Ends in {0}"
+    },
+    {
+      "key": "event.starts_in",
+      "value": "Starts in {0}"
+    },
+    {
+      "key": "event.level",
+      "value": "Event level {0} / {1}"
+    },
+    {
+      "key": "event.inactive",
+      "value": "The event is not running right now."
+    },
+    {
+      "key": "arena.title",
+      "value": "Arena"
+    },
+    {
+      "key": "arena.choose",
+      "value": "Choose your opponent"
+    },
+    {
+      "key": "arena.claim_weekly",
+      "value": "Claim weekly league reward"
+    },
+    {
+      "key": "arena.attempts",
+      "value": "Battles: {0} / {1}"
+    },
+    {
+      "key": "arena.opp_info",
+      "value": "{0} trophies  |  power {1}"
+    },
+    {
+      "key": "arena.no_attempts",
+      "value": "No battles left - they refill over time."
+    },
+    {
+      "key": "board.title",
+      "value": "Leaderboards"
+    },
+    {
+      "key": "board.campaign",
+      "value": "Campaign"
+    },
+    {
+      "key": "board.endless",
+      "value": "Endless"
+    },
+    {
+      "key": "board.arena",
+      "value": "Arena"
+    },
+    {
+      "key": "board.you",
+      "value": "You: rank #{0}  -  {1}"
+    },
+    {
+      "key": "board.unranked",
+      "value": "You are not ranked yet"
+    },
+    {
+      "key": "board.you_tag",
+      "value": "you"
+    },
+    {
+      "key": "settings.title",
+      "value": "Settings"
+    },
+    {
+      "key": "settings.music",
+      "value": "Music"
+    },
+    {
+      "key": "settings.sfx",
+      "value": "Sound effects"
+    },
+    {
+      "key": "settings.haptics",
+      "value": "Vibration"
+    },
+    {
+      "key": "settings.language",
+      "value": "Language"
+    },
+    {
+      "key": "settings.cloud",
+      "value": "Cloud save"
+    },
+    {
+      "key": "settings.sync",
+      "value": "Sync now"
+    },
+    {
+      "key": "settings.signed_in",
+      "value": "Signed in - progress is backed up"
+    },
+    {
+      "key": "settings.offline",
+      "value": "Offline - progress is saved on this device"
+    },
+    {
+      "key": "settings.synced",
+      "value": "Synced!"
+    },
+    {
+      "key": "settings.saved",
+      "value": "Saved"
+    },
+    {
+      "key": "settings.privacy",
+      "value": "Privacy Policy"
+    },
+    {
+      "key": "settings.terms",
+      "value": "Terms of Service"
+    },
+    {
+      "key": "settings.privacy_choices",
+      "value": "Privacy choices"
+    },
+    {
+      "key": "settings.support",
+      "value": "Contact support"
+    },
+    {
+      "key": "settings.delete",
+      "value": "Delete account and data"
+    },
+    {
+      "key": "settings.delete_msg",
+      "value": "This permanently erases your progress from this device and the cloud. This cannot be undone."
+    },
+    {
+      "key": "settings.delete_yes",
+      "value": "Delete everything"
+    },
+    {
+      "key": "settings.on",
+      "value": "ON"
+    },
+    {
+      "key": "settings.off",
+      "value": "OFF"
+    },
+    {
+      "key": "profile.title",
+      "value": "Profile"
+    },
+    {
+      "key": "profile.random_name",
+      "value": "Random name"
+    },
+    {
+      "key": "profile.level",
+      "value": "Highest level: {0}"
+    },
+    {
+      "key": "profile.stars",
+      "value": "Total stars: {0}"
+    },
+    {
+      "key": "profile.endless",
+      "value": "Endless best wave: {0}"
+    },
+    {
+      "key": "profile.wins",
+      "value": "Wins {0}  /  Losses {1}"
+    },
+    {
+      "key": "profile.arena",
+      "value": "Arena trophies: {0}  (wins {1})"
+    },
+    {
+      "key": "profile.playtime",
+      "value": "Time played: {0}"
+    },
+    {
+      "key": "common.continue",
+      "value": "Continue"
+    },
+    {
+      "key": "common.quit",
+      "value": "Quit"
+    },
+    {
+      "key": "age.title",
+      "value": "Before you play"
+    },
+    {
+      "key": "age.message",
+      "value": "Please enter your year of birth. We use it only to make sure Merge Legion is right for you."
+    },
+    {
+      "key": "age.blocked_title",
+      "value": "Sorry"
+    },
+    {
+      "key": "age.blocked_message",
+      "value": "Merge Legion is not intended for children. You cannot play this game. Thank you for understanding."
+    },
+    {
+      "key": "perm.title",
+      "value": "Stay in the loop"
+    },
+    {
+      "key": "perm.message",
+      "value": "Next you may be asked to allow notifications and tracking. Notifications tell you when chests and coins are ready. Tracking helps us show ads that are relevant to you and supports the game."
     }
   ]
 }

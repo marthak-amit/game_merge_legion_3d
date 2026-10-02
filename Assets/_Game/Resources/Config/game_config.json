@@ -34,5 +34,12 @@
     "hpPerLevel": 0.03, "damagePerLevel": 0.03, "discountPerLevel": 0.01,
     "maxHpLevel": 100, "maxDamageLevel": 100, "maxDiscountLevel": 30,
     "baseCost": 150, "costGrowth": 1.125, "discountBaseCost": 300, "discountCostGrowth": 1.25
+  },
+  "legal": {
+    "privacyUrl": "https://example.com/merge-legion/privacy",
+    "termsUrl": "https://example.com/merge-legion/terms",
+    "supportEmail": "support@example.com",
+    "supportSubject": "Merge Legion support",
+    "minimumAge": 13
   }
 }

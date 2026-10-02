@@ -55,13 +55,32 @@ namespace MergeLegion.Battle
             var theme = new GameObject("ArenaTheme").AddComponent<ArenaThemeBuilder>();
             theme.Init(_layout, _camera, sun, gridView);
 
+            // menus only show banners; never in battle
+            if (ServiceLocator.TryGet<Monetization.AdsManager>(out var ads)) ads.SetBannerVisible(false);
+            if (ServiceLocator.TryGet<Audio.IAudioService>(out var audio)) audio.PlayMusic("battle");
+
+            // tutorial pointers into the 3D grid
+            Tutorial.TutorialTargets.RegisterWorld("merge_a", () => MergePairWorld(gridView, true));
+            Tutorial.TutorialTargets.RegisterWorld("merge_b", () => MergePairWorld(gridView, false));
+
             Director = new GameObject("BattleDirector").AddComponent<BattleDirector>();
             Director.Init(_layout, view, bars, hud, gridView, drag, theme);
+        }
+
+        private Vector3 MergePairWorld(GridView grid, bool first)
+        {
+            if (!_army.TryFindMergePair(out int a, out int b)) return new Vector3(0, -100, 0);
+            return grid.CellWorld(first ? a : b) + Vector3.up * 0.6f;
         }
 
         private void OnDestroy()
         {
             Director = null;
+            Tutorial.TutorialTargets.Unregister("merge_a");
+            Tutorial.TutorialTargets.Unregister("merge_b");
+            Tutorial.TutorialTargets.Unregister("fight");
+            Tutorial.TutorialTargets.Unregister("skill");
+            for (int i = 0; i < Data.UnitLines.Count; i++) Tutorial.TutorialTargets.Unregister("buy_" + (Data.UnitLineId)i);
         }
 
         private void BuildCamera()

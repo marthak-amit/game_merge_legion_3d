@@ -16,6 +16,7 @@ namespace MergeLegion.UI
         public ScreenId Current => _stack.Count > 0 ? _stack.Peek() : ScreenId.None;
         public int Depth => _stack.Count;
         public Canvas Canvas { get; private set; }
+        public MenuChrome Chrome { get; private set; }
 
         private void Awake()
         {
@@ -28,6 +29,10 @@ namespace MergeLegion.UI
             Canvas = GetComponent<Canvas>();
             ScreenFactory.CreateAll(transform, this);
             foreach (var s in _byId.Values) s.Hide();
+            Chrome = MenuChrome.Create(transform, this); // last sibling: draws above every screen
+
+            if (ServiceLocator.TryGet<Monetization.AdsManager>(out var ads)) ads.SetBannerVisible(true); // menus only, never in battle
+            if (ServiceLocator.TryGet<Audio.IAudioService>(out var audio)) audio.PlayMusic("menu");
         }
 
         private void OnDestroy()
@@ -38,6 +43,13 @@ namespace MergeLegion.UI
         private void Start()
         {
             if (_stack.Count == 0) Push(ScreenId.Home);
+        }
+
+        /// <summary>Switches root tab (Army, Commanders, Home, Shop, Missions) and clears sub-screens.</summary>
+        public void OpenTab(ScreenId id)
+        {
+            if (Current == id && _stack.Count == 1) return;
+            Replace(id);
         }
 
         public void Register(UIScreen screen) => _byId[screen.Id] = screen;

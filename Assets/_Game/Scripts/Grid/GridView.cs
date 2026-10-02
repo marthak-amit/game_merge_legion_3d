@@ -162,6 +162,7 @@ namespace MergeLegion.Grid
             _views[e.Index] = v;
             Vfx.Emit(VfxType.Pop, CellWorld(e.Index) + Vector3.up * 0.3f, v.Tint, 8);
             Haptics.Light();
+            Sfx.Play(SfxId.Spawn);
         }
 
         private void OnMoved(UnitMovedEvent e)
@@ -192,6 +193,7 @@ namespace MergeLegion.Grid
             Vfx.Emit(VfxType.Pop, at, v.Tint, 26);
             Vfx.Emit(VfxType.Glow, at, Color.Lerp(v.Tint, Color.white, 0.5f), 6);
             Haptics.Medium();
+            Sfx.Play(SfxId.Merge);
             if (ArenaCamera.Instance != null) ArenaCamera.Instance.Shake(0.10f + 0.01f * e.NewLevel, 0.18f);
         }
     }

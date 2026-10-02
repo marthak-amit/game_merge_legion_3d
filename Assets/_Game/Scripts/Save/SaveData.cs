@@ -8,6 +8,7 @@ namespace MergeLegion.Save
     public sealed class SaveData
     {
         public string playerId = Guid.NewGuid().ToString("N");
+        public string displayName = "";
         public long createdUtcTicks;
         public long lastSavedUtcTicks;
         public long totalPlaytimeSeconds;
@@ -233,6 +234,7 @@ namespace MergeLegion.Save
     [Serializable]
     public sealed class ConsentData
     {
+        public bool ageBlocked;
         public bool ageGatePassed;
         public bool consentAnswered;
         public bool trackingPromptShown;

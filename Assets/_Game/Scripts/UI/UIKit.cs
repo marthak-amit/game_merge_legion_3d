@@ -142,6 +142,7 @@ namespace MergeLegion.UI
             colors.pressedColor = new Color(0.78f, 0.78f, 0.78f, 1f);
             colors.disabledColor = new Color(0.55f, 0.55f, 0.6f, 0.7f);
             b.colors = colors;
+            b.onClick.AddListener(() => MergeLegion.Audio.Sfx.Play(MergeLegion.Audio.SfxId.Click));
             if (onClick != null) b.onClick.AddListener(onClick);
             img.gameObject.AddComponent<PressScale>();
             var label = Label(img.transform, text, fontSize, Color.white, TextAlignmentOptions.Center, FontStyles.Bold);
@@ -210,6 +211,49 @@ namespace MergeLegion.UI
             fillImage.fillMethod = Image.FillMethod.Horizontal;
             fillImage.fillAmount = 0f;
             return back;
+        }
+
+        /// <summary>Small red notification dot in the top-right corner of a widget.</summary>
+        public static GameObject Badge(Transform parent)
+        {
+            var dot = Icon(parent, Bad, new Vector2(34, 34), true, "Badge");
+            Place(dot.rectTransform, new Vector2(1f, 1f), new Vector2(8, 8), new Vector2(34, 34));
+            dot.rectTransform.pivot = new Vector2(0.5f, 0.5f);
+            dot.gameObject.SetActive(false);
+            return dot.gameObject;
+        }
+
+        /// <summary>Row of toggle tabs; returns the buttons so callers can restyle the active one.</summary>
+        public static Button[] Tabs(Transform parent, string[] labels, int selected, System.Action<int> onChange, Vector2 anchor, Vector2 pos, Vector2 totalSize)
+        {
+            var root = Rect("Tabs", parent);
+            Place(root, anchor, pos, totalSize);
+            var buttons = new Button[labels.Length];
+            float w = totalSize.x / labels.Length;
+            for (int i = 0; i < labels.Length; i++)
+            {
+                int idx = i;
+                var b = Btn(root, labels[i], i == selected ? Accent : PanelLight, null, new Vector2(w - 8, totalSize.y), 36);
+                var rt = (RectTransform)b.transform;
+                rt.anchorMin = rt.anchorMax = new Vector2(0f, 0.5f);
+                rt.pivot = new Vector2(0f, 0.5f);
+                rt.anchoredPosition = new Vector2(i * w + 4, 0);
+                buttons[i] = b;
+                b.onClick.AddListener(() =>
+                {
+                    for (int k = 0; k < buttons.Length; k++) buttons[k].GetComponent<Image>().color = k == idx ? Accent : PanelLight;
+                    onChange(idx);
+                });
+            }
+            return buttons;
+        }
+
+        public static void Flash(Graphic g, Color flash, float seconds = 0.4f)
+        {
+            Color original = g.color;
+            g.color = flash;
+            MergeLegion.Core.Tween.Value(seconds, k => { if (g != null) g.color = Color.Lerp(flash, original, k); },
+                MergeLegion.Core.Ease.OutQuad, () => { if (g != null) g.color = original; }, 0f, g);
         }
 
         public static void EnsureEventSystem()

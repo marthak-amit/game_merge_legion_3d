@@ -226,6 +226,7 @@ namespace MergeLegion.Battle
                         var at = new Vector3(e.X, 1.2f, e.Y);
                         Vfx.Emit(VfxType.Hit, at, e.Team == 0 ? new Color(1f, 0.5f, 0.4f) : Color.white, 3);
                         _numbers.Show(at, e.Value, e.Team == 0 ? new Color(1f, 0.45f, 0.4f) : Color.white);
+                        Sfx.Play(SfxId.Hit, 0.5f);
                     }
                     break;
 
@@ -300,6 +301,7 @@ namespace MergeLegion.Battle
             _dying.Add(new Dying { Visual = v, Time = 0f, Scale = v.transform.localScale });
             Vfx.Emit(VfxType.Death, new Vector3(e.X, 0.6f, e.Y), v.Tint, 14);
             Haptics.Light();
+            Sfx.Play(SfxId.Death, 0.6f);
         }
 
         private void AddTelegraph(SimEvent e)

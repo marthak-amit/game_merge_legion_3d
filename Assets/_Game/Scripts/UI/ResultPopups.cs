@@ -51,6 +51,7 @@ namespace MergeLegion.UI
             }
 
             var coins = Row(c, UIKit.Gold, "+" + Format(a.Reward.Coins), -250);
+            Tween.Value(0.1f, k => { }, Ease.Linear, () => CoinFly.Play(new Vector2(Screen.width * 0.5f, Screen.height * 0.5f), 10), 0.9f);
             if (a.Reward.Gems > 0) Row(c, UIKit.Blue, "+" + a.Reward.Gems + " " + Loc.Get("result.gems"), -340);
             if (a.Reward.Keys > 0) Row(c, UIKit.Purple, "+" + a.Reward.Keys + " " + Loc.Get("result.keys"), a.Reward.Gems > 0 ? -430 : -340);
 

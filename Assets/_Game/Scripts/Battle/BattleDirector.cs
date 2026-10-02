@@ -14,16 +14,6 @@ using UnityEngine;
 
 namespace MergeLegion.Battle
 {
-    public readonly struct BattlePhaseEvent
-    {
-        public readonly BattlePhase Phase;
-        public BattlePhaseEvent(BattlePhase phase) { Phase = phase; }
-    }
-
-    public readonly struct SkillUsedEvent { }
-
-    public enum BattlePhase { Prepare, Fighting, Result }
-
     /// <summary>
     /// Runs the level loop: PREPARE (grid + enemy preview) -> FIGHT (fixed-step sim, commander skill, 2x speed) -> WIN/LOSE.
     /// All rewards, ad offers and progress writes happen here.

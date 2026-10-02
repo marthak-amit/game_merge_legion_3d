@@ -130,6 +130,12 @@ namespace MergeLegion.Services
             ServiceLocator.Register(sync);
             ServiceLocator.Register(new LeaderboardReporter(save, ServiceLocator.Get<ILeaderboardService>()));
 
+            // ---- onboarding + notifications
+            ServiceLocator.Register(new Tutorial.TutorialService(save, Tutorial.TutorialConfig.Load(), () => campaign.CurrentLevel, currency, analytics));
+            ServiceLocator.Register(new PushScheduler(ServiceLocator.Get<IPushService>(), ServiceLocator.Get<CastleService>(),
+                ServiceLocator.Get<ChestService>(), ServiceLocator.Get<LoginService>(), ServiceLocator.Get<WeekendEventService>(),
+                time, UI.Loc.Get));
+
             var iapService = ServiceLocator.Get<IIAPService>();
             if (iapService is MockIAPService mockIap)
             {

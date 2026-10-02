@@ -1,0 +1,16 @@
+{
+  "steps": [
+    { "id": "buy1", "scene": "battle", "phase": "prepare", "minLevel": 1, "maxLevel": 1, "textKey": "tut.buy_first", "target": "buy_Melee", "completeOn": 0, "count": 1, "dim": true },
+    { "id": "buy2", "scene": "battle", "phase": "prepare", "minLevel": 1, "maxLevel": 1, "textKey": "tut.buy_second", "target": "buy_Melee", "completeOn": 0, "count": 1, "dim": true },
+    { "id": "merge", "scene": "battle", "phase": "prepare", "minLevel": 1, "maxLevel": 1, "textKey": "tut.merge", "target": "merge", "completeOn": 1, "count": 1, "dim": false },
+    { "id": "fight", "scene": "battle", "phase": "prepare", "minLevel": 1, "maxLevel": 1, "textKey": "tut.fight", "target": "fight", "completeOn": 2, "count": 1, "dim": true },
+    { "id": "skill", "scene": "battle", "phase": "fight", "minLevel": 2, "maxLevel": 2, "textKey": "tut.skill", "target": "skill", "completeOn": 3, "count": 1, "dim": true },
+    { "id": "research_open", "scene": "home", "phase": "", "minLevel": 3, "maxLevel": 6, "textKey": "tut.research_open", "target": "tab_Army", "completeOn": 8, "completeArg": "Army", "count": 1, "dim": true },
+    { "id": "research_buy", "scene": "home", "phase": "", "minLevel": 3, "maxLevel": 6, "textKey": "tut.research_buy", "target": "research_Melee_Hp", "completeOn": 4, "count": 1, "dim": true, "startCoins": 400 },
+    { "id": "chest", "scene": "home", "phase": "", "minLevel": 4, "maxLevel": 8, "textKey": "tut.chest", "target": "chest_wooden", "completeOn": 5, "count": 1, "dim": true },
+    { "id": "commander_open", "scene": "home", "phase": "", "minLevel": 5, "maxLevel": 9, "textKey": "tut.commander_open", "target": "tab_Commanders", "completeOn": 8, "completeArg": "Commanders", "count": 1, "dim": true, "startShards": 20, "startShardsTarget": "selene" },
+    { "id": "commander_unlock", "scene": "home", "phase": "", "minLevel": 5, "maxLevel": 9, "textKey": "tut.commander_unlock", "target": "cmd_selene", "completeOn": 6, "count": 1, "dim": true },
+    { "id": "castle", "scene": "home", "phase": "", "minLevel": 6, "maxLevel": 10, "textKey": "tut.castle", "target": "castle", "completeOn": 9, "count": 1, "dim": true },
+    { "id": "missions", "scene": "home", "phase": "", "minLevel": 7, "maxLevel": 11, "textKey": "tut.missions", "target": "tab_Missions", "completeOn": 8, "completeArg": "Missions", "count": 1, "dim": true }
+  ]
+}

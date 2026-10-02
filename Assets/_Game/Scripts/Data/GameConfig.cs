@@ -67,6 +67,17 @@ namespace MergeLegion.Data
         public float discountCostGrowth = 1.25f;
     }
 
+    /// <summary>Links required by the stores. Replace the placeholders before release (Remote Config can override them).</summary>
+    [Serializable]
+    public sealed class LegalConfig
+    {
+        public string privacyUrl = "https://example.com/merge-legion/privacy";
+        public string termsUrl = "https://example.com/merge-legion/terms";
+        public string supportEmail = "support@example.com";
+        public string supportSubject = "Merge Legion support";
+        public int minimumAge = 13;
+    }
+
     [Serializable]
     public sealed class AdPlacementConfig
     {
@@ -104,6 +115,7 @@ namespace MergeLegion.Data
         public RewardConfig rewards = new RewardConfig();
         public EndlessConfig endless = new EndlessConfig();
         public ResearchConfig research = new ResearchConfig();
+        public LegalConfig legal = new LegalConfig();
         public AdsConfig ads = new AdsConfig();
 
         public static GameConfig FromJson(string json, string overrideJson = null)

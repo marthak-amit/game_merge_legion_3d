@@ -46,6 +46,14 @@ namespace MergeLegion.Core
             ServiceLocator.Register(loader);
             gameObject.AddComponent<SaveRunner>().Init(save, ServiceLocator.Get<IRemoteConfigService>());
             gameObject.AddComponent<AppLifecycle>();
+            gameObject.AddComponent<Audio.AudioManager>();
+            ServiceLocator.Register<Audio.IAudioService>(GetComponent<Audio.AudioManager>());
+            Tutorial.TutorialOverlay.Create();
+            UI.PermissionsFlow.Init();
+
+            var auth = ServiceLocator.Get<IAuthService>();
+            if (!string.IsNullOrEmpty(save.Data.displayName)) auth.DisplayName = save.Data.displayName;
+            else save.Data.displayName = auth.DisplayName;
         }
 
         private IEnumerator Start()
@@ -76,6 +84,14 @@ namespace MergeLegion.Core
             var auth = ServiceLocator.Get<IAuthService>();
             ServiceLocator.Get<IAnalyticsService>().SetUserId(auth.PlayerId);
 
+            // compliance first: age gate + consent (full boot only; direct-play of a scene in the Editor skips it)
+            if (!string.IsNullOrEmpty(firstScene))
+            {
+                bool flowDone = false;
+                UI.FirstRunFlow.Run(() => flowDone = true);
+                while (!flowDone) yield return null;
+            }
+
             // cloud save: adopt a better cloud save (asks the player when both have progress) or upload ours
             bool syncDone = false;
             ServiceLocator.Get<CloudSyncService>().SyncOnBoot(_ => syncDone = true);
@@ -88,7 +104,13 @@ namespace MergeLegion.Core
             GetComponent<AppLifecycle>().BeginSession();
 
             EventBus.Publish(new BootCompletedEvent());
-            if (!string.IsNullOrEmpty(firstScene)) ServiceLocator.Get<SceneLoader>().Load(firstScene);
+            if (!string.IsNullOrEmpty(firstScene))
+            {
+                // brand-new players go straight into the 30-second hook: buy -> merge -> fight -> win
+                string scene = ServiceLocator.Get<Tutorial.TutorialService>().NeedsIntroBattle ? SceneNames.Battle : firstScene;
+                ServiceLocator.Get<SceneLoader>().Load(scene);
+                UI.PermissionsFlow.AskIfDue();
+            }
         }
 
         private void OnDestroy()

@@ -103,6 +103,7 @@ namespace MergeLegion.Battle
             var rt = (RectTransform)_skillButton.transform;
             UIKit.Place(rt, new Vector2(0.5f, 0f), new Vector2(0, 60), new Vector2(230, 230));
             _skillButton.GetComponent<Image>().sprite = UIKit.Circle;
+            Tutorial.TutorialTargets.Register("skill", rt);
 
             _skillFill = UIKit.PanelImage(rt, UIKit.Blue, "Cooldown");
             UIKit.Stretch(_skillFill.rectTransform, 10, 10, 10, 10);
@@ -131,6 +132,7 @@ namespace MergeLegion.Battle
             UIKit.Place(pill.rectTransform, new Vector2(0f, 1f), new Vector2(20, -20), new Vector2(360, 90));
             var coinIcon = UIKit.Icon(pill.transform, UIKit.Gold, new Vector2(56, 56));
             UIKit.Place(coinIcon.rectTransform, new Vector2(0f, 0.5f), new Vector2(18, 0), new Vector2(56, 56));
+            Tutorial.TutorialTargets.Register("pill_coins", pill.rectTransform);
             _coins = UIKit.Label(pill.transform, "0", 44, Color.white, TextAlignmentOptions.MidlineRight, FontStyles.Bold);
             UIKit.Stretch(_coins.rectTransform, 84, 0, 20, 0);
 
@@ -149,6 +151,7 @@ namespace MergeLegion.Battle
 
             _fight = UIKit.Btn(_prepareGroup, Loc.Get("hud.fight"), UIKit.Good, () => FightClicked?.Invoke(), new Vector2(760, 140), 64);
             UIKit.Place((RectTransform)_fight.transform, new Vector2(0.5f, 0f), new Vector2(0, 275), new Vector2(760, 140));
+            Tutorial.TutorialTargets.Register("fight", (RectTransform)_fight.transform);
 
             _freeUnit = UIKit.Btn(_prepareGroup, "", UIKit.Blue, () => FreeUnitClicked?.Invoke(), new Vector2(420, 90), 34);
             UIKit.Place((RectTransform)_freeUnit.transform, new Vector2(0f, 1f), new Vector2(20, -125), new Vector2(420, 90));
@@ -178,6 +181,7 @@ namespace MergeLegion.Battle
                 slot.LockText = UIKit.Label(lockImg.transform, "", 34, Color.white);
                 UIKit.Stretch(slot.LockText.rectTransform, 8, 8, 8, 8);
                 _slots[i] = slot;
+                Tutorial.TutorialTargets.Register("buy_" + line, rt);
             }
         }
 

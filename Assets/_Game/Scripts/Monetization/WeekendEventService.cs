@@ -21,7 +21,6 @@ namespace MergeLegion.Monetization
         private readonly ITimeService _time;
         private readonly RewardGranter _granter;
         private readonly GameDatabase _db;
-        private readonly IAnalyticsService _analytics;
         private readonly Func<int> _playerLevel;
         private EventConfig _cfg;
 
@@ -32,7 +31,6 @@ namespace MergeLegion.Monetization
             _time = time;
             _granter = granter;
             _db = db;
-            _analytics = analytics;
             _playerLevel = playerLevel;
             _cfg = fallback;
 
