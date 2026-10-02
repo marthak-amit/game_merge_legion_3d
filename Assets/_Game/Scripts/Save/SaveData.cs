@@ -35,6 +35,9 @@ namespace MergeLegion.Save
         public int highestMergedLevel = 1;
         public long lastFreeUnitUtcTicks;
 
+        // Research Lab: key "{line}_{stat}" -> level
+        public List<IntEntry> research = new List<IntEntry>();
+
         // Commanders
         public string equippedCommander = "";
         public List<IntEntry> commanderLevels = new List<IntEntry>();

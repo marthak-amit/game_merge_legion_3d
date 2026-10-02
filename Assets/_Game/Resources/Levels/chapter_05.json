@@ -1,0 +1,304 @@
+{
+  "chapter": 5,
+  "theme": "volcano",
+  "levels": [
+    {
+      "id": 81, "chapter": 5, "index": 1, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 777.4648, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 3, "level": 4, "col": 4, "row": 1},
+        {"line": 3, "level": 3, "col": 3, "row": 1},
+        {"line": 0, "level": 2, "col": 2, "row": 0},
+        {"line": 2, "level": 3, "col": 3, "row": 0},
+        {"line": 1, "level": 1, "col": 4, "row": 3},
+        {"line": 1, "level": 2, "col": 2, "row": 2},
+        {"line": 3, "level": 1, "col": 1, "row": 0},
+        {"line": 2, "level": 1, "col": 1, "row": 1},
+        {"line": 3, "level": 1, "col": 0, "row": 1}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 82, "chapter": 5, "index": 2, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 796.316, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 3, "level": 5, "col": 4, "row": 0},
+        {"line": 3, "level": 3, "col": 0, "row": 0},
+        {"line": 1, "level": 1, "col": 0, "row": 2},
+        {"line": 0, "level": 1, "col": 3, "row": 0},
+        {"line": 2, "level": 1, "col": 3, "row": 1},
+        {"line": 3, "level": 1, "col": 0, "row": 1},
+        {"line": 1, "level": 1, "col": 1, "row": 3},
+        {"line": 2, "level": 1, "col": 4, "row": 1}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 83, "chapter": 5, "index": 3, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 793.6496, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 2, "level": 4, "col": 3, "row": 1},
+        {"line": 1, "level": 3, "col": 1, "row": 3},
+        {"line": 3, "level": 3, "col": 4, "row": 1},
+        {"line": 1, "level": 2, "col": 3, "row": 2},
+        {"line": 0, "level": 2, "col": 0, "row": 0},
+        {"line": 0, "level": 1, "col": 4, "row": 0},
+        {"line": 2, "level": 1, "col": 3, "row": 0},
+        {"line": 0, "level": 1, "col": 2, "row": 1},
+        {"line": 3, "level": 1, "col": 1, "row": 1}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 84, "chapter": 5, "index": 4, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 803.397, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 4, "col": 0, "row": 0},
+        {"line": 3, "level": 4, "col": 4, "row": 0},
+        {"line": 0, "level": 2, "col": 3, "row": 1},
+        {"line": 3, "level": 2, "col": 2, "row": 0},
+        {"line": 1, "level": 1, "col": 4, "row": 3},
+        {"line": 2, "level": 1, "col": 0, "row": 1},
+        {"line": 1, "level": 1, "col": 3, "row": 3},
+        {"line": 0, "level": 1, "col": 2, "row": 1}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 85, "chapter": 5, "index": 5, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 833.3348, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 1, "level": 5, "col": 3, "row": 3},
+        {"line": 3, "level": 3, "col": 3, "row": 0},
+        {"line": 2, "level": 2, "col": 1, "row": 0},
+        {"line": 3, "level": 2, "col": 4, "row": 1},
+        {"line": 2, "level": 1, "col": 1, "row": 1},
+        {"line": 3, "level": 2, "col": 3, "row": 1},
+        {"line": 0, "level": 1, "col": 4, "row": 0},
+        {"line": 3, "level": 1, "col": 0, "row": 0}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 86, "chapter": 5, "index": 6, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 849.6963, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 4, "col": 2, "row": 0},
+        {"line": 3, "level": 3, "col": 0, "row": 1},
+        {"line": 1, "level": 3, "col": 4, "row": 3},
+        {"line": 3, "level": 2, "col": 4, "row": 0},
+        {"line": 1, "level": 3, "col": 3, "row": 2},
+        {"line": 0, "level": 1, "col": 1, "row": 1},
+        {"line": 3, "level": 1, "col": 3, "row": 1},
+        {"line": 0, "level": 1, "col": 1, "row": 0},
+        {"line": 2, "level": 1, "col": 4, "row": 1}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 87, "chapter": 5, "index": 7, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 861.0619, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 4, "col": 1, "row": 1},
+        {"line": 2, "level": 4, "col": 3, "row": 0},
+        {"line": 0, "level": 2, "col": 0, "row": 0},
+        {"line": 1, "level": 2, "col": 0, "row": 2},
+        {"line": 0, "level": 2, "col": 4, "row": 1},
+        {"line": 2, "level": 1, "col": 2, "row": 0},
+        {"line": 1, "level": 1, "col": 1, "row": 2},
+        {"line": 0, "level": 1, "col": 2, "row": 1}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 88, "chapter": 5, "index": 8, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 930.934, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 4, "col": 2, "row": 0},
+        {"line": 2, "level": 4, "col": 0, "row": 0},
+        {"line": 1, "level": 2, "col": 3, "row": 3},
+        {"line": 2, "level": 2, "col": 4, "row": 1},
+        {"line": 0, "level": 2, "col": 1, "row": 0},
+        {"line": 0, "level": 1, "col": 1, "row": 1},
+        {"line": 3, "level": 1, "col": 4, "row": 0},
+        {"line": 0, "level": 1, "col": 2, "row": 1},
+        {"line": 3, "level": 1, "col": 3, "row": 0},
+        {"line": 3, "level": 1, "col": 2, "row": 2}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 89, "chapter": 5, "index": 9, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 984.0571, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 4, "col": 1, "row": 0},
+        {"line": 1, "level": 4, "col": 0, "row": 3},
+        {"line": 2, "level": 2, "col": 3, "row": 1},
+        {"line": 0, "level": 3, "col": 1, "row": 1},
+        {"line": 2, "level": 2, "col": 3, "row": 0},
+        {"line": 0, "level": 1, "col": 0, "row": 1},
+        {"line": 0, "level": 1, "col": 2, "row": 1},
+        {"line": 1, "level": 1, "col": 1, "row": 2},
+        {"line": 3, "level": 1, "col": 2, "row": 0},
+        {"line": 0, "level": 1, "col": 0, "row": 0}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 90, "chapter": 5, "index": 10, "theme": "volcano", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 548.2112, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 3, "level": 3, "col": 3, "row": 0},
+        {"line": 0, "level": 3, "col": 1, "row": 0},
+        {"line": 2, "level": 2, "col": 0, "row": 1},
+        {"line": 1, "level": 2, "col": 0, "row": 3},
+        {"line": 1, "level": 1, "col": 1, "row": 3},
+        {"line": 2, "level": 1, "col": 0, "row": 0},
+        {"line": 3, "level": 1, "col": 3, "row": 1},
+        {"line": 3, "level": 1, "col": 2, "row": 1}
+      ],
+      "boss": {"hp": 5190.076, "damage": 173.0025, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 1, "minionLevel": 1}
+    },
+    {
+      "id": 91, "chapter": 5, "index": 11, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 973.0693, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 3, "level": 4, "col": 3, "row": 1},
+        {"line": 0, "level": 3, "col": 4, "row": 0},
+        {"line": 3, "level": 4, "col": 2, "row": 0},
+        {"line": 0, "level": 2, "col": 1, "row": 1},
+        {"line": 3, "level": 2, "col": 4, "row": 1},
+        {"line": 3, "level": 2, "col": 3, "row": 0},
+        {"line": 2, "level": 1, "col": 1, "row": 0},
+        {"line": 2, "level": 1, "col": 0, "row": 0},
+        {"line": 1, "level": 1, "col": 2, "row": 2},
+        {"line": 2, "level": 1, "col": 0, "row": 1}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 92, "chapter": 5, "index": 12, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 1066.85, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 2, "level": 5, "col": 0, "row": 1},
+        {"line": 2, "level": 3, "col": 3, "row": 0},
+        {"line": 1, "level": 4, "col": 4, "row": 3},
+        {"line": 0, "level": 2, "col": 2, "row": 0},
+        {"line": 2, "level": 1, "col": 4, "row": 0},
+        {"line": 2, "level": 1, "col": 1, "row": 0},
+        {"line": 1, "level": 1, "col": 3, "row": 3},
+        {"line": 1, "level": 1, "col": 3, "row": 2}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 93, "chapter": 5, "index": 13, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 1075.171, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 3, "level": 4, "col": 1, "row": 1},
+        {"line": 1, "level": 4, "col": 2, "row": 3},
+        {"line": 1, "level": 4, "col": 1, "row": 3},
+        {"line": 0, "level": 3, "col": 1, "row": 0},
+        {"line": 2, "level": 2, "col": 4, "row": 1},
+        {"line": 0, "level": 2, "col": 2, "row": 0},
+        {"line": 3, "level": 1, "col": 3, "row": 0},
+        {"line": 0, "level": 1, "col": 0, "row": 0},
+        {"line": 2, "level": 1, "col": 0, "row": 1}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 94, "chapter": 5, "index": 14, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 1111.312, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 4, "col": 0, "row": 0},
+        {"line": 0, "level": 4, "col": 4, "row": 1},
+        {"line": 1, "level": 3, "col": 1, "row": 3},
+        {"line": 1, "level": 4, "col": 1, "row": 2},
+        {"line": 1, "level": 2, "col": 0, "row": 3},
+        {"line": 1, "level": 1, "col": 4, "row": 2},
+        {"line": 1, "level": 2, "col": 3, "row": 2},
+        {"line": 0, "level": 1, "col": 1, "row": 1},
+        {"line": 2, "level": 1, "col": 2, "row": 1}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 95, "chapter": 5, "index": 15, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 1102.65, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 4, "col": 1, "row": 0},
+        {"line": 3, "level": 4, "col": 3, "row": 0},
+        {"line": 0, "level": 4, "col": 0, "row": 1},
+        {"line": 2, "level": 2, "col": 0, "row": 0},
+        {"line": 1, "level": 3, "col": 2, "row": 3},
+        {"line": 1, "level": 1, "col": 1, "row": 3},
+        {"line": 2, "level": 1, "col": 2, "row": 0},
+        {"line": 0, "level": 1, "col": 1, "row": 1}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 96, "chapter": 5, "index": 16, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 1213.287, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 1, "level": 5, "col": 4, "row": 3},
+        {"line": 0, "level": 4, "col": 2, "row": 0},
+        {"line": 0, "level": 3, "col": 0, "row": 1},
+        {"line": 2, "level": 2, "col": 0, "row": 0},
+        {"line": 2, "level": 2, "col": 4, "row": 0},
+        {"line": 0, "level": 2, "col": 3, "row": 1},
+        {"line": 1, "level": 2, "col": 0, "row": 3},
+        {"line": 3, "level": 1, "col": 2, "row": 1},
+        {"line": 0, "level": 1, "col": 3, "row": 0},
+        {"line": 3, "level": 1, "col": 4, "row": 1}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 97, "chapter": 5, "index": 17, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 1218.084, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 1, "level": 5, "col": 0, "row": 2},
+        {"line": 3, "level": 4, "col": 0, "row": 0},
+        {"line": 3, "level": 4, "col": 4, "row": 0},
+        {"line": 2, "level": 2, "col": 1, "row": 1},
+        {"line": 1, "level": 3, "col": 3, "row": 3},
+        {"line": 3, "level": 1, "col": 0, "row": 1},
+        {"line": 2, "level": 1, "col": 3, "row": 1},
+        {"line": 3, "level": 1, "col": 1, "row": 0},
+        {"line": 2, "level": 1, "col": 4, "row": 1}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 98, "chapter": 5, "index": 18, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 1221.624, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 2, "level": 4, "col": 0, "row": 0},
+        {"line": 3, "level": 4, "col": 0, "row": 1},
+        {"line": 0, "level": 3, "col": 1, "row": 1},
+        {"line": 2, "level": 4, "col": 2, "row": 1},
+        {"line": 2, "level": 2, "col": 4, "row": 1},
+        {"line": 1, "level": 2, "col": 4, "row": 3},
+        {"line": 3, "level": 2, "col": 3, "row": 0},
+        {"line": 1, "level": 1, "col": 1, "row": 2},
+        {"line": 3, "level": 1, "col": 4, "row": 0},
+        {"line": 2, "level": 1, "col": 2, "row": 0}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 99, "chapter": 5, "index": 19, "theme": "volcano", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 1245.968, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 4, "col": 2, "row": 1},
+        {"line": 1, "level": 4, "col": 1, "row": 3},
+        {"line": 2, "level": 4, "col": 3, "row": 1},
+        {"line": 3, "level": 3, "col": 1, "row": 1},
+        {"line": 3, "level": 2, "col": 3, "row": 0},
+        {"line": 3, "level": 3, "col": 0, "row": 0},
+        {"line": 2, "level": 1, "col": 1, "row": 0},
+        {"line": 2, "level": 1, "col": 0, "row": 1},
+        {"line": 0, "level": 1, "col": 2, "row": 0},
+        {"line": 1, "level": 1, "col": 4, "row": 2},
+        {"line": 0, "level": 1, "col": 4, "row": 1}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 100, "chapter": 5, "index": 20, "theme": "volcano", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 748.6064, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 4, "col": 1, "row": 0},
+        {"line": 2, "level": 3, "col": 1, "row": 1},
+        {"line": 2, "level": 3, "col": 2, "row": 1},
+        {"line": 0, "level": 2, "col": 4, "row": 0},
+        {"line": 2, "level": 1, "col": 3, "row": 0},
+        {"line": 3, "level": 1, "col": 4, "row": 1},
+        {"line": 2, "level": 1, "col": 0, "row": 0}
+      ],
+      "boss": {"hp": 7087.276, "damage": 236.2425, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 1, "minionLevel": 1}
+    }
+  ]
+}

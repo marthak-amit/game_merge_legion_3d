@@ -1,0 +1,14 @@
+{
+  "themes": [
+    { "id": "grasslands", "nameKey": "theme.grasslands", "ground": "#5B8F52", "tileA": "#3F5F3C", "tileB": "#4A6E46", "sky": "#8FC3EB", "fog": "#B7DDF2", "light": "#FFF4D8", "lightIntensity": 1.15, "prop": "tree", "propColor": "#2F7A3A", "accent": "#7A5A3A", "addressKey": "theme_grasslands" },
+    { "id": "desert", "nameKey": "theme.desert", "ground": "#D6B26A", "tileA": "#A8864A", "tileB": "#B5934F", "sky": "#F2D9A0", "fog": "#F5E2B8", "light": "#FFE7B0", "lightIntensity": 1.25, "prop": "cactus", "propColor": "#4F8F4A", "accent": "#C99A55", "addressKey": "theme_desert" },
+    { "id": "snow", "nameKey": "theme.snow", "ground": "#E4EEF5", "tileA": "#A9BED0", "tileB": "#B8CBDB", "sky": "#BFD8EE", "fog": "#DDEBF6", "light": "#E8F2FF", "lightIntensity": 1.1, "prop": "pine", "propColor": "#2D5B4A", "accent": "#FFFFFF", "addressKey": "theme_snow" },
+    { "id": "swamp", "nameKey": "theme.swamp", "ground": "#41533A", "tileA": "#2F3D2B", "tileB": "#364632", "sky": "#6E8A6A", "fog": "#7C9577", "light": "#D8E8C0", "lightIntensity": 0.95, "prop": "reed", "propColor": "#6E8F3A", "accent": "#2C4A42", "addressKey": "theme_swamp" },
+    { "id": "volcano", "nameKey": "theme.volcano", "ground": "#3A2D2A", "tileA": "#2A201E", "tileB": "#33261F", "sky": "#6A2A20", "fog": "#8A3A28", "light": "#FFB07A", "lightIntensity": 1.2, "prop": "rock", "propColor": "#4A3A38", "accent": "#FF6A1F", "addressKey": "theme_volcano" },
+    { "id": "castle", "nameKey": "theme.castle", "ground": "#7D8791", "tileA": "#5A646E", "tileB": "#66707A", "sky": "#9DB0C8", "fog": "#B8C6D8", "light": "#FFF2E0", "lightIntensity": 1.1, "prop": "wall", "propColor": "#9AA3AD", "accent": "#B03030", "addressKey": "theme_castle" },
+    { "id": "undead", "nameKey": "theme.undead", "ground": "#3C3A4A", "tileA": "#2A2836", "tileB": "#312F40", "sky": "#4A4560", "fog": "#5A5575", "light": "#B8C0FF", "lightIntensity": 0.9, "prop": "tomb", "propColor": "#8A8A9A", "accent": "#7BFFB0", "addressKey": "theme_undead" },
+    { "id": "sky", "nameKey": "theme.sky", "ground": "#E8F4FF", "tileA": "#B5D2EE", "tileB": "#C3DCF3", "sky": "#6FB6FF", "fog": "#CFE7FF", "light": "#FFFFFF", "lightIntensity": 1.3, "prop": "cloud", "propColor": "#FFFFFF", "accent": "#FFE9A8", "addressKey": "theme_sky" },
+    { "id": "abyss", "nameKey": "theme.abyss", "ground": "#1C1A2E", "tileA": "#121022", "tileB": "#181630", "sky": "#0A0818", "fog": "#15122B", "light": "#9A8CFF", "lightIntensity": 0.85, "prop": "pillar", "propColor": "#2A2450", "accent": "#A06BFF", "addressKey": "theme_abyss" },
+    { "id": "celestial", "nameKey": "theme.celestial", "ground": "#F6E9C8", "tileA": "#D9C58F", "tileB": "#E4D29E", "sky": "#2A2F6E", "fog": "#4A4F95", "light": "#FFF3C0", "lightIntensity": 1.25, "prop": "orb", "propColor": "#FFE08A", "accent": "#FFFFFF", "addressKey": "theme_celestial" }
+  ]
+}

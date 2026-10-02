@@ -174,7 +174,14 @@ namespace MergeLegion.Tests
 
             _currency.Add(CurrencyType.Coins, 100000000, "test");
             for (int i = 0; i < 15; i++) Assert.AreEqual(BuyResult.Ok, _army.Buy(UnitLineId.Melee));
-            Assert.AreEqual(BuyResult.GridFull, _army.Buy(UnitLineId.Melee));
+            // full grid of level-1 melee: another melee merges instantly instead of being rejected
+            Assert.AreEqual(BuyResult.Ok, _army.Buy(UnitLineId.Melee));
+            Assert.AreEqual(15, _army.Grid.UnitCount());
+            Assert.AreEqual(2, _army.Grid.HighestLevel());
+
+            _army.Grid.Clear();
+            for (int i = 0; i < 15; i++) _army.SpawnFree(UnitLineId.Ranged, 8);
+            Assert.AreEqual(BuyResult.GridFull, _army.Buy(UnitLineId.Melee), "no empty cell and nothing to merge with");
         }
 
         [Test]

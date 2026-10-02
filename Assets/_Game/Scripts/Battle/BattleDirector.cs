@@ -44,6 +44,7 @@ namespace MergeLegion.Battle
         private BattleHud _hud;
         private GridView _gridView;
         private DragController _drag;
+        private ArenaThemeBuilder _theme;
 
         private LevelDefinition _level;
         private BattleSim _sim;
@@ -62,7 +63,7 @@ namespace MergeLegion.Battle
         public LevelDefinition Level => _level;
         public BattleSim Sim => _sim;
 
-        public void Init(ArenaLayout layout, BattleView view, HealthBarBatch bars, BattleHud hud, GridView gridView, DragController drag)
+        public void Init(ArenaLayout layout, BattleView view, HealthBarBatch bars, BattleHud hud, GridView gridView, DragController drag, ArenaThemeBuilder theme)
         {
             _cfg = ServiceLocator.Get<GameConfig>();
             _db = GameDatabase.Instance;
@@ -80,6 +81,7 @@ namespace MergeLegion.Battle
             _hud = hud;
             _gridView = gridView;
             _drag = drag;
+            _theme = theme;
 
             _hud.FightClicked += StartFight;
             _hud.SkillClicked += CastSkill;
@@ -99,6 +101,7 @@ namespace MergeLegion.Battle
             Time.timeScale = 1f;
             _level = _levels.Get(_campaign.CurrentLevel);
             _hud.SetLevel(_level.id);
+            _theme.Apply(_level.theme);
 
             var preview = new BattleSim(_cfg.battle, 1);
             BattleFactory.AddEnemies(preview, _level, _layout, _db);

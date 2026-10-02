@@ -53,6 +53,21 @@ namespace MergeLegion.Data
     }
 
     [Serializable]
+    public sealed class ResearchConfig
+    {
+        public float hpPerLevel = 0.03f;
+        public float damagePerLevel = 0.03f;
+        public float discountPerLevel = 0.01f;
+        public int maxHpLevel = 100;
+        public int maxDamageLevel = 100;
+        public int maxDiscountLevel = 30;
+        public int baseCost = 150;
+        public float costGrowth = 1.125f;
+        public int discountBaseCost = 300;
+        public float discountCostGrowth = 1.25f;
+    }
+
+    [Serializable]
     public sealed class AdPlacementConfig
     {
         public string id;
@@ -88,6 +103,7 @@ namespace MergeLegion.Data
         public BattleConfig battle = new BattleConfig();
         public RewardConfig rewards = new RewardConfig();
         public EndlessConfig endless = new EndlessConfig();
+        public ResearchConfig research = new ResearchConfig();
         public AdsConfig ads = new AdsConfig();
 
         public static GameConfig FromJson(string json, string overrideJson = null)

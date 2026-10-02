@@ -68,6 +68,14 @@ namespace MergeLegion.Grid
                 for (int i = 0; i < _views.Length; i++) UnitVisualFactory.Release(_views[i]);
         }
 
+        public void SetTileColors(Color a, Color b)
+        {
+            _tileA = MaterialLibrary.Lit(a);
+            _tileB = MaterialLibrary.Lit(b);
+            for (int i = 0; i < _tiles.Length; i++) ResetTile(i);
+            if (_highlight >= 0) _tiles[_highlight].sharedMaterial = _highlightMerge ? _tileMerge : _tileGlow;
+        }
+
         public Vector3 CellWorld(int index)
         {
             var g = _army.Grid;

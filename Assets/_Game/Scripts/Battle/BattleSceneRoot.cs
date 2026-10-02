@@ -30,8 +30,7 @@ namespace MergeLegion.Battle
             _layout = new ArenaLayout(_config.grid);
 
             BuildCamera();
-            BuildLight();
-            BuildGround();
+            var sun = BuildLight();
 
             var db = GameDatabase.Instance;
             var gridView = new GameObject("GridView").AddComponent<GridView>();
@@ -53,8 +52,11 @@ namespace MergeLegion.Battle
             hud.Init(_army, ServiceLocator.Get<CurrencyService>(), db, _army.CurrentLevel);
             hud.HomeClicked += () => Director.GoHome();
 
+            var theme = new GameObject("ArenaTheme").AddComponent<ArenaThemeBuilder>();
+            theme.Init(_layout, _camera, sun, gridView);
+
             Director = new GameObject("BattleDirector").AddComponent<BattleDirector>();
-            Director.Init(_layout, view, bars, hud, gridView, drag);
+            Director.Init(_layout, view, bars, hud, gridView, drag, theme);
         }
 
         private void OnDestroy()
@@ -78,28 +80,17 @@ namespace MergeLegion.Battle
             arenaCam.Frame(_layout);
         }
 
-        private static void BuildLight()
+        private static Light BuildLight()
         {
             var existing = Object.FindFirstObjectByType<Light>();
-            if (existing != null && existing.type == LightType.Directional) return;
+            if (existing != null && existing.type == LightType.Directional) return existing;
             var go = new GameObject("Sun");
             var light = go.AddComponent<Light>();
             light.type = LightType.Directional;
             light.intensity = 1.15f;
             light.shadows = LightShadows.None;
             go.transform.rotation = Quaternion.Euler(52f, -28f, 0f);
-        }
-
-        private void BuildGround()
-        {
-            var ground = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            Destroy(ground.GetComponent<Collider>());
-            ground.name = "Ground";
-            float width = _layout.HalfWidth * 2f + 6f;
-            float depth = _layout.FarZ - _layout.NearZ + 8f;
-            ground.transform.position = new Vector3(0f, -0.15f, (_layout.NearZ + _layout.FarZ) * 0.5f);
-            ground.transform.localScale = new Vector3(width, 0.3f, depth);
-            ground.GetComponent<Renderer>().sharedMaterial = MaterialLibrary.Lit(new Color(0.36f, 0.55f, 0.32f));
+            return light;
         }
     }
 }

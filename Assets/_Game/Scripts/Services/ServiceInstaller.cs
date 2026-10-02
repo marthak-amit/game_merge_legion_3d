@@ -62,8 +62,12 @@ namespace MergeLegion.Services
             }
 
             var db = GameDatabase.Instance;
+            var research = new ResearchService(save, currency, config.research);
+            ServiceLocator.Register(research);
+            ServiceLocator.Register<IResearchProvider>(research);
+
             var army = new ArmyService(new GridModel(config.grid.cols, config.grid.rows), save, currency, config, db,
-                new DeterministicRng(Environment.TickCount), analytics);
+                new DeterministicRng(Environment.TickCount), analytics, research);
             army.Load();
             ServiceLocator.Register(army);
 

@@ -41,19 +41,20 @@ namespace MergeLegion.Levels
                 budget *= 1.0 - bossShare;
             }
 
-            FillFormation(level, db, budget, rng, cfg);
+            FillFormation(level, db, budget, rng, Math.Min(UnitLines.Count, 1 + cfg.linesUnlockedAtWave(wave)) , MaxEnemyUnits);
             return level;
         }
 
-        public static void FillFormation(LevelDefinition level, GameDatabase db, double budget, DeterministicRng rng, EndlessConfig cfg)
+        /// <param name="lineCount">How many unit lines (from Melee) the enemy may use.</param>
+        public static void FillFormation(LevelDefinition level, GameDatabase db, double budget, DeterministicRng rng, int lineCount, int maxUnits)
         {
             int cols = level.enemyCols;
             var occupied = new HashSet<int>();
             int guard = 0;
             double remaining = budget;
-            int maxLine = Math.Min(UnitLines.Count, 1 + cfg.linesUnlockedAtWave(level.index));
+            int maxLine = Math.Max(1, Math.Min(UnitLines.Count, lineCount));
 
-            while (remaining > 0.5 && level.enemies.Count < MaxEnemyUnits && guard++ < 400)
+            while (remaining > 0.5 && level.enemies.Count < maxUnits && guard++ < 400)
             {
                 int line = rng.NextInt(maxLine);
                 var data = db.GetLine((UnitLineId)line);
@@ -68,14 +69,14 @@ namespace MergeLegion.Levels
                 float s = LevelPower.UnitStrength(data.GetLevel(pick));
                 if (s > remaining && pick > 1) pick = 1;
 
-                int slot = FindSlot(occupied, cols, line, level.enemies.Count, data.isRanged, rng);
+                int slot = FindSlot(occupied, cols, data.isRanged, rng);
                 occupied.Add(slot);
                 level.enemies.Add(new EnemySpawnDef { line = line, level = pick, col = slot % cols, row = slot / cols });
                 remaining -= LevelPower.UnitStrength(data.GetLevel(pick));
             }
         }
 
-        private static int FindSlot(HashSet<int> occupied, int cols, int line, int count, bool ranged, DeterministicRng rng)
+        private static int FindSlot(HashSet<int> occupied, int cols, bool ranged, DeterministicRng rng)
         {
             // frontline units fill row 0/1, ranged units prefer the rear rows
             int baseRow = ranged ? 2 : 0;
@@ -113,7 +114,7 @@ namespace MergeLegion.Levels
     [Serializable]
     public sealed class EndlessConfig
     {
-        public float basePower = 900f;
+        public float basePower = 26000f;
         public float growth = 1.12f;
         public int firstEndlessLevel = 201;
         public int bossEvery = 10;

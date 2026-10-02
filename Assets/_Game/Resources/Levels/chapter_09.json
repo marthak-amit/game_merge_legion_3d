@@ -1,0 +1,430 @@
+{
+  "chapter": 9,
+  "theme": "abyss",
+  "levels": [
+    {
+      "id": 161, "chapter": 9, "index": 1, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 7833.829, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 1, "level": 7, "col": 3, "row": 2},
+        {"line": 2, "level": 7, "col": 1, "row": 1},
+        {"line": 0, "level": 6, "col": 2, "row": 1},
+        {"line": 0, "level": 6, "col": 4, "row": 1},
+        {"line": 0, "level": 6, "col": 3, "row": 0},
+        {"line": 1, "level": 5, "col": 4, "row": 2},
+        {"line": 1, "level": 4, "col": 4, "row": 3},
+        {"line": 3, "level": 4, "col": 3, "row": 1},
+        {"line": 1, "level": 4, "col": 2, "row": 3},
+        {"line": 2, "level": 3, "col": 0, "row": 1},
+        {"line": 3, "level": 2, "col": 4, "row": 0},
+        {"line": 1, "level": 1, "col": 1, "row": 2},
+        {"line": 3, "level": 1, "col": 1, "row": 0},
+        {"line": 1, "level": 1, "col": 3, "row": 3},
+        {"line": 2, "level": 1, "col": 2, "row": 0}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 162, "chapter": 9, "index": 2, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 8273.784, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 2, "level": 8, "col": 4, "row": 1},
+        {"line": 0, "level": 6, "col": 0, "row": 1},
+        {"line": 3, "level": 6, "col": 3, "row": 0},
+        {"line": 2, "level": 6, "col": 0, "row": 0},
+        {"line": 2, "level": 5, "col": 3, "row": 1},
+        {"line": 1, "level": 5, "col": 2, "row": 3},
+        {"line": 2, "level": 4, "col": 1, "row": 0},
+        {"line": 3, "level": 4, "col": 4, "row": 0},
+        {"line": 3, "level": 3, "col": 1, "row": 1},
+        {"line": 1, "level": 3, "col": 0, "row": 2},
+        {"line": 3, "level": 2, "col": 2, "row": 1},
+        {"line": 0, "level": 1, "col": 2, "row": 0},
+        {"line": 0, "level": 1, "col": 2, "row": 2},
+        {"line": 1, "level": 1, "col": 1, "row": 3},
+        {"line": 0, "level": 1, "col": 4, "row": 2}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 163, "chapter": 9, "index": 3, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 8509.953, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 7, "col": 3, "row": 0},
+        {"line": 3, "level": 7, "col": 0, "row": 0},
+        {"line": 0, "level": 7, "col": 1, "row": 1},
+        {"line": 1, "level": 6, "col": 2, "row": 2},
+        {"line": 2, "level": 6, "col": 0, "row": 1},
+        {"line": 3, "level": 5, "col": 4, "row": 0},
+        {"line": 2, "level": 3, "col": 1, "row": 0},
+        {"line": 3, "level": 3, "col": 2, "row": 0},
+        {"line": 2, "level": 4, "col": 3, "row": 1},
+        {"line": 3, "level": 2, "col": 2, "row": 1},
+        {"line": 3, "level": 2, "col": 4, "row": 1},
+        {"line": 3, "level": 1, "col": 3, "row": 2},
+        {"line": 3, "level": 1, "col": 0, "row": 2},
+        {"line": 1, "level": 1, "col": 3, "row": 3},
+        {"line": 0, "level": 1, "col": 1, "row": 2}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 164, "chapter": 9, "index": 4, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 8260.507, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 3, "level": 8, "col": 4, "row": 0},
+        {"line": 3, "level": 7, "col": 3, "row": 1},
+        {"line": 2, "level": 7, "col": 2, "row": 1},
+        {"line": 3, "level": 5, "col": 4, "row": 1},
+        {"line": 3, "level": 5, "col": 3, "row": 0},
+        {"line": 0, "level": 4, "col": 1, "row": 0},
+        {"line": 0, "level": 3, "col": 0, "row": 0},
+        {"line": 1, "level": 3, "col": 3, "row": 3},
+        {"line": 2, "level": 1, "col": 0, "row": 1},
+        {"line": 2, "level": 1, "col": 1, "row": 1},
+        {"line": 1, "level": 1, "col": 0, "row": 3},
+        {"line": 2, "level": 1, "col": 2, "row": 0},
+        {"line": 3, "level": 1, "col": 3, "row": 2},
+        {"line": 0, "level": 1, "col": 4, "row": 2}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 165, "chapter": 9, "index": 5, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 9126.521, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 8, "col": 4, "row": 0},
+        {"line": 0, "level": 6, "col": 3, "row": 1},
+        {"line": 1, "level": 7, "col": 3, "row": 3},
+        {"line": 3, "level": 6, "col": 4, "row": 1},
+        {"line": 3, "level": 5, "col": 2, "row": 1},
+        {"line": 0, "level": 5, "col": 1, "row": 1},
+        {"line": 1, "level": 5, "col": 3, "row": 2},
+        {"line": 0, "level": 4, "col": 0, "row": 1},
+        {"line": 0, "level": 3, "col": 3, "row": 0},
+        {"line": 0, "level": 2, "col": 2, "row": 0},
+        {"line": 0, "level": 1, "col": 0, "row": 0},
+        {"line": 3, "level": 1, "col": 1, "row": 0},
+        {"line": 0, "level": 1, "col": 0, "row": 2},
+        {"line": 1, "level": 1, "col": 2, "row": 2},
+        {"line": 1, "level": 1, "col": 4, "row": 2},
+        {"line": 2, "level": 1, "col": 1, "row": 2}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 166, "chapter": 9, "index": 6, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 9494.103, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 3, "level": 7, "col": 3, "row": 0},
+        {"line": 0, "level": 7, "col": 4, "row": 1},
+        {"line": 1, "level": 8, "col": 0, "row": 2},
+        {"line": 2, "level": 6, "col": 1, "row": 1},
+        {"line": 3, "level": 5, "col": 4, "row": 0},
+        {"line": 2, "level": 5, "col": 0, "row": 1},
+        {"line": 0, "level": 4, "col": 3, "row": 1},
+        {"line": 1, "level": 4, "col": 1, "row": 2},
+        {"line": 0, "level": 3, "col": 0, "row": 0},
+        {"line": 1, "level": 3, "col": 0, "row": 3},
+        {"line": 3, "level": 3, "col": 2, "row": 1},
+        {"line": 3, "level": 2, "col": 2, "row": 0},
+        {"line": 0, "level": 2, "col": 1, "row": 0},
+        {"line": 0, "level": 1, "col": 2, "row": 2},
+        {"line": 3, "level": 1, "col": 4, "row": 2},
+        {"line": 2, "level": 1, "col": 3, "row": 2}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 167, "chapter": 9, "index": 7, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 8997.732, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 1, "level": 8, "col": 2, "row": 3},
+        {"line": 3, "level": 7, "col": 1, "row": 1},
+        {"line": 3, "level": 7, "col": 3, "row": 0},
+        {"line": 2, "level": 5, "col": 1, "row": 0},
+        {"line": 3, "level": 6, "col": 4, "row": 0},
+        {"line": 0, "level": 5, "col": 4, "row": 1},
+        {"line": 1, "level": 4, "col": 0, "row": 2},
+        {"line": 0, "level": 4, "col": 2, "row": 0},
+        {"line": 1, "level": 4, "col": 1, "row": 2},
+        {"line": 0, "level": 1, "col": 0, "row": 1},
+        {"line": 3, "level": 2, "col": 3, "row": 1},
+        {"line": 3, "level": 2, "col": 0, "row": 0},
+        {"line": 2, "level": 1, "col": 2, "row": 1},
+        {"line": 0, "level": 1, "col": 3, "row": 2}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 168, "chapter": 9, "index": 8, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 10102.16, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 1, "level": 8, "col": 0, "row": 2},
+        {"line": 3, "level": 7, "col": 2, "row": 0},
+        {"line": 0, "level": 6, "col": 0, "row": 0},
+        {"line": 1, "level": 7, "col": 4, "row": 3},
+        {"line": 1, "level": 7, "col": 1, "row": 2},
+        {"line": 3, "level": 5, "col": 1, "row": 0},
+        {"line": 3, "level": 5, "col": 1, "row": 1},
+        {"line": 1, "level": 4, "col": 0, "row": 3},
+        {"line": 0, "level": 3, "col": 4, "row": 0},
+        {"line": 2, "level": 3, "col": 3, "row": 0},
+        {"line": 2, "level": 1, "col": 0, "row": 1},
+        {"line": 0, "level": 2, "col": 4, "row": 1},
+        {"line": 1, "level": 1, "col": 3, "row": 2},
+        {"line": 3, "level": 1, "col": 2, "row": 1},
+        {"line": 3, "level": 1, "col": 3, "row": 1}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 169, "chapter": 9, "index": 9, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 10171.77, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 2, "level": 7, "col": 0, "row": 1},
+        {"line": 2, "level": 7, "col": 4, "row": 0},
+        {"line": 0, "level": 7, "col": 4, "row": 1},
+        {"line": 2, "level": 6, "col": 0, "row": 0},
+        {"line": 1, "level": 7, "col": 3, "row": 3},
+        {"line": 2, "level": 5, "col": 1, "row": 0},
+        {"line": 2, "level": 5, "col": 1, "row": 1},
+        {"line": 0, "level": 5, "col": 2, "row": 1},
+        {"line": 0, "level": 2, "col": 3, "row": 0},
+        {"line": 2, "level": 3, "col": 3, "row": 1},
+        {"line": 3, "level": 3, "col": 1, "row": 2},
+        {"line": 3, "level": 1, "col": 2, "row": 0},
+        {"line": 1, "level": 1, "col": 4, "row": 3},
+        {"line": 1, "level": 1, "col": 2, "row": 2},
+        {"line": 0, "level": 1, "col": 3, "row": 2}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 170, "chapter": 9, "index": 10, "theme": "abyss", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 5742.77, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 6, "col": 3, "row": 1},
+        {"line": 0, "level": 7, "col": 4, "row": 0},
+        {"line": 0, "level": 6, "col": 3, "row": 0},
+        {"line": 3, "level": 5, "col": 0, "row": 0},
+        {"line": 3, "level": 5, "col": 4, "row": 1},
+        {"line": 3, "level": 4, "col": 1, "row": 0},
+        {"line": 1, "level": 3, "col": 4, "row": 2},
+        {"line": 0, "level": 3, "col": 1, "row": 1},
+        {"line": 2, "level": 3, "col": 2, "row": 1},
+        {"line": 0, "level": 2, "col": 2, "row": 0},
+        {"line": 1, "level": 2, "col": 1, "row": 3},
+        {"line": 2, "level": 1, "col": 2, "row": 2},
+        {"line": 3, "level": 1, "col": 0, "row": 2},
+        {"line": 2, "level": 1, "col": 0, "row": 1}
+      ],
+      "boss": {"hp": 54368.48, "damage": 1812.283, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 171, "chapter": 9, "index": 11, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 11019.55, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 2, "level": 7, "col": 1, "row": 1},
+        {"line": 1, "level": 8, "col": 2, "row": 3},
+        {"line": 2, "level": 7, "col": 1, "row": 0},
+        {"line": 0, "level": 7, "col": 3, "row": 0},
+        {"line": 3, "level": 5, "col": 2, "row": 0},
+        {"line": 1, "level": 5, "col": 0, "row": 3},
+        {"line": 0, "level": 5, "col": 2, "row": 1},
+        {"line": 0, "level": 5, "col": 4, "row": 1},
+        {"line": 1, "level": 4, "col": 4, "row": 2},
+        {"line": 1, "level": 3, "col": 1, "row": 3},
+        {"line": 0, "level": 2, "col": 3, "row": 1},
+        {"line": 1, "level": 1, "col": 4, "row": 3},
+        {"line": 2, "level": 1, "col": 0, "row": 1},
+        {"line": 0, "level": 1, "col": 4, "row": 0},
+        {"line": 3, "level": 1, "col": 2, "row": 2},
+        {"line": 0, "level": 1, "col": 3, "row": 2}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 172, "chapter": 9, "index": 12, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 11070.81, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 8, "col": 1, "row": 1},
+        {"line": 0, "level": 8, "col": 0, "row": 0},
+        {"line": 3, "level": 7, "col": 3, "row": 0},
+        {"line": 3, "level": 5, "col": 0, "row": 1},
+        {"line": 2, "level": 5, "col": 1, "row": 0},
+        {"line": 1, "level": 5, "col": 2, "row": 2},
+        {"line": 1, "level": 5, "col": 2, "row": 3},
+        {"line": 1, "level": 2, "col": 1, "row": 2},
+        {"line": 2, "level": 1, "col": 3, "row": 1},
+        {"line": 0, "level": 2, "col": 2, "row": 0},
+        {"line": 0, "level": 1, "col": 4, "row": 0},
+        {"line": 3, "level": 1, "col": 2, "row": 1},
+        {"line": 0, "level": 1, "col": 4, "row": 1},
+        {"line": 3, "level": 1, "col": 0, "row": 2}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 173, "chapter": 9, "index": 13, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 11354.83, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 3, "level": 8, "col": 3, "row": 0},
+        {"line": 1, "level": 7, "col": 1, "row": 2},
+        {"line": 3, "level": 7, "col": 0, "row": 0},
+        {"line": 0, "level": 7, "col": 1, "row": 0},
+        {"line": 2, "level": 5, "col": 2, "row": 1},
+        {"line": 3, "level": 6, "col": 1, "row": 1},
+        {"line": 2, "level": 5, "col": 4, "row": 1},
+        {"line": 0, "level": 4, "col": 3, "row": 1},
+        {"line": 0, "level": 4, "col": 0, "row": 1},
+        {"line": 1, "level": 5, "col": 1, "row": 3},
+        {"line": 2, "level": 3, "col": 4, "row": 2},
+        {"line": 3, "level": 1, "col": 2, "row": 0},
+        {"line": 1, "level": 1, "col": 3, "row": 3},
+        {"line": 0, "level": 1, "col": 4, "row": 0},
+        {"line": 2, "level": 1, "col": 3, "row": 2},
+        {"line": 2, "level": 1, "col": 0, "row": 2}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 174, "chapter": 9, "index": 14, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 11720.07, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 8, "col": 4, "row": 1},
+        {"line": 1, "level": 8, "col": 3, "row": 3},
+        {"line": 0, "level": 7, "col": 0, "row": 1},
+        {"line": 3, "level": 7, "col": 3, "row": 0},
+        {"line": 3, "level": 5, "col": 2, "row": 1},
+        {"line": 0, "level": 4, "col": 3, "row": 1},
+        {"line": 3, "level": 4, "col": 2, "row": 0},
+        {"line": 1, "level": 4, "col": 4, "row": 3},
+        {"line": 1, "level": 3, "col": 2, "row": 2},
+        {"line": 0, "level": 3, "col": 1, "row": 0},
+        {"line": 0, "level": 1, "col": 4, "row": 0},
+        {"line": 3, "level": 2, "col": 1, "row": 1},
+        {"line": 2, "level": 1, "col": 1, "row": 2},
+        {"line": 3, "level": 1, "col": 0, "row": 2},
+        {"line": 2, "level": 1, "col": 0, "row": 0}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 175, "chapter": 9, "index": 15, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 11827, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 1, "level": 8, "col": 3, "row": 2},
+        {"line": 2, "level": 8, "col": 2, "row": 1},
+        {"line": 1, "level": 7, "col": 1, "row": 3},
+        {"line": 3, "level": 6, "col": 3, "row": 1},
+        {"line": 0, "level": 5, "col": 4, "row": 0},
+        {"line": 2, "level": 6, "col": 1, "row": 1},
+        {"line": 3, "level": 5, "col": 2, "row": 0},
+        {"line": 1, "level": 4, "col": 2, "row": 3},
+        {"line": 3, "level": 4, "col": 4, "row": 1},
+        {"line": 2, "level": 3, "col": 0, "row": 0},
+        {"line": 2, "level": 3, "col": 3, "row": 0},
+        {"line": 1, "level": 3, "col": 4, "row": 3},
+        {"line": 0, "level": 2, "col": 0, "row": 1},
+        {"line": 0, "level": 2, "col": 1, "row": 0},
+        {"line": 3, "level": 1, "col": 2, "row": 2},
+        {"line": 1, "level": 1, "col": 3, "row": 3},
+        {"line": 0, "level": 1, "col": 1, "row": 2},
+        {"line": 1, "level": 1, "col": 0, "row": 3}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 176, "chapter": 9, "index": 16, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 11829.39, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 1, "level": 8, "col": 1, "row": 2},
+        {"line": 0, "level": 8, "col": 1, "row": 0},
+        {"line": 2, "level": 7, "col": 0, "row": 1},
+        {"line": 3, "level": 6, "col": 3, "row": 1},
+        {"line": 2, "level": 6, "col": 4, "row": 1},
+        {"line": 0, "level": 5, "col": 3, "row": 0},
+        {"line": 1, "level": 5, "col": 1, "row": 3},
+        {"line": 2, "level": 4, "col": 0, "row": 0},
+        {"line": 3, "level": 3, "col": 2, "row": 0},
+        {"line": 0, "level": 1, "col": 1, "row": 1},
+        {"line": 0, "level": 2, "col": 2, "row": 1},
+        {"line": 1, "level": 2, "col": 3, "row": 3},
+        {"line": 3, "level": 1, "col": 4, "row": 0},
+        {"line": 0, "level": 1, "col": 2, "row": 2},
+        {"line": 3, "level": 1, "col": 0, "row": 2}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 177, "chapter": 9, "index": 17, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 12189.02, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 3, "level": 8, "col": 0, "row": 1},
+        {"line": 0, "level": 7, "col": 2, "row": 1},
+        {"line": 0, "level": 8, "col": 3, "row": 1},
+        {"line": 3, "level": 6, "col": 0, "row": 0},
+        {"line": 2, "level": 6, "col": 4, "row": 1},
+        {"line": 3, "level": 5, "col": 1, "row": 0},
+        {"line": 0, "level": 5, "col": 3, "row": 0},
+        {"line": 2, "level": 3, "col": 4, "row": 0},
+        {"line": 1, "level": 3, "col": 4, "row": 2},
+        {"line": 2, "level": 2, "col": 2, "row": 0},
+        {"line": 1, "level": 2, "col": 0, "row": 2},
+        {"line": 0, "level": 2, "col": 1, "row": 1},
+        {"line": 3, "level": 1, "col": 2, "row": 2},
+        {"line": 3, "level": 1, "col": 3, "row": 2},
+        {"line": 0, "level": 1, "col": 1, "row": 2},
+        {"line": 3, "level": 1, "col": 2, "row": 3},
+        {"line": 2, "level": 1, "col": 1, "row": 3}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 178, "chapter": 9, "index": 18, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 12859.64, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 8, "col": 0, "row": 1},
+        {"line": 0, "level": 7, "col": 4, "row": 1},
+        {"line": 0, "level": 7, "col": 1, "row": 0},
+        {"line": 0, "level": 7, "col": 2, "row": 0},
+        {"line": 0, "level": 7, "col": 3, "row": 0},
+        {"line": 3, "level": 5, "col": 1, "row": 1},
+        {"line": 2, "level": 5, "col": 3, "row": 1},
+        {"line": 1, "level": 3, "col": 3, "row": 2},
+        {"line": 3, "level": 3, "col": 0, "row": 0},
+        {"line": 2, "level": 3, "col": 0, "row": 2},
+        {"line": 0, "level": 1, "col": 4, "row": 0},
+        {"line": 3, "level": 1, "col": 2, "row": 1},
+        {"line": 2, "level": 1, "col": 1, "row": 2},
+        {"line": 1, "level": 1, "col": 2, "row": 3}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 179, "chapter": 9, "index": 19, "theme": "abyss", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 13480.28, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 3, "level": 8, "col": 3, "row": 0},
+        {"line": 2, "level": 8, "col": 4, "row": 0},
+        {"line": 3, "level": 7, "col": 4, "row": 1},
+        {"line": 1, "level": 8, "col": 3, "row": 2},
+        {"line": 3, "level": 6, "col": 1, "row": 0},
+        {"line": 3, "level": 4, "col": 2, "row": 1},
+        {"line": 1, "level": 4, "col": 2, "row": 3},
+        {"line": 2, "level": 5, "col": 0, "row": 1},
+        {"line": 2, "level": 3, "col": 2, "row": 0},
+        {"line": 2, "level": 3, "col": 0, "row": 0},
+        {"line": 3, "level": 2, "col": 3, "row": 1},
+        {"line": 2, "level": 2, "col": 1, "row": 1},
+        {"line": 1, "level": 1, "col": 0, "row": 2},
+        {"line": 3, "level": 1, "col": 4, "row": 2},
+        {"line": 0, "level": 1, "col": 2, "row": 2}
+      ],
+      "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    },
+    {
+      "id": 180, "chapter": 9, "index": 20, "theme": "abyss", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 7487.059, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "enemies": [
+        {"line": 0, "level": 7, "col": 4, "row": 0},
+        {"line": 0, "level": 7, "col": 3, "row": 1},
+        {"line": 0, "level": 6, "col": 1, "row": 1},
+        {"line": 3, "level": 6, "col": 0, "row": 0},
+        {"line": 0, "level": 5, "col": 2, "row": 0},
+        {"line": 0, "level": 4, "col": 4, "row": 1},
+        {"line": 0, "level": 4, "col": 0, "row": 1},
+        {"line": 1, "level": 4, "col": 1, "row": 3},
+        {"line": 2, "level": 3, "col": 1, "row": 0},
+        {"line": 2, "level": 3, "col": 2, "row": 1},
+        {"line": 3, "level": 1, "col": 3, "row": 0},
+        {"line": 3, "level": 1, "col": 4, "row": 2},
+        {"line": 3, "level": 1, "col": 1, "row": 2},
+        {"line": 2, "level": 1, "col": 3, "row": 2},
+        {"line": 3, "level": 1, "col": 2, "row": 2}
+      ],
+      "boss": {"hp": 70882.18, "damage": 2362.739, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+    }
+  ]
+}

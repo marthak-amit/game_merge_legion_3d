@@ -1,4 +1,6 @@
 using MergeLegion.Core;
+using MergeLegion.Data;
+using MergeLegion.Levels;
 using MergeLegion.Save;
 using TMPro;
 using UnityEngine;
@@ -37,7 +39,14 @@ namespace MergeLegion.UI
         {
             _versionLabel.text = Loc.Format("home.version", Application.version);
             int level = ServiceLocator.TryGet<SaveService>(out var save) ? save.Data.highestCampaignLevel + 1 : 1;
-            _levelLabel.text = Loc.Format("home.level", level);
+            if (ServiceLocator.TryGet<LevelRepository>(out var repo))
+            {
+                var def = repo.Get(level);
+                _levelLabel.text = def.endless
+                    ? Loc.Format("home.endless", def.index)
+                    : Loc.Format("home.chapter", def.chapter, Loc.Get(ThemeLibrary.Get(def.theme).nameKey)) + "\n" + Loc.Format("home.level", level);
+            }
+            else _levelLabel.text = Loc.Format("home.level", level);
         }
 
         private void OnBattle()

@@ -151,6 +151,58 @@
     {
       "key": "toast.no_units",
       "value": "Buy a unit first!"
+    },
+    {
+      "key": "theme.grasslands",
+      "value": "Grasslands"
+    },
+    {
+      "key": "theme.desert",
+      "value": "Scorched Desert"
+    },
+    {
+      "key": "theme.snow",
+      "value": "Frozen Tundra"
+    },
+    {
+      "key": "theme.swamp",
+      "value": "Murk Swamp"
+    },
+    {
+      "key": "theme.volcano",
+      "value": "Ember Volcano"
+    },
+    {
+      "key": "theme.castle",
+      "value": "Iron Castle"
+    },
+    {
+      "key": "theme.undead",
+      "value": "Undead Crypt"
+    },
+    {
+      "key": "theme.sky",
+      "value": "Sky Realm"
+    },
+    {
+      "key": "theme.abyss",
+      "value": "The Abyss"
+    },
+    {
+      "key": "theme.celestial",
+      "value": "Celestial Gate"
+    },
+    {
+      "key": "home.chapter",
+      "value": "Chapter {0}: {1}"
+    },
+    {
+      "key": "home.endless",
+      "value": "Endless - Wave {0}"
+    },
+    {
+      "key": "home.boss_next",
+      "value": "Boss level!"
     }
   ]
 }

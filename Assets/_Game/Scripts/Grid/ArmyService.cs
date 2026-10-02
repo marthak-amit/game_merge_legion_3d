@@ -54,18 +54,44 @@ namespace MergeLegion.Grid
         public BuyResult Buy(UnitLineId line)
         {
             if (!IsUnlocked(line)) return BuyResult.Locked;
-            if (_grid.EmptyCount() == 0) return BuyResult.GridFull;
+            // A full grid still allows a purchase that merges instantly with a level-1 unit of the same line.
+            int partner = _grid.EmptyCount() == 0 ? FindLevelOne(line) : -1;
+            if (_grid.EmptyCount() == 0 && partner < 0) return BuyResult.GridFull;
             long cost = GetBuyCost(line);
             if (!_currency.TrySpend(CurrencyType.Coins, cost, "unit_buy")) return BuyResult.NoCoins;
 
             IntEntries.Add(_save.Data.buyCounts, line.ToString(), 1);
-            SpawnAt(_grid.PickRandomEmpty(_rng), line, 1);
+            if (partner >= 0) AutoMerge(partner, line);
+            else SpawnAt(_grid.PickRandomEmpty(_rng), line, 1);
             _analytics?.LogEvent(AnalyticsEvents.UnitBuy, new Dictionary<string, object>
             {
                 { AnalyticsParams.Line, line.ToString() },
                 { AnalyticsParams.Amount, cost }
             });
             return BuyResult.Ok;
+        }
+
+        private int FindLevelOne(UnitLineId line)
+        {
+            for (int i = 0; i < _grid.Count; i++)
+            {
+                var s = _grid.Get(i);
+                if (!s.IsEmpty && s.line == (int)line && s.level == 1 && s.level < _config.grid.maxUnitLevel) return i;
+            }
+            return -1;
+        }
+
+        private void AutoMerge(int index, UnitLineId line)
+        {
+            _grid.Set(index, UnitSlot.Of((int)line, 2));
+            if (2 > _save.Data.highestMergedLevel) _save.Data.highestMergedLevel = 2;
+            _analytics?.LogEvent(AnalyticsEvents.Merge, new Dictionary<string, object>
+            {
+                { AnalyticsParams.Line, line.ToString() },
+                { AnalyticsParams.ToLevel, 2 }
+            });
+            EventBus.Publish(new UnitMergedEvent(index, index, (int)line, 2));
+            Persist();
         }
 
         /// <summary>Places a unit without charging (rewarded free unit, reinforcements, tutorial). Returns the cell or -1.</summary>
