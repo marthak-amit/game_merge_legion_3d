@@ -1,0 +1,79 @@
+name: Build APK + Screenshots
+
+# Needs repo secrets UNITY_LICENSE, UNITY_EMAIL, UNITY_PASSWORD (see docs/SDK_SETUP.md). Run manually or on push to claude/**.
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "claude/**" ]
+
+permissions:
+  contents: write
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+  UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+  UNITY_VERSION: 6000.0.58f2
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+        with: { lfs: true }
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-shots-${{ hashFiles('Packages/manifest.json', 'ProjectSettings/ProjectVersion.txt') }}
+          restore-keys: Library-shots-
+      - name: Generate scenes
+        uses: game-ci/unity-builder@v4
+        with:
+          unityVersion: ${{ env.UNITY_VERSION }}
+          targetPlatform: StandaloneLinux64
+          buildMethod: MergeLegion.Editor.CiSetup.GenerateScenesOnly
+          allowDirtyBuild: true
+      - name: Capture screenshots (play mode)
+        uses: game-ci/unity-test-runner@v4
+        with:
+          unityVersion: ${{ env.UNITY_VERSION }}
+          testMode: playmode
+          customParameters: -testFilter ScreenshotTests -screen-width 1080 -screen-height 1920
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screenshots
+          path: |
+            Screenshots
+            artifacts
+          if-no-files-found: warn
+
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { lfs: true }
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-apk-${{ hashFiles('Packages/manifest.json', 'ProjectSettings/ProjectVersion.txt') }}
+          restore-keys: Library-apk-
+      - uses: game-ci/unity-builder@v4
+        with:
+          unityVersion: ${{ env.UNITY_VERSION }}
+          targetPlatform: Android
+          buildMethod: MergeLegion.Editor.BuildScripts.BuildAndroidApk
+          allowDirtyBuild: true
+          versioning: None
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MergeLegion-debug-apk
+          path: Builds/*.apk
+      - name: Publish as pre-release (easy phone download)
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          gh release delete latest-debug --yes --cleanup-tag || true
+          gh release create latest-debug Builds/MergeLegion.apk --prerelease --target "$GITHUB_SHA" \
+            --title "Debug APK ($GITHUB_SHA)" --notes "Debug-signed build for testing. Mock SDKs; no ads/IAP keys."

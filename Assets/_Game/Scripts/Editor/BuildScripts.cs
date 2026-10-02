@@ -39,6 +39,18 @@ namespace MergeLegion.Editor
             Build(BuildTarget.Android, Path.Combine(Output(), "MergeLegion.aab"));
         }
 
+        /// <summary>Installable debug APK (signed with the Unity debug keystore) for quick device testing.</summary>
+        [MenuItem("Tools/Merge Legion/Build/Android debug APK")]
+        public static void BuildAndroidApk()
+        {
+            ApplyCommon();
+            EditorUserBuildSettings.buildAppBundle = false;
+            EditorUserBuildSettings.development = false;
+            PlayerSettings.Android.bundleVersionCode = IntEnv("BUILD_NUMBER", PlayerSettings.Android.bundleVersionCode);
+            PlayerSettings.Android.useCustomKeystore = false;
+            Build(BuildTarget.Android, Path.Combine(Output(), "MergeLegion.apk"));
+        }
+
         [MenuItem("Tools/Merge Legion/Build/iOS Xcode project")]
         public static void BuildIosProject()
         {
