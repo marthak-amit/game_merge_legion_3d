@@ -40,6 +40,7 @@ namespace MergeLegion.Monetization
             _attribution = attribution;
             _validator = validator;
             _ads = ads;
+            _iap.PurchaseCompleted += OnStorePurchase;
         }
 
         public IReadOnlyList<ProductDef> Products => _cfg.products;
@@ -71,31 +72,64 @@ namespace MergeLegion.Monetization
             _analytics.LogEvent(AnalyticsEvents.IapView, new Dictionary<string, object> { { AnalyticsParams.Sku, sku } });
         }
 
+        private readonly Dictionary<string, Action<PurchaseResult>> _pending = new Dictionary<string, Action<PurchaseResult>>();
+
         public void Purchase(string sku, Action<PurchaseResult> onDone)
         {
             var def = _cfg.Product(sku);
             if (def == null) { onDone?.Invoke(new PurchaseResult(PurchaseStatus.Failed, sku)); return; }
             if (def.oneTime && Owned(sku)) { onDone?.Invoke(new PurchaseResult(PurchaseStatus.AlreadyOwned, sku)); return; }
 
-            _iap.Purchase(sku, result =>
+            _pending[sku] = onDone;
+            _iap.Purchase(sku, null); // the result arrives through PurchaseCompleted so late/restored deliveries use the same path
+        }
+
+        /// <summary>
+        /// Single entry point for every store delivery: user purchases, purchases interrupted by an app kill, and restores.
+        /// </summary>
+        private void OnStorePurchase(PurchaseResult result)
+        {
+            _pending.TryGetValue(result.Sku, out var callback);
+            _pending.Remove(result.Sku);
+
+            if (!result.Success) { callback?.Invoke(result); return; }
+
+            var def = _cfg.Product(result.Sku);
+            if (def == null) { Confirm(result.Sku); callback?.Invoke(new PurchaseResult(PurchaseStatus.Failed, result.Sku)); return; }
+
+            _validator.Validate(result.Sku, result.Receipt, valid =>
             {
-                if (!result.Success) { onDone?.Invoke(result); return; }
-                _validator.Validate(sku, result.Receipt, valid =>
+                if (!valid)
                 {
-                    if (!valid) { onDone?.Invoke(new PurchaseResult(PurchaseStatus.Failed, sku)); return; }
-                    Fulfil(def);
-                    var info = _iap.GetProduct(sku);
-                    decimal price = info != null ? info.Price : (decimal)def.priceUsd;
-                    string currency = info != null ? info.IsoCurrency : "USD";
+                    Confirm(result.Sku); // do not let the store redeliver a receipt we rejected
+                    callback?.Invoke(new PurchaseResult(PurchaseStatus.Failed, result.Sku));
+                    return;
+                }
+
+                // a one-time product delivered twice (restore, reinstall) must not pay out twice
+                bool alreadyOwned = def.oneTime && Owned(def.sku);
+                if (!alreadyOwned) Fulfil(def);
+                Confirm(result.Sku);
+
+                var info = _iap.GetProduct(result.Sku);
+                decimal price = info != null ? info.Price : (decimal)def.priceUsd;
+                string currency = info != null ? info.IsoCurrency : "USD";
+                if (!alreadyOwned)
+                {
                     _analytics.LogEvent(AnalyticsEvents.IapPurchase, new Dictionary<string, object>
                     {
-                        { AnalyticsParams.Sku, sku },
+                        { AnalyticsParams.Sku, result.Sku },
                         { AnalyticsParams.Price, price }
                     });
-                    _attribution.LogPurchase(sku, price, currency);
-                    onDone?.Invoke(result);
-                });
+                    _attribution.LogPurchase(result.Sku, price, currency);
+                }
+                callback?.Invoke(alreadyOwned ? new PurchaseResult(PurchaseStatus.AlreadyOwned, result.Sku) : result);
             });
+        }
+
+        private void Confirm(string sku)
+        {
+            if (_iap is IConfirmingIapService confirming) confirming.ConfirmPurchase(sku);
         }
 
         private void Fulfil(ProductDef def)

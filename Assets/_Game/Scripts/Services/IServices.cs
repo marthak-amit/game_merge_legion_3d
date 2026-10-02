@@ -39,6 +39,18 @@ namespace MergeLegion.Services
         void RestorePurchases(Action<bool> onComplete);
     }
 
+    /// <summary>Optional: lets the store adapter learn each SKU's product type from the shop config.</summary>
+    public interface IKindAware
+    {
+        Func<string, ProductKind> KindLookup { get; set; }
+    }
+
+    /// <summary>Optional: stores that keep a purchase pending until the game confirms delivery (Unity IAP pending purchases).</summary>
+    public interface IConfirmingIapService
+    {
+        void ConfirmPurchase(string sku);
+    }
+
     public interface IRemoteConfigService
     {
         bool IsReady { get; }

@@ -138,10 +138,9 @@ namespace MergeLegion.Services
 
             var iapService = ServiceLocator.Get<IIAPService>();
             if (iapService is MockIAPService mockIap)
-            {
                 mockIap.PriceLookup = sku => shop.Product(sku) != null ? (decimal)shop.Product(sku).priceUsd : 0.99m;
-                mockIap.KindLookup = sku => shop.Product(sku) != null ? shop.Product(sku).kind : ProductKind.Consumable;
-            }
+            if (iapService is IKindAware kindAware)
+                kindAware.KindLookup = sku => shop.Product(sku) != null ? shop.Product(sku).kind : ProductKind.Consumable;
             var iap = new IapManager(iapService, shop, granter, save, analytics, ServiceLocator.Get<IAttributionService>(),
                 ServiceLocator.Get<IReceiptValidator>(), ads);
             iap.RegisterSpecial(shop.battlePass.premiumSku, def => bp.UnlockPremium());
@@ -177,13 +176,16 @@ namespace MergeLegion.Services
             ServiceLocator.Register(PlatformServiceOverrides.CloudSave != null
                 ? PlatformServiceOverrides.CloudSave()
                 : new MockCloudSaveService(new FileSaveStorage(Path.Combine(Application.persistentDataPath, "cloud_mock.json"))));
-            ServiceLocator.Register(PlatformServiceOverrides.Leaderboards != null
+            ILeaderboardService boards = PlatformServiceOverrides.Leaderboards != null
                 ? PlatformServiceOverrides.Leaderboards(auth)
-                : new MockLeaderboardService(auth));
+                : new MockLeaderboardService(auth);
+            foreach (var decorate in PlatformServiceOverrides.LeaderboardDecorators) boards = decorate(boards);
+            ServiceLocator.Register(boards);
             ServiceLocator.Register(PlatformServiceOverrides.Push != null ? PlatformServiceOverrides.Push() : new MockPushService());
             ServiceLocator.Register(PlatformServiceOverrides.Attribution != null ? PlatformServiceOverrides.Attribution() : new MockAttributionService());
             ServiceLocator.Register(PlatformServiceOverrides.Consent != null ? PlatformServiceOverrides.Consent() : new MockConsentService());
             ServiceLocator.Register<IAudioService>(new NullAudioService());
+            foreach (var hook in PlatformServiceOverrides.PostInstall) hook();
         }
     }
 }

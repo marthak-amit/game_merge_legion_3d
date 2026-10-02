@@ -17,6 +17,10 @@ namespace MergeLegion.Services
         public static Func<SaveData, IAuthService> Auth;
         public static Func<ICloudSaveService> CloudSave;
         public static Func<IAuthService, ILeaderboardService> Leaderboards;
+        /// <summary>Wrap the leaderboard service (e.g. mirror scores to Google Play Games / Game Center).</summary>
+        public static readonly List<Func<ILeaderboardService, ILeaderboardService>> LeaderboardDecorators = new List<Func<ILeaderboardService, ILeaderboardService>>();
+        /// <summary>Extra SDK startup work (Crashlytics, attribution start...) executed after services are installed.</summary>
+        public static readonly List<Action> PostInstall = new List<Action>();
         public static Func<GameDatabase, ArenaConfig, IArenaBackend> ArenaBackend;
         public static Func<IAdsService> Ads;
         public static Func<IIAPService> Iap;
@@ -33,6 +37,8 @@ namespace MergeLegion.Services
             RemoteConfig = null; Auth = null; CloudSave = null; Leaderboards = null; ArenaBackend = null; Ads = null; Iap = null;
             Receipts = null; Push = null; Attribution = null; Consent = null;
             AnalyticsSinks.Clear();
+            LeaderboardDecorators.Clear();
+            PostInstall.Clear();
         }
     }
 

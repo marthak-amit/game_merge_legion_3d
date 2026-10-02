@@ -21,3 +21,7 @@ sysinfo.txt
 crashlytics-build.properties
 /Assets/Plugins/Android/*.keystore
 *.keystore
+
+# real SDK keys (copy sdk_keys.example.json to sdk_keys.json)
+/Assets/_Game/Resources/Config/sdk_keys.json
+/Assets/_Game/Resources/Config/sdk_keys.json.meta

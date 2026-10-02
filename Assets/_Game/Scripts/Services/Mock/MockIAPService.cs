@@ -5,19 +5,22 @@ using UnityEngine;
 namespace MergeLegion.Services.Mock
 {
     /// <summary>Purchases succeed instantly. Prices are placeholders; the real catalog price comes from the store.</summary>
-    public sealed class MockIAPService : IIAPService
+    public class MockIAPService : IIAPService, IKindAware
     {
         private readonly Dictionary<string, ProductInfo> _products = new Dictionary<string, ProductInfo>();
         private readonly HashSet<string> _owned = new HashSet<string>();
 
         public bool IsInitialized { get; private set; }
+
+        /// <summary>Test hook: simulates a delivery that did not come from Purchase() (pending purchase, restore).</summary>
+        protected void RaiseExternal(PurchaseResult result) => PurchaseCompleted?.Invoke(result);
         public event Action<PurchaseResult> PurchaseCompleted;
 
         public PurchaseStatus NextStatus = PurchaseStatus.Success;
 
         /// <summary>Lets the mock show the catalog's real prices instead of a placeholder.</summary>
         public Func<string, decimal> PriceLookup;
-        public Func<string, ProductKind> KindLookup;
+        public Func<string, ProductKind> KindLookup { get; set; }
 
         public void Initialize(IReadOnlyList<string> skus, Action onInitialized = null)
         {
