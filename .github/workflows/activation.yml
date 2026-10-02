@@ -3,6 +3,9 @@ name: Acquire Unity activation file
 # Run once manually (Actions tab -> Run workflow) to get the .alf file for Unity Personal license activation.
 on:
   workflow_dispatch:
+  push:
+    branches: [ "claude/**" ]
+    paths: [ ".github/workflows/activation.yml" ]
 
 jobs:
   activation:
