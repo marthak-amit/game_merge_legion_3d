@@ -86,10 +86,12 @@ namespace MergeLegion.Battle
 
         public void SetSpeedText(string text) => UIKit.SetButtonText(_speedButton, text);
 
+        private string _skillName;
+
         public void SetSkill(string name, float readyFraction, bool ready)
         {
             _skillFill.fillAmount = readyFraction;
-            _skillLabel.text = name;
+            if (_skillName != name) { _skillName = name; _skillLabel.text = name; } // avoid re-setting text every tick
             _skillButton.interactable = ready;
             _skillFill.color = ready ? UIKit.Good : UIKit.Blue;
         }

@@ -3,7 +3,7 @@
   "theme": "grasslands",
   "levels": [
     {
-      "id": 1, "chapter": 1, "index": 1, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 70.38779, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 1, "chapter": 1, "index": 1, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 110.6094, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 1, "col": 4, "row": 2},
         {"line": 1, "level": 1, "col": 2, "row": 2},
@@ -12,16 +12,15 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 2, "chapter": 1, "index": 2, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 75.14004, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 2, "chapter": 1, "index": 2, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 118.0772, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 1, "col": 1, "row": 2},
-        {"line": 0, "level": 1, "col": 3, "row": 1},
-        {"line": 0, "level": 1, "col": 0, "row": 0}
+        {"line": 0, "level": 1, "col": 3, "row": 1}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 3, "chapter": 1, "index": 3, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 71.44463, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 3, "chapter": 1, "index": 3, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 112.2701, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 1, "col": 1, "row": 3},
         {"line": 1, "level": 1, "col": 4, "row": 3},
@@ -30,16 +29,15 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 4, "chapter": 1, "index": 4, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 78.1368, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 4, "chapter": 1, "index": 4, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 122.7864, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 0, "level": 1, "col": 3, "row": 1},
-        {"line": 1, "level": 1, "col": 4, "row": 3},
-        {"line": 0, "level": 1, "col": 0, "row": 0}
+        {"line": 1, "level": 1, "col": 4, "row": 3}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 5, "chapter": 1, "index": 5, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 82.60628, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 5, "chapter": 1, "index": 5, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 129.8099, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 0, "level": 1, "col": 3, "row": 0},
         {"line": 1, "level": 1, "col": 4, "row": 3},
@@ -48,7 +46,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 6, "chapter": 1, "index": 6, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 80.73685, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 6, "chapter": 1, "index": 6, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 126.8722, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 0, "level": 1, "col": 1, "row": 0},
         {"line": 1, "level": 1, "col": 0, "row": 3},
@@ -57,7 +55,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 7, "chapter": 1, "index": 7, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 80.42819, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 7, "chapter": 1, "index": 7, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 126.3872, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 1, "col": 0, "row": 2},
         {"line": 1, "level": 1, "col": 2, "row": 2},
@@ -66,7 +64,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 8, "chapter": 1, "index": 8, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 90.19653, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 8, "chapter": 1, "index": 8, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 141.7374, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 1, "col": 4, "row": 0},
         {"line": 2, "level": 1, "col": 1, "row": 1},
@@ -75,24 +73,23 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 9, "chapter": 1, "index": 9, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 86.61101, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 9, "chapter": 1, "index": 9, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 136.103, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 1, "col": 1, "row": 0},
-        {"line": 0, "level": 1, "col": 0, "row": 0},
-        {"line": 2, "level": 1, "col": 1, "row": 1}
+        {"line": 0, "level": 1, "col": 0, "row": 0}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 10, "chapter": 1, "index": 10, "theme": "grasslands", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 51.92501, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 10, "chapter": 1, "index": 10, "theme": "grasslands", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 81.59645, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 1, "col": 0, "row": 2},
         {"line": 1, "level": 1, "col": 3, "row": 3}
       ],
-      "boss": {"hp": 491.5893, "damage": 16.38631, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 1, "minionLevel": 1}
+      "boss": {"hp": 772.4976, "damage": 25.74992, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 1, "minionLevel": 1}
     },
     {
-      "id": 11, "chapter": 1, "index": 11, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 95.51556, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 11, "chapter": 1, "index": 11, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 150.0959, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 0, "level": 1, "col": 1, "row": 1},
         {"line": 2, "level": 1, "col": 2, "row": 0},
@@ -101,7 +98,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 12, "chapter": 1, "index": 12, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 94.67375, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 12, "chapter": 1, "index": 12, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 148.773, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 1, "col": 4, "row": 3},
         {"line": 1, "level": 1, "col": 1, "row": 3},
@@ -110,7 +107,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 13, "chapter": 1, "index": 13, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 97.25238, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 13, "chapter": 1, "index": 13, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 152.8252, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 1, "col": 0, "row": 2},
         {"line": 1, "level": 1, "col": 3, "row": 2},
@@ -119,7 +116,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 14, "chapter": 1, "index": 14, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 98.49139, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 14, "chapter": 1, "index": 14, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 154.7722, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 1, "col": 0, "row": 2},
         {"line": 0, "level": 1, "col": 0, "row": 1},
@@ -128,7 +125,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 15, "chapter": 1, "index": 15, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 107.71, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 15, "chapter": 1, "index": 15, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 169.2586, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 1, "col": 4, "row": 2},
         {"line": 0, "level": 1, "col": 4, "row": 0},
@@ -137,37 +134,34 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 16, "chapter": 1, "index": 16, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 111.305, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 16, "chapter": 1, "index": 16, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 174.9079, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 1, "col": 3, "row": 2},
         {"line": 2, "level": 1, "col": 0, "row": 1},
-        {"line": 1, "level": 1, "col": 4, "row": 2},
-        {"line": 0, "level": 1, "col": 1, "row": 0}
+        {"line": 1, "level": 1, "col": 4, "row": 2}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 17, "chapter": 1, "index": 17, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 114.3258, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 17, "chapter": 1, "index": 17, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 179.6548, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 0, "level": 1, "col": 4, "row": 1},
         {"line": 1, "level": 1, "col": 2, "row": 3},
-        {"line": 2, "level": 1, "col": 1, "row": 1},
-        {"line": 0, "level": 1, "col": 2, "row": 0}
+        {"line": 2, "level": 1, "col": 1, "row": 1}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 18, "chapter": 1, "index": 18, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 117.4176, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 18, "chapter": 1, "index": 18, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 184.5133, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 1, "col": 1, "row": 0},
         {"line": 2, "level": 1, "col": 4, "row": 0},
-        {"line": 1, "level": 1, "col": 4, "row": 3},
-        {"line": 0, "level": 1, "col": 2, "row": 0}
+        {"line": 1, "level": 1, "col": 4, "row": 3}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 19, "chapter": 1, "index": 19, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 121.9247, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 19, "chapter": 1, "index": 19, "theme": "grasslands", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 191.5959, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 1, "col": 1, "row": 0},
         {"line": 0, "level": 1, "col": 3, "row": 0},
@@ -176,12 +170,12 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 20, "chapter": 1, "index": 20, "theme": "grasslands", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 70.53161, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 20, "chapter": 1, "index": 20, "theme": "grasslands", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 110.8354, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 3, "level": 1, "col": 0, "row": 0},
         {"line": 2, "level": 1, "col": 3, "row": 1}
       ],
-      "boss": {"hp": 667.7433, "damage": 22.25811, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+      "boss": {"hp": 1049.311, "damage": 34.97703, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     }
   ]
 }

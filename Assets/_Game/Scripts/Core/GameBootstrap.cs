@@ -35,7 +35,7 @@ namespace MergeLegion.Core
             }
             _instance = this;
             DontDestroyOnLoad(gameObject);
-            Application.targetFrameRate = 60;
+            PerformanceProfile.Apply(PerformanceProfile.Detect());
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
             var save = ServiceInstaller.InstallCore();

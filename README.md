@@ -1,26 +1,28 @@
 # Merge Legion 3D
 
-Mobile merge-army battler (Unity 6 LTS, URP, portrait 1080x1920). Built phase by phase; see the project brief for the full roadmap.
+Portrait merge-army battler for Android + iOS (Unity 6 LTS, URP). Buy units, drag-merge them up eight levels, auto-battle
+through a 200-level campaign (10 themed chapters, a boss every 10th level), then endless mode, an async PvP arena,
+a weekend event, battle pass, castle, chests, missions, daily login and lucky spin. Built for ~US$0.15 ARPDAU with a
+hybrid ads (AppLovin MAX) + IAP model.
 
-## Status
-**Phase 1 done**: Core (ServiceLocator, EventBus, SceneLoader, TimeService), versioned/checksummed Save with
-backup recovery, migrations and cloud-merge policy, all 9 service interfaces (+ consent) with working Mocks,
-stack-based UI shell, localization facade, Boot -> Main (Home) flow, and editor generators.
+**Status: all 10 phases implemented** (feature-complete, runs end-to-end in the Editor on mocks, no keys needed).
+See `docs/` for architecture, SDK setup, live ops, balance and store compliance.
 
-## First-time setup (once, in the Unity Editor)
-1. Open the folder with **Unity 6000.0.x LTS** (Unity may offer to upgrade `ProjectVersion.txt`; accept).
+## First-time setup (Unity Editor)
+1. Open with **Unity 6000.0.x LTS** (accept the version upgrade prompt; `ProjectVersion.txt` is a placeholder).
 2. `Window > TextMeshPro > Import TMP Essential Resources`.
-3. `Tools > Merge Legion > Setup All (Settings + Scenes)`.
-   - Creates the URP asset, applies player settings, switches Input Handling to the Input System package.
-   - If Unity asks to restart, restart, then run `Setup All` again.
-4. Open `Boot` (done automatically) and press **Play**: it boots on mocks and lands on the empty Home screen.
+3. `Tools > Merge Legion > Setup All (Settings + Scenes + Data)` (restart if asked, then run it again).
+4. Open `Boot` and press **Play**. First launch: age gate -> consent -> straight into the 30-second tutorial battle.
 5. Commit the generated `.meta` files, scenes and `Assets/_Game/Settings`.
-
-Before any store build, change `BundleId` / `CompanyName` in `Assets/_Game/Scripts/Editor/ProjectSetup.cs`.
+6. Change `BundleId` / `CompanyName` in `Scripts/Editor/ProjectSetup.cs` and the legal URLs in `Resources/Config/game_config.json`.
 
 ## Tests
-`Window > General > Test Runner`: EditMode (logic) and PlayMode (`BootFlowTests`, needs generated scenes).
+`Window > General > Test Runner`: EditMode (logic) and PlayMode (needs generated scenes). CI: `.github/workflows/ci.yml` (GameCI).
+Headless builds: `BuildScripts.BuildAndroidAab` / `BuildIosProject`.
+
+## Going live
+`docs/SDK_SETUP.md` (enable real SDKs), `docs/LIVE_OPS.md` (Remote Config), `docs/STORE_COMPLIANCE.md` (Data Safety, ATT, privacy).
 
 ## Rules of the codebase
-- Third-party SDKs only behind `I*Service` interfaces; `ServiceInstaller` picks the implementation.
-- No hardcoded balance/prices/caps/strings: Remote Config defaults in `Resources/RemoteConfigDefaults.json`, UI text in `Resources/Localization/en.json`.
+* Third-party SDKs only behind `I*Service`; mocks always work.
+* No hardcoded balance, prices, caps or strings: JSON/CSV/`en.json` only.

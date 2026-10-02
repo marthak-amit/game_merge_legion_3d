@@ -114,7 +114,7 @@ namespace MergeLegion.Levels
     [Serializable]
     public sealed class EndlessConfig
     {
-        public float basePower = 26000f;
+        public float basePower = 41000f;
         public float growth = 1.12f;
         public int firstEndlessLevel = 201;
         public int bossEvery = 10;

@@ -3,19 +3,18 @@
   "theme": "snow",
   "levels": [
     {
-      "id": 41, "chapter": 3, "index": 1, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 232.2214, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 41, "chapter": 3, "index": 1, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 364.9193, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 3, "level": 2, "col": 1, "row": 0},
         {"line": 0, "level": 1, "col": 3, "row": 1},
         {"line": 0, "level": 1, "col": 0, "row": 1},
         {"line": 2, "level": 1, "col": 0, "row": 0},
-        {"line": 1, "level": 1, "col": 0, "row": 3},
-        {"line": 2, "level": 1, "col": 3, "row": 0}
+        {"line": 1, "level": 1, "col": 0, "row": 3}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 42, "chapter": 3, "index": 2, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 231.0971, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 42, "chapter": 3, "index": 2, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 363.1526, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 2, "col": 4, "row": 0},
         {"line": 0, "level": 1, "col": 1, "row": 0},
@@ -26,7 +25,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 43, "chapter": 3, "index": 3, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 253.4188, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 43, "chapter": 3, "index": 3, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 398.2295, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 3, "level": 2, "col": 3, "row": 0},
         {"line": 0, "level": 2, "col": 0, "row": 1},
@@ -37,28 +36,29 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 44, "chapter": 3, "index": 4, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 250.4203, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 44, "chapter": 3, "index": 4, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 393.5176, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
-        {"line": 2, "level": 3, "col": 4, "row": 0},
-        {"line": 2, "level": 1, "col": 0, "row": 0},
+        {"line": 2, "level": 2, "col": 4, "row": 0},
+        {"line": 2, "level": 2, "col": 0, "row": 0},
         {"line": 1, "level": 1, "col": 4, "row": 2},
-        {"line": 0, "level": 1, "col": 2, "row": 0}
+        {"line": 0, "level": 1, "col": 2, "row": 0},
+        {"line": 3, "level": 1, "col": 3, "row": 1}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 45, "chapter": 3, "index": 5, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 260.6166, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 45, "chapter": 3, "index": 5, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 409.5404, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
-        {"line": 1, "level": 3, "col": 1, "row": 2},
+        {"line": 1, "level": 2, "col": 1, "row": 2},
         {"line": 2, "level": 1, "col": 0, "row": 1},
-        {"line": 3, "level": 1, "col": 2, "row": 0},
+        {"line": 3, "level": 2, "col": 2, "row": 0},
         {"line": 0, "level": 1, "col": 3, "row": 0},
         {"line": 3, "level": 1, "col": 3, "row": 1}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 46, "chapter": 3, "index": 6, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 252.5177, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 46, "chapter": 3, "index": 6, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 396.8135, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 3, "level": 2, "col": 2, "row": 1},
         {"line": 2, "level": 2, "col": 2, "row": 0},
@@ -69,20 +69,19 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 47, "chapter": 3, "index": 7, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 268.9016, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 47, "chapter": 3, "index": 7, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 422.5596, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 2, "col": 2, "row": 1},
         {"line": 0, "level": 1, "col": 0, "row": 1},
         {"line": 3, "level": 1, "col": 4, "row": 1},
         {"line": 3, "level": 1, "col": 1, "row": 1},
         {"line": 3, "level": 1, "col": 2, "row": 0},
-        {"line": 2, "level": 1, "col": 4, "row": 0},
-        {"line": 1, "level": 1, "col": 4, "row": 2}
+        {"line": 2, "level": 1, "col": 4, "row": 0}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 48, "chapter": 3, "index": 8, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 289.5743, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 48, "chapter": 3, "index": 8, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 455.0453, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 2, "col": 4, "row": 0},
         {"line": 3, "level": 2, "col": 3, "row": 1},
@@ -94,19 +93,19 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 49, "chapter": 3, "index": 9, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 288.32, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 49, "chapter": 3, "index": 9, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 453.0744, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 2, "col": 0, "row": 3},
         {"line": 3, "level": 2, "col": 0, "row": 0},
         {"line": 3, "level": 1, "col": 1, "row": 0},
-        {"line": 3, "level": 2, "col": 4, "row": 0},
+        {"line": 3, "level": 1, "col": 4, "row": 0},
         {"line": 3, "level": 1, "col": 4, "row": 1},
         {"line": 3, "level": 1, "col": 3, "row": 0}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 50, "chapter": 3, "index": 10, "theme": "snow", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 164.0442, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 50, "chapter": 3, "index": 10, "theme": "snow", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 257.7838, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 0, "level": 1, "col": 2, "row": 1},
         {"line": 2, "level": 1, "col": 2, "row": 0},
@@ -114,13 +113,13 @@
         {"line": 1, "level": 1, "col": 4, "row": 2},
         {"line": 1, "level": 1, "col": 2, "row": 3}
       ],
-      "boss": {"hp": 1553.055, "damage": 51.76849, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 1, "minionLevel": 1}
+      "boss": {"hp": 2440.515, "damage": 81.35049, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 1, "minionLevel": 1}
     },
     {
-      "id": 51, "chapter": 3, "index": 11, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 300.8377, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 51, "chapter": 3, "index": 11, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 472.7449, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 3, "level": 3, "col": 2, "row": 1},
-        {"line": 0, "level": 2, "col": 4, "row": 0},
+        {"line": 0, "level": 1, "col": 4, "row": 0},
         {"line": 2, "level": 1, "col": 4, "row": 1},
         {"line": 1, "level": 1, "col": 1, "row": 2},
         {"line": 2, "level": 1, "col": 1, "row": 1}
@@ -128,9 +127,9 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 52, "chapter": 3, "index": 12, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 306.5724, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 52, "chapter": 3, "index": 12, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 481.7566, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
-        {"line": 2, "level": 2, "col": 3, "row": 1},
+        {"line": 2, "level": 1, "col": 3, "row": 1},
         {"line": 1, "level": 2, "col": 3, "row": 3},
         {"line": 1, "level": 1, "col": 3, "row": 2},
         {"line": 0, "level": 1, "col": 1, "row": 0},
@@ -141,12 +140,12 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 53, "chapter": 3, "index": 13, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 320.6389, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 53, "chapter": 3, "index": 13, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 503.8611, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 2, "col": 4, "row": 0},
         {"line": 3, "level": 2, "col": 0, "row": 1},
         {"line": 3, "level": 1, "col": 2, "row": 0},
-        {"line": 1, "level": 2, "col": 3, "row": 3},
+        {"line": 1, "level": 1, "col": 3, "row": 3},
         {"line": 2, "level": 1, "col": 3, "row": 1},
         {"line": 3, "level": 1, "col": 3, "row": 0},
         {"line": 2, "level": 1, "col": 0, "row": 0}
@@ -154,10 +153,10 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 54, "chapter": 3, "index": 14, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 336.355, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 54, "chapter": 3, "index": 14, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 528.5579, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 2, "col": 0, "row": 0},
-        {"line": 3, "level": 2, "col": 2, "row": 0},
+        {"line": 3, "level": 1, "col": 2, "row": 0},
         {"line": 1, "level": 2, "col": 1, "row": 2},
         {"line": 1, "level": 1, "col": 3, "row": 2},
         {"line": 3, "level": 1, "col": 1, "row": 0},
@@ -167,60 +166,58 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 55, "chapter": 3, "index": 15, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 359.7793, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 55, "chapter": 3, "index": 15, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 565.3676, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 3, "level": 3, "col": 1, "row": 1},
         {"line": 2, "level": 2, "col": 0, "row": 0},
         {"line": 2, "level": 1, "col": 4, "row": 1},
         {"line": 3, "level": 1, "col": 0, "row": 1},
         {"line": 0, "level": 1, "col": 1, "row": 0},
-        {"line": 3, "level": 1, "col": 3, "row": 0},
-        {"line": 1, "level": 1, "col": 0, "row": 2}
+        {"line": 3, "level": 1, "col": 3, "row": 0}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 56, "chapter": 3, "index": 16, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 347.104, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 56, "chapter": 3, "index": 16, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 545.4492, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 3, "level": 3, "col": 1, "row": 1},
         {"line": 3, "level": 2, "col": 4, "row": 1},
         {"line": 1, "level": 2, "col": 2, "row": 3},
         {"line": 3, "level": 1, "col": 0, "row": 1},
-        {"line": 1, "level": 1, "col": 1, "row": 3},
-        {"line": 3, "level": 1, "col": 0, "row": 0}
+        {"line": 1, "level": 1, "col": 1, "row": 3}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 57, "chapter": 3, "index": 17, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 356.1395, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 57, "chapter": 3, "index": 17, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 559.6478, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 3, "col": 4, "row": 2},
-        {"line": 1, "level": 3, "col": 0, "row": 2},
+        {"line": 1, "level": 2, "col": 0, "row": 2},
         {"line": 1, "level": 2, "col": 3, "row": 2},
         {"line": 2, "level": 1, "col": 0, "row": 0},
-        {"line": 2, "level": 1, "col": 1, "row": 1}
+        {"line": 2, "level": 1, "col": 1, "row": 1},
+        {"line": 0, "level": 1, "col": 1, "row": 0}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 58, "chapter": 3, "index": 18, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 358.8538, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 58, "chapter": 3, "index": 18, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 563.9131, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 0, "level": 3, "col": 1, "row": 1},
         {"line": 2, "level": 1, "col": 2, "row": 1},
         {"line": 2, "level": 1, "col": 4, "row": 0},
         {"line": 2, "level": 1, "col": 4, "row": 1},
         {"line": 1, "level": 1, "col": 4, "row": 2},
-        {"line": 1, "level": 1, "col": 3, "row": 2},
-        {"line": 1, "level": 1, "col": 0, "row": 3}
+        {"line": 1, "level": 1, "col": 3, "row": 2}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 59, "chapter": 3, "index": 19, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 393.0607, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 59, "chapter": 3, "index": 19, "theme": "snow", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 617.6667, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 0, "level": 2, "col": 1, "row": 0},
-        {"line": 2, "level": 3, "col": 2, "row": 1},
-        {"line": 3, "level": 1, "col": 4, "row": 1},
+        {"line": 2, "level": 2, "col": 2, "row": 1},
+        {"line": 3, "level": 2, "col": 4, "row": 1},
         {"line": 1, "level": 1, "col": 2, "row": 3},
         {"line": 3, "level": 1, "col": 3, "row": 0},
         {"line": 1, "level": 1, "col": 0, "row": 3},
@@ -230,7 +227,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 60, "chapter": 3, "index": 20, "theme": "snow", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 217.9644, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 60, "chapter": 3, "index": 20, "theme": "snow", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 342.5155, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 1, "col": 2, "row": 0},
         {"line": 3, "level": 1, "col": 1, "row": 1},
@@ -239,7 +236,7 @@
         {"line": 1, "level": 1, "col": 0, "row": 2},
         {"line": 0, "level": 1, "col": 4, "row": 1}
       ],
-      "boss": {"hp": 2063.533, "damage": 68.78442, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 1, "minionLevel": 1}
+      "boss": {"hp": 3242.694, "damage": 108.0898, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 1, "minionLevel": 1}
     }
   ]
 }

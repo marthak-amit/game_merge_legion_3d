@@ -7,7 +7,7 @@ namespace MergeLegion.Levels
     [Serializable]
     public sealed class CampaignGenParams
     {
-        public float startPower = 70f;       // enemy power budget on level 1
+        public float startPower = 110f;      // enemy power budget on level 1
         public float growth = 1.03f;         // per level
         public float bossShare = 0.55f;      // share of a boss level's budget spent on the boss itself
         public float bossBudgetMult = 1.25f; // boss levels are tougher than their neighbours

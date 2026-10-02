@@ -3,7 +3,7 @@
   "theme": "desert",
   "levels": [
     {
-      "id": 21, "chapter": 2, "index": 1, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 131.1803, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 21, "chapter": 2, "index": 1, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 206.1404, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 1, "col": 1, "row": 0},
         {"line": 1, "level": 1, "col": 0, "row": 3},
@@ -13,7 +13,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 22, "chapter": 2, "index": 2, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 136.3642, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 22, "chapter": 2, "index": 2, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 214.2865, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 3, "level": 1, "col": 1, "row": 1},
         {"line": 0, "level": 1, "col": 1, "row": 0},
@@ -23,7 +23,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 23, "chapter": 2, "index": 3, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 134.6809, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 23, "chapter": 2, "index": 3, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 211.6414, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 0, "level": 1, "col": 1, "row": 1},
         {"line": 0, "level": 1, "col": 1, "row": 0},
@@ -33,7 +33,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 24, "chapter": 2, "index": 4, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 131.5606, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 24, "chapter": 2, "index": 4, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 206.7381, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 1, "col": 2, "row": 0},
         {"line": 3, "level": 1, "col": 0, "row": 0},
@@ -43,49 +43,45 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 25, "chapter": 2, "index": 5, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 146.5496, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 25, "chapter": 2, "index": 5, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 230.2922, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 1, "col": 1, "row": 0},
         {"line": 3, "level": 1, "col": 2, "row": 0},
         {"line": 1, "level": 1, "col": 1, "row": 2},
-        {"line": 2, "level": 1, "col": 0, "row": 0},
-        {"line": 1, "level": 1, "col": 2, "row": 2}
+        {"line": 2, "level": 1, "col": 0, "row": 0}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 26, "chapter": 2, "index": 6, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 139.6246, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 26, "chapter": 2, "index": 6, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 219.4101, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 2, "col": 4, "row": 2},
         {"line": 3, "level": 1, "col": 1, "row": 0},
-        {"line": 0, "level": 1, "col": 2, "row": 1},
-        {"line": 2, "level": 1, "col": 0, "row": 1}
+        {"line": 0, "level": 1, "col": 2, "row": 1}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 27, "chapter": 2, "index": 7, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 149.8123, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 27, "chapter": 2, "index": 7, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 235.4193, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 1, "col": 2, "row": 2},
         {"line": 2, "level": 1, "col": 4, "row": 0},
         {"line": 1, "level": 1, "col": 0, "row": 2},
-        {"line": 0, "level": 1, "col": 1, "row": 0},
-        {"line": 2, "level": 1, "col": 3, "row": 0}
+        {"line": 0, "level": 1, "col": 1, "row": 0}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 28, "chapter": 2, "index": 8, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 156.9342, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 28, "chapter": 2, "index": 8, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 246.6108, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 2, "col": 2, "row": 1},
         {"line": 1, "level": 1, "col": 3, "row": 3},
-        {"line": 2, "level": 1, "col": 4, "row": 0},
-        {"line": 0, "level": 1, "col": 0, "row": 0}
+        {"line": 2, "level": 1, "col": 4, "row": 0}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 29, "chapter": 2, "index": 9, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 164.5321, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 29, "chapter": 2, "index": 9, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 258.5504, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 3, "level": 2, "col": 3, "row": 1},
         {"line": 1, "level": 1, "col": 1, "row": 2},
@@ -95,26 +91,27 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 30, "chapter": 2, "index": 10, "theme": "desert", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 90.61127, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 30, "chapter": 2, "index": 10, "theme": "desert", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 142.3891, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 0, "level": 1, "col": 2, "row": 1},
         {"line": 2, "level": 1, "col": 1, "row": 1},
         {"line": 0, "level": 1, "col": 1, "row": 0}
       ],
-      "boss": {"hp": 857.8434, "damage": 28.59478, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
+      "boss": {"hp": 1348.04, "damage": 44.93466, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 31, "chapter": 2, "index": 11, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 166.7184, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 31, "chapter": 2, "index": 11, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 261.986, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 1, "col": 3, "row": 3},
-        {"line": 1, "level": 2, "col": 0, "row": 2},
+        {"line": 1, "level": 1, "col": 0, "row": 2},
         {"line": 3, "level": 1, "col": 1, "row": 1},
-        {"line": 2, "level": 1, "col": 3, "row": 0}
+        {"line": 2, "level": 1, "col": 3, "row": 0},
+        {"line": 2, "level": 1, "col": 4, "row": 1}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 32, "chapter": 2, "index": 12, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 180.6174, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 32, "chapter": 2, "index": 12, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 283.8273, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 0, "level": 2, "col": 0, "row": 0},
         {"line": 0, "level": 1, "col": 1, "row": 1},
@@ -124,7 +121,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 33, "chapter": 2, "index": 13, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 182.1056, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 33, "chapter": 2, "index": 13, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 286.1659, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 0, "level": 2, "col": 3, "row": 1},
         {"line": 2, "level": 1, "col": 2, "row": 0},
@@ -134,7 +131,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 34, "chapter": 2, "index": 14, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 180.9871, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 34, "chapter": 2, "index": 14, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 284.4084, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 0, "level": 1, "col": 3, "row": 0},
         {"line": 0, "level": 1, "col": 0, "row": 1},
@@ -145,7 +142,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 35, "chapter": 2, "index": 15, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 199.0263, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 35, "chapter": 2, "index": 15, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 312.7556, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 1, "level": 2, "col": 0, "row": 2},
         {"line": 1, "level": 1, "col": 4, "row": 2},
@@ -156,7 +153,7 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 36, "chapter": 2, "index": 16, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 200.8643, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 36, "chapter": 2, "index": 16, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 315.6439, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 1, "col": 1, "row": 1},
         {"line": 3, "level": 1, "col": 4, "row": 1},
@@ -168,19 +165,18 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 37, "chapter": 2, "index": 17, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 194.0794, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 37, "chapter": 2, "index": 17, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 304.9819, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 0, "level": 1, "col": 4, "row": 0},
         {"line": 1, "level": 1, "col": 3, "row": 3},
         {"line": 2, "level": 1, "col": 1, "row": 0},
         {"line": 0, "level": 1, "col": 2, "row": 1},
-        {"line": 2, "level": 1, "col": 4, "row": 1},
-        {"line": 2, "level": 1, "col": 3, "row": 1}
+        {"line": 2, "level": 1, "col": 4, "row": 1}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 38, "chapter": 2, "index": 18, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 214.5663, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 38, "chapter": 2, "index": 18, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 337.1755, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 0, "level": 2, "col": 1, "row": 0},
         {"line": 0, "level": 1, "col": 1, "row": 1},
@@ -191,24 +187,25 @@
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 39, "chapter": 2, "index": 19, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 211.5844, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 39, "chapter": 2, "index": 19, "theme": "desert", "isBoss": false, "hasBoss": false, "enemyCols": 5, "power": 332.4898, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
-        {"line": 1, "level": 3, "col": 4, "row": 3},
+        {"line": 1, "level": 2, "col": 4, "row": 3},
         {"line": 3, "level": 1, "col": 0, "row": 0},
         {"line": 0, "level": 1, "col": 3, "row": 1},
-        {"line": 0, "level": 1, "col": 1, "row": 1}
+        {"line": 0, "level": 1, "col": 1, "row": 1},
+        {"line": 2, "level": 1, "col": 2, "row": 0}
       ],
       "boss": {"hp": 2000, "damage": 40, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 0, "minionLevel": 1}
     },
     {
-      "id": 40, "chapter": 2, "index": 20, "theme": "desert", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 123.2268, "hpMult": 1, "dmgMult": 1, "endless": false,
+      "id": 40, "chapter": 2, "index": 20, "theme": "desert", "isBoss": true, "hasBoss": true, "enemyCols": 5, "power": 193.6421, "hpMult": 1, "dmgMult": 1, "endless": false,
       "enemies": [
         {"line": 2, "level": 1, "col": 4, "row": 1},
         {"line": 3, "level": 1, "col": 0, "row": 0},
         {"line": 1, "level": 1, "col": 0, "row": 2},
         {"line": 2, "level": 1, "col": 4, "row": 0}
       ],
-      "boss": {"hp": 1166.624, "damage": 38.88746, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 1, "minionLevel": 1}
+      "boss": {"hp": 1833.266, "damage": 61.10888, "attackSpeed": 0.5, "range": 2.6, "moveSpeed": 1.6, "scale": 2.8, "slamInterval": 6, "slamRadius": 3.2, "slamDamageMult": 2.5, "summonInterval": 10, "summonCount": 2, "minionLine": 1, "minionLevel": 1}
     }
   ]
 }

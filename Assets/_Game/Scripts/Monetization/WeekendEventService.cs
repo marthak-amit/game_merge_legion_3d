@@ -142,7 +142,8 @@ namespace MergeLegion.Monetization
             int seed = (int)(CurrentEventKey.GetHashCode() & 0x7fffffff) + index * 131;
             var rng = new DeterministicRng(seed);
 
-            double curve = 70.0 * Math.Pow(1.03, player - 1);
+            var curveParams = new CampaignGenParams(); // same power curve as the campaign: one source of truth
+            double curve = curveParams.startPower * Math.Pow(curveParams.growth, player - 1);
             double budget = curve * _cfg.difficulty * (1.0 + 0.03 * index);
 
             var level = new LevelDefinition

@@ -4,6 +4,7 @@ import os
 OUT = os.path.join(os.path.dirname(__file__), "..", "Assets", "_Game", "Resources", "Balance")
 os.makedirs(OUT, exist_ok=True)
 SCALE = 1.9
+HP_MULT = 3.0   # global fight-length lever: higher = longer, more watchable battles
 LEVELS = 8
 lines = [
     # id, name_key, role_key, unlock, base_cost, growth, ranged, flying, taunt, proj_speed
@@ -32,7 +33,7 @@ with open(os.path.join(OUT, "units.csv"), "w") as f:
             m = SCALE ** (lv - 1)
             t = (lv - 1) / (LEVELS - 1) * 0.55
             tint = tuple(c + (1 - c) * t for c in col)
-            f.write("%s,%d,%.1f,%.1f,%.2f,%.2f,%.2f,%.2f,%s\n" % (name, lv, hp * m, dmg * m, aspd, rng, ms, 0.7 + 0.08 * (lv - 1), hexc(tint)))
+            f.write("%s,%d,%.1f,%.1f,%.2f,%.2f,%.2f,%.2f,%s\n" % (name, lv, hp * m * HP_MULT, dmg * m, aspd, rng, ms, 0.7 + 0.08 * (lv - 1), hexc(tint)))
 print("balance csv written")
 
 commanders = [

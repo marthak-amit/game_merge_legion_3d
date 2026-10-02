@@ -30,6 +30,7 @@ namespace MergeLegion.Tests
             public int Units;
             public int HighestUnit;
             public int ResearchLevels;
+            public float FightSeconds;
         }
 
         private readonly GameDatabase _db;
@@ -77,6 +78,7 @@ namespace MergeLegion.Tests
                 bool cleared = false;
                 int stars = 0;
                 float strength = 0;
+                float fight = 0;
                 while (attempts < maxAttemptsPerLevel && !cleared)
                 {
                     attempts++;
@@ -87,6 +89,7 @@ namespace MergeLegion.Tests
                     int ticks = (int)(_cfg.battle.maxDurationSeconds / _cfg.battle.fixedStep) + 5;
                     for (int t = 0; t < ticks && sim.Outcome == BattleOutcome.Running; t++) { sim.Tick(_cfg.battle.fixedStep); sim.Drain(); }
                     var res = sim.GetResult();
+                    fight = res.Duration;
                     if (res.Outcome == BattleOutcome.Win)
                     {
                         cleared = true;
@@ -101,7 +104,7 @@ namespace MergeLegion.Tests
                 log.Add(new LevelLog
                 {
                     Level = level, Attempts = attempts, Cleared = cleared, ArmyStrength = strength, Stars = stars,
-                    Coins = _currency.Get(CurrencyType.Coins), Units = _army.Grid.UnitCount(), HighestUnit = _army.Grid.HighestLevel(), ResearchLevels = rl
+                    Coins = _currency.Get(CurrencyType.Coins), Units = _army.Grid.UnitCount(), HighestUnit = _army.Grid.HighestLevel(), ResearchLevels = rl, FightSeconds = fight
                 });
                 if (!cleared) break;
             }
