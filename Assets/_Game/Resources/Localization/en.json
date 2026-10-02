@@ -1,8 +1,80 @@
 {
   "entries": [
-    { "key": "game.title", "value": "Merge Legion" },
-    { "key": "home.battle", "value": "BATTLE" },
-    { "key": "home.coming_soon", "value": "Battle arrives in the next phase" },
-    { "key": "home.version", "value": "v{0}" }
+    {
+      "key": "game.title",
+      "value": "Merge Legion"
+    },
+    {
+      "key": "home.battle",
+      "value": "BATTLE"
+    },
+    {
+      "key": "home.version",
+      "value": "v{0}"
+    },
+    {
+      "key": "home.level",
+      "value": "Level {0}"
+    },
+    {
+      "key": "hud.level",
+      "value": "Level {0}"
+    },
+    {
+      "key": "hud.home",
+      "value": "Home"
+    },
+    {
+      "key": "hud.fight",
+      "value": "FIGHT!"
+    },
+    {
+      "key": "hud.unlock_at",
+      "value": "Unlocks at\nLevel {0}"
+    },
+    {
+      "key": "toast.no_coins",
+      "value": "Not enough coins!"
+    },
+    {
+      "key": "toast.grid_full",
+      "value": "Grid is full - merge some units!"
+    },
+    {
+      "key": "toast.fight_soon",
+      "value": "Battle starts next phase"
+    },
+    {
+      "key": "line.melee",
+      "value": "Melee"
+    },
+    {
+      "key": "line.ranged",
+      "value": "Ranged"
+    },
+    {
+      "key": "line.tank",
+      "value": "Tank"
+    },
+    {
+      "key": "line.flying",
+      "value": "Flying"
+    },
+    {
+      "key": "role.frontline",
+      "value": "Frontline damage"
+    },
+    {
+      "key": "role.backline",
+      "value": "Backline DPS"
+    },
+    {
+      "key": "role.tank",
+      "value": "High HP, taunt"
+    },
+    {
+      "key": "role.flyer",
+      "value": "Hunts the backline"
+    }
   ]
 }

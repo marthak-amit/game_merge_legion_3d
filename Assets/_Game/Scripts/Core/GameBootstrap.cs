@@ -7,13 +7,24 @@ namespace MergeLegion.Core
 {
     /// <summary>
     /// Lives in the Boot scene. Installs services, warms up SDKs (mocks in the Editor), then loads Main.
-    /// Persists across scenes and hosts the long-lived runners.
+    /// Persists across scenes and hosts the long-lived runners. <see cref="EnsureServices"/> lets any scene be
+    /// played directly in the Editor without going through Boot.
     /// </summary>
     public sealed class GameBootstrap : MonoBehaviour
     {
         private static GameBootstrap _instance;
 
         [SerializeField] private string firstScene = SceneNames.Main;
+
+        /// <summary>Installs everything synchronously if Boot has not run (Editor play-from-any-scene, tests).</summary>
+        public static void EnsureServices()
+        {
+            if (_instance != null || ServiceLocator.Has<SaveService>()) return;
+            var go = new GameObject("[GameBootstrapLite]");
+            DontDestroyOnLoad(go);
+            var boot = go.AddComponent<GameBootstrap>();
+            boot.firstScene = null; // Awake already installed the services; Start finishes SDK warm-up without loading a scene
+        }
 
         private void Awake()
         {
@@ -29,6 +40,7 @@ namespace MergeLegion.Core
 
             var save = ServiceInstaller.InstallCore();
             ServiceInstaller.InstallPlatformServices(save);
+            ServiceInstaller.InstallGameplay(save);
 
             var loader = gameObject.AddComponent<SceneLoader>();
             ServiceLocator.Register(loader);
@@ -44,13 +56,12 @@ namespace MergeLegion.Core
             float timeout = config.GetFloat(RemoteKeys.BootTimeoutSeconds, 4f);
 
             int pending = 0;
-            void Begin() => pending++;
             void End() => pending--;
 
-            Begin(); ServiceLocator.Get<IRemoteConfigService>().Fetch(_ => End());
-            Begin(); ServiceLocator.Get<IAuthService>().SignInAnonymously(_ => End());
-            Begin(); ServiceLocator.Get<IAdsService>().Initialize(End);
-            Begin(); ServiceLocator.Get<IIAPService>().Initialize(System.Array.Empty<string>(), End);
+            pending++; ServiceLocator.Get<IRemoteConfigService>().Fetch(_ => End());
+            pending++; ServiceLocator.Get<IAuthService>().SignInAnonymously(_ => End());
+            pending++; ServiceLocator.Get<IAdsService>().Initialize(End);
+            pending++; ServiceLocator.Get<IIAPService>().Initialize(ServiceInstaller.IapSkus(), End);
             ServiceLocator.Get<IAnalyticsService>().Initialize();
             ServiceLocator.Get<IAttributionService>().Initialize();
 
@@ -67,7 +78,7 @@ namespace MergeLegion.Core
             GetComponent<AppLifecycle>().BeginSession();
 
             EventBus.Publish(new BootCompletedEvent());
-            ServiceLocator.Get<SceneLoader>().Load(firstScene);
+            if (!string.IsNullOrEmpty(firstScene)) ServiceLocator.Get<SceneLoader>().Load(firstScene);
         }
 
         private void OnDestroy()

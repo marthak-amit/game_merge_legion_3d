@@ -1,0 +1,17 @@
+{
+  "grid": {
+    "cols": 5, "rows": 3, "maxUnitLevel": 8, "cellSize": 1.7, "frontZ": -3.0,
+    "startCoins": 200, "freeUnitCooldownSeconds": 180, "freeUnitLevelOffset": 2
+  },
+  "battle": {
+    "fixedStep": 0.0333333, "maxDurationSeconds": 120, "retargetInterval": 0.4,
+    "separationRadius": 0.9, "flyingSpeedMultiplier": 1, "tauntRange": 6,
+    "threeStarHpPct": 0.66, "twoStarHpPct": 0.33, "revivePct": 0.5,
+    "enemyHpScalePerChapter": 1, "damageNumberMinValue": 1, "slowMoScale": 0.25, "slowMoSeconds": 0.6
+  },
+  "rewards": {
+    "levelCoinBase": 60, "levelCoinGrowth": 1.09, "starBonusPct": 0.15, "loseConsolationPct": 0.25,
+    "adMultiplier": 3, "keyProgressPerWin": 1, "keysPerChestCycle": 3, "bossBonusGems": 10,
+    "battlePassXpPerWin": 40, "battlePassXpPerBossWin": 120
+  }
+}

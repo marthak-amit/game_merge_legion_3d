@@ -77,8 +77,8 @@ namespace MergeLegion.Tests
             string v1 = new SaveCodec(null, 1).Encode(new SaveData { coins = 77 });
             var codec = new SaveCodec(new ISaveMigration[]
             {
-                new AddFlagMigration(1, "\\\"coins\\\":77", "\\\"coins\\\":78"),
-                new AddFlagMigration(2, "\\\"coins\\\":78", "\\\"coins\\\":79"),
+                new AddFlagMigration(1, "\"coins\":77", "\"coins\":78"),
+                new AddFlagMigration(2, "\"coins\":78", "\"coins\":79"),
             }, 3);
 
             var result = codec.Decode(v1);

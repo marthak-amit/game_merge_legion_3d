@@ -98,7 +98,7 @@ namespace MergeLegion.Tests
         {
             var iap = new MockIAPService();
             iap.Initialize(new[] { "no_ads" });
-            PurchaseResult res = default;
+            PurchaseResult res = new PurchaseResult();
             iap.Purchase("no_ads", r => res = r);
             Assert.IsTrue(res.Success);
             Assert.IsTrue(iap.IsOwned("no_ads"));
@@ -109,7 +109,7 @@ namespace MergeLegion.Tests
         {
             var iap = new MockIAPService();
             iap.Initialize(new[] { "no_ads" });
-            PurchaseResult res = default;
+            PurchaseResult res = new PurchaseResult();
             iap.Purchase("nope", r => res = r);
             Assert.AreEqual(PurchaseStatus.Failed, res.Status);
         }
@@ -148,12 +148,12 @@ namespace MergeLegion.Tests
         public void CloudSave_RoundTripsThroughStorage()
         {
             var cloud = new MockCloudSaveService(new InMemorySaveStorage());
-            CloudLoadResult empty = default;
+            CloudLoadResult empty = new CloudLoadResult();
             cloud.Load(r => empty = r);
             Assert.AreEqual(CloudLoadStatus.NotFound, empty.Status);
 
             cloud.Save("{\"x\":1}", _ => { });
-            CloudLoadResult got = default;
+            CloudLoadResult got = new CloudLoadResult();
             cloud.Load(r => got = r);
             Assert.AreEqual(CloudLoadStatus.Ok, got.Status);
             Assert.AreEqual("{\"x\":1}", got.Json);

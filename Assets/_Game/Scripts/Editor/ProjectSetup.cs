@@ -50,6 +50,18 @@ namespace MergeLegion.Editor
             return needsRestart;
         }
 
+        /// <summary>Creates the URP/Lit template material in Resources so the shader is always included in builds.</summary>
+        public static void CreateMaterials()
+        {
+            const string folder = "Assets/_Game/Resources/Materials";
+            if (!AssetDatabase.IsValidFolder(folder)) AssetDatabase.CreateFolder("Assets/_Game/Resources", "Materials");
+            string path = folder + "/UnitLit.mat";
+            if (AssetDatabase.LoadAssetAtPath<Material>(path) != null) return;
+            var shader = Shader.Find("Universal Render Pipeline/Lit") ?? Shader.Find("Standard");
+            var mat = new Material(shader) { enableInstancing = true, name = "UnitLit" };
+            AssetDatabase.CreateAsset(mat, path);
+        }
+
         private static bool SetActiveInputHandler()
         {
             var so = new SerializedObject(Unsupported.GetSerializedAssetInterfaceSingleton("PlayerSettings"));

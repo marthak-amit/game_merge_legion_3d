@@ -1,6 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using MergeLegion.Core;
+using MergeLegion.Data;
+using MergeLegion.Economy;
+using MergeLegion.Grid;
 using MergeLegion.Save;
 using MergeLegion.Services.Mock;
 using UnityEngine;
@@ -32,6 +36,32 @@ namespace MergeLegion.Services
             }
             ServiceLocator.Register<IRemoteConfigService>(new MockRemoteConfigService(remoteDefaultsJson));
             return save;
+        }
+
+        /// <summary>SKU list for the store catalog (filled in Phase 6 from the shop data).</summary>
+        public static IReadOnlyList<string> IapSkus() => new string[0];
+
+        /// <summary>Game-level services that depend on save, config and platform services.</summary>
+        public static void InstallGameplay(SaveService save)
+        {
+            var remote = ServiceLocator.Get<IRemoteConfigService>();
+            var analytics = ServiceLocator.Get<IAnalyticsService>();
+            var config = GameConfig.Load(remote);
+            ServiceLocator.Register(config);
+
+            var currency = new CurrencyService(save, analytics);
+            ServiceLocator.Register(currency);
+            if (!save.Data.HasFlag(SaveFlags.StarterCoinsGiven))
+            {
+                save.Data.SetFlag(SaveFlags.StarterCoinsGiven);
+                currency.Add(CurrencyType.Coins, config.grid.startCoins, "starter");
+            }
+
+            var db = GameDatabase.Instance;
+            var army = new ArmyService(new GridModel(config.grid.cols, config.grid.rows), save, currency, config, db,
+                new DeterministicRng(Environment.TickCount), analytics);
+            army.Load();
+            ServiceLocator.Register(army);
         }
 
         public static void InstallPlatformServices(SaveService save, IReadOnlyList<string> iapSkus = null)

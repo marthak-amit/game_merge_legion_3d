@@ -24,6 +24,12 @@ namespace MergeLegion.Save
         public long battlePassXp;
         public List<IntEntry> commanderShards = new List<IntEntry>();
 
+        // Army (persists between levels)
+        public List<GridCellSave> grid = new List<GridCellSave>();
+        public List<IntEntry> buyCounts = new List<IntEntry>();
+        public int highestMergedLevel = 1;
+        public long lastFreeUnitUtcTicks;
+
         public SettingsData settings = new SettingsData();
         public ConsentData consent = new ConsentData();
 
@@ -49,6 +55,43 @@ namespace MergeLegion.Save
     {
         public string key;
         public int value;
+    }
+
+    [Serializable]
+    public sealed class GridCellSave
+    {
+        public int col;
+        public int row;
+        public int line;
+        public int level;
+    }
+
+    public static class IntEntries
+    {
+        public static int Get(List<IntEntry> list, string key, int fallback = 0)
+        {
+            for (int i = 0; i < list.Count; i++)
+                if (list[i].key == key) return list[i].value;
+            return fallback;
+        }
+
+        public static void Set(List<IntEntry> list, string key, int value)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].key != key) continue;
+                list[i].value = value;
+                return;
+            }
+            list.Add(new IntEntry { key = key, value = value });
+        }
+
+        public static int Add(List<IntEntry> list, string key, int delta)
+        {
+            int v = Get(list, key) + delta;
+            Set(list, key, v);
+            return v;
+        }
     }
 
     [Serializable]

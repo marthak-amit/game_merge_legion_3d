@@ -1,0 +1,5 @@
+line,name_key,role_key,unlock_level,base_cost,cost_growth,ranged,flying,taunt,projectile_speed
+Melee,line.melee,role.frontline,1,50,1.15,0,0,0,0
+Ranged,line.ranged,role.backline,1,70,1.15,1,0,0,14
+Tank,line.tank,role.tank,8,90,1.15,0,0,1,0
+Flying,line.flying,role.flyer,20,110,1.15,0,1,0,0
