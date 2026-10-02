@@ -1,0 +1,769 @@
+{
+ "products": [
+  {
+   "sku": "no_ads",
+   "kind": 1,
+   "priceUsd": 3.99,
+   "titleKey": "iap.no_ads",
+   "descKey": "iap.no_ads.desc",
+   "group": "special",
+   "oneTime": true,
+   "bonusPct": 0,
+   "commanderId": "",
+   "rewards": [
+    {
+     "type": 8,
+     "amount": 1
+    },
+    {
+     "type": 1,
+     "amount": 150
+    }
+   ]
+  },
+  {
+   "sku": "starter_pack",
+   "kind": 0,
+   "priceUsd": 1.99,
+   "titleKey": "iap.starter_pack",
+   "descKey": "iap.starter_pack.desc",
+   "group": "special",
+   "oneTime": true,
+   "bonusPct": 0,
+   "commanderId": "",
+   "rewards": [
+    {
+     "type": 5,
+     "amount": 15
+    },
+    {
+     "type": 1,
+     "amount": 150
+    },
+    {
+     "type": 4,
+     "amount": 10,
+     "target": "random"
+    },
+    {
+     "type": 2,
+     "amount": 3
+    }
+   ]
+  },
+  {
+   "sku": "gems_small",
+   "kind": 0,
+   "priceUsd": 0.99,
+   "titleKey": "iap.gems_small",
+   "descKey": "iap.gems_small.desc",
+   "group": "gems",
+   "oneTime": false,
+   "bonusPct": 0,
+   "commanderId": "",
+   "rewards": [
+    {
+     "type": 1,
+     "amount": 100
+    }
+   ]
+  },
+  {
+   "sku": "gems_med",
+   "kind": 0,
+   "priceUsd": 4.99,
+   "titleKey": "iap.gems_med",
+   "descKey": "iap.gems_med.desc",
+   "group": "gems",
+   "oneTime": false,
+   "bonusPct": 10,
+   "commanderId": "",
+   "rewards": [
+    {
+     "type": 1,
+     "amount": 550
+    }
+   ]
+  },
+  {
+   "sku": "gems_large",
+   "kind": 0,
+   "priceUsd": 9.99,
+   "titleKey": "iap.gems_large",
+   "descKey": "iap.gems_large.desc",
+   "group": "gems",
+   "oneTime": false,
+   "bonusPct": 20,
+   "commanderId": "",
+   "rewards": [
+    {
+     "type": 1,
+     "amount": 1200
+    }
+   ]
+  },
+  {
+   "sku": "gems_huge",
+   "kind": 0,
+   "priceUsd": 19.99,
+   "titleKey": "iap.gems_huge",
+   "descKey": "iap.gems_huge.desc",
+   "group": "gems",
+   "oneTime": false,
+   "bonusPct": 30,
+   "commanderId": "",
+   "rewards": [
+    {
+     "type": 1,
+     "amount": 2600
+    }
+   ]
+  },
+  {
+   "sku": "gems_mega",
+   "kind": 0,
+   "priceUsd": 49.99,
+   "titleKey": "iap.gems_mega",
+   "descKey": "iap.gems_mega.desc",
+   "group": "gems",
+   "oneTime": false,
+   "bonusPct": 40,
+   "commanderId": "",
+   "rewards": [
+    {
+     "type": 1,
+     "amount": 7000
+    }
+   ]
+  },
+  {
+   "sku": "battle_pass_premium",
+   "kind": 1,
+   "priceUsd": 4.99,
+   "titleKey": "iap.battle_pass_premium",
+   "descKey": "iap.battle_pass_premium.desc",
+   "group": "pass",
+   "oneTime": false,
+   "bonusPct": 0,
+   "commanderId": "",
+   "rewards": []
+  },
+  {
+   "sku": "vip_weekly",
+   "kind": 2,
+   "priceUsd": 4.99,
+   "titleKey": "iap.vip_weekly",
+   "descKey": "iap.vip_weekly.desc",
+   "group": "vip",
+   "oneTime": false,
+   "bonusPct": 0,
+   "commanderId": "",
+   "rewards": []
+  },
+  {
+   "sku": "piggy_bank",
+   "kind": 0,
+   "priceUsd": 2.99,
+   "titleKey": "iap.piggy_bank",
+   "descKey": "iap.piggy_bank.desc",
+   "group": "special",
+   "oneTime": false,
+   "bonusPct": 0,
+   "commanderId": "",
+   "rewards": []
+  },
+  {
+   "sku": "commander_bundle_selene",
+   "kind": 0,
+   "priceUsd": 4.99,
+   "titleKey": "iap.commander_bundle_selene",
+   "descKey": "iap.commander_bundle_selene.desc",
+   "group": "bundle",
+   "oneTime": true,
+   "bonusPct": 0,
+   "commanderId": "selene",
+   "rewards": [
+    {
+     "type": 4,
+     "amount": 20,
+     "target": "selene"
+    },
+    {
+     "type": 1,
+     "amount": 100
+    }
+   ]
+  },
+  {
+   "sku": "commander_bundle_voltra",
+   "kind": 0,
+   "priceUsd": 9.99,
+   "titleKey": "iap.commander_bundle_voltra",
+   "descKey": "iap.commander_bundle_voltra.desc",
+   "group": "bundle",
+   "oneTime": true,
+   "bonusPct": 0,
+   "commanderId": "voltra",
+   "rewards": [
+    {
+     "type": 4,
+     "amount": 60,
+     "target": "voltra"
+    },
+    {
+     "type": 1,
+     "amount": 250
+    },
+    {
+     "type": 2,
+     "amount": 3
+    }
+   ]
+  },
+  {
+   "sku": "commander_bundle_nyx",
+   "kind": 0,
+   "priceUsd": 19.99,
+   "titleKey": "iap.commander_bundle_nyx",
+   "descKey": "iap.commander_bundle_nyx.desc",
+   "group": "bundle",
+   "oneTime": true,
+   "bonusPct": 0,
+   "commanderId": "nyx",
+   "rewards": [
+    {
+     "type": 4,
+     "amount": 80,
+     "target": "nyx"
+    },
+    {
+     "type": 1,
+     "amount": 600
+    },
+    {
+     "type": 6,
+     "amount": 1,
+     "target": "legendary"
+    }
+   ]
+  },
+  {
+   "sku": "offer_comeback",
+   "kind": 0,
+   "priceUsd": 1.99,
+   "titleKey": "iap.offer_comeback",
+   "descKey": "iap.offer_comeback.desc",
+   "group": "special",
+   "oneTime": false,
+   "bonusPct": 0,
+   "commanderId": "",
+   "rewards": [
+    {
+     "type": 5,
+     "amount": 12
+    },
+    {
+     "type": 1,
+     "amount": 100
+    },
+    {
+     "type": 2,
+     "amount": 2
+    }
+   ]
+  },
+  {
+   "sku": "offer_chapter",
+   "kind": 0,
+   "priceUsd": 4.99,
+   "titleKey": "iap.offer_chapter",
+   "descKey": "iap.offer_chapter.desc",
+   "group": "special",
+   "oneTime": false,
+   "bonusPct": 0,
+   "commanderId": "",
+   "rewards": [
+    {
+     "type": 5,
+     "amount": 30
+    },
+    {
+     "type": 1,
+     "amount": 300
+    },
+    {
+     "type": 4,
+     "amount": 20,
+     "target": "random"
+    }
+   ]
+  },
+  {
+   "sku": "offer_welcome_back",
+   "kind": 0,
+   "priceUsd": 0.99,
+   "titleKey": "iap.offer_welcome_back",
+   "descKey": "iap.offer_welcome_back.desc",
+   "group": "special",
+   "oneTime": false,
+   "bonusPct": 0,
+   "commanderId": "",
+   "rewards": [
+    {
+     "type": 5,
+     "amount": 8
+    },
+    {
+     "type": 1,
+     "amount": 60
+    }
+   ]
+  }
+ ],
+ "offers": [
+  {
+   "id": "starter",
+   "sku": "starter_pack",
+   "trigger": 0,
+   "triggerValue": 5,
+   "durationHours": 48,
+   "cooldownHours": 0,
+   "maxActivations": 1,
+   "discountPct": 80,
+   "titleKey": "offer.starter"
+  },
+  {
+   "id": "comeback",
+   "sku": "offer_comeback",
+   "trigger": 1,
+   "triggerValue": 3,
+   "durationHours": 6,
+   "cooldownHours": 24,
+   "maxActivations": 0,
+   "discountPct": 70,
+   "titleKey": "offer.comeback"
+  },
+  {
+   "id": "chapter",
+   "sku": "offer_chapter",
+   "trigger": 2,
+   "triggerValue": 20,
+   "durationHours": 24,
+   "cooldownHours": 0,
+   "maxActivations": 0,
+   "discountPct": 60,
+   "titleKey": "offer.chapter"
+  },
+  {
+   "id": "welcome_back",
+   "sku": "offer_welcome_back",
+   "trigger": 3,
+   "triggerValue": 72,
+   "durationHours": 24,
+   "cooldownHours": 168,
+   "maxActivations": 0,
+   "discountPct": 50,
+   "titleKey": "offer.welcome_back"
+  }
+ ],
+ "piggy": {
+  "gemsPerWin": 3,
+  "gemsPerLoss": 1,
+  "capGems": 1500,
+  "minBreakGems": 100,
+  "sku": "piggy_bank"
+ },
+ "vip": {
+  "sku": "vip_weekly",
+  "days": 7,
+  "dailyGems": 50
+ },
+ "battlePass": {
+  "seasonDays": 30,
+  "baseXp": 100,
+  "xpStep": 10,
+  "premiumSku": "battle_pass_premium",
+  "tiers": [
+   {
+    "free": {
+     "type": 5,
+     "amount": 1
+    },
+    "premium": {
+     "type": 1,
+     "amount": 21
+    }
+   },
+   {
+    "free": {
+     "type": 1,
+     "amount": 9
+    },
+    "premium": {
+     "type": 1,
+     "amount": 22
+    }
+   },
+   {
+    "free": {
+     "type": 5,
+     "amount": 1
+    },
+    "premium": {
+     "type": 4,
+     "amount": 5,
+     "target": "random"
+    }
+   },
+   {
+    "free": {
+     "type": 1,
+     "amount": 10
+    },
+    "premium": {
+     "type": 1,
+     "amount": 24
+    }
+   },
+   {
+    "free": {
+     "type": 2,
+     "amount": 1
+    },
+    "premium": {
+     "type": 1,
+     "amount": 25
+    }
+   },
+   {
+    "free": {
+     "type": 1,
+     "amount": 11
+    },
+    "premium": {
+     "type": 4,
+     "amount": 6,
+     "target": "random"
+    }
+   },
+   {
+    "free": {
+     "type": 5,
+     "amount": 2
+    },
+    "premium": {
+     "type": 1,
+     "amount": 27
+    }
+   },
+   {
+    "free": {
+     "type": 1,
+     "amount": 12
+    },
+    "premium": {
+     "type": 1,
+     "amount": 28
+    }
+   },
+   {
+    "free": {
+     "type": 5,
+     "amount": 2
+    },
+    "premium": {
+     "type": 4,
+     "amount": 7,
+     "target": "random"
+    }
+   },
+   {
+    "free": {
+     "type": 6,
+     "amount": 1,
+     "target": "silver"
+    },
+    "premium": {
+     "type": 6,
+     "amount": 1,
+     "target": "gold"
+    }
+   },
+   {
+    "free": {
+     "type": 5,
+     "amount": 2
+    },
+    "premium": {
+     "type": 1,
+     "amount": 31
+    }
+   },
+   {
+    "free": {
+     "type": 1,
+     "amount": 14
+    },
+    "premium": {
+     "type": 4,
+     "amount": 8,
+     "target": "random"
+    }
+   },
+   {
+    "free": {
+     "type": 5,
+     "amount": 3
+    },
+    "premium": {
+     "type": 1,
+     "amount": 33
+    }
+   },
+   {
+    "free": {
+     "type": 1,
+     "amount": 15
+    },
+    "premium": {
+     "type": 1,
+     "amount": 34
+    }
+   },
+   {
+    "free": {
+     "type": 2,
+     "amount": 1
+    },
+    "premium": {
+     "type": 4,
+     "amount": 9,
+     "target": "random"
+    }
+   },
+   {
+    "free": {
+     "type": 1,
+     "amount": 16
+    },
+    "premium": {
+     "type": 1,
+     "amount": 36
+    }
+   },
+   {
+    "free": {
+     "type": 5,
+     "amount": 3
+    },
+    "premium": {
+     "type": 1,
+     "amount": 37
+    }
+   },
+   {
+    "free": {
+     "type": 1,
+     "amount": 17
+    },
+    "premium": {
+     "type": 4,
+     "amount": 10,
+     "target": "random"
+    }
+   },
+   {
+    "free": {
+     "type": 5,
+     "amount": 4
+    },
+    "premium": {
+     "type": 1,
+     "amount": 39
+    }
+   },
+   {
+    "free": {
+     "type": 6,
+     "amount": 1,
+     "target": "silver"
+    },
+    "premium": {
+     "type": 6,
+     "amount": 1,
+     "target": "gold"
+    }
+   },
+   {
+    "free": {
+     "type": 5,
+     "amount": 4
+    },
+    "premium": {
+     "type": 4,
+     "amount": 11,
+     "target": "random"
+    }
+   },
+   {
+    "free": {
+     "type": 1,
+     "amount": 19
+    },
+    "premium": {
+     "type": 1,
+     "amount": 42
+    }
+   },
+   {
+    "free": {
+     "type": 5,
+     "amount": 4
+    },
+    "premium": {
+     "type": 1,
+     "amount": 43
+    }
+   },
+   {
+    "free": {
+     "type": 1,
+     "amount": 20
+    },
+    "premium": {
+     "type": 4,
+     "amount": 12,
+     "target": "random"
+    }
+   },
+   {
+    "free": {
+     "type": 2,
+     "amount": 1
+    },
+    "premium": {
+     "type": 1,
+     "amount": 45
+    }
+   },
+   {
+    "free": {
+     "type": 1,
+     "amount": 21
+    },
+    "premium": {
+     "type": 1,
+     "amount": 46
+    }
+   },
+   {
+    "free": {
+     "type": 5,
+     "amount": 5
+    },
+    "premium": {
+     "type": 4,
+     "amount": 13,
+     "target": "random"
+    }
+   },
+   {
+    "free": {
+     "type": 1,
+     "amount": 22
+    },
+    "premium": {
+     "type": 1,
+     "amount": 48
+    }
+   },
+   {
+    "free": {
+     "type": 5,
+     "amount": 5
+    },
+    "premium": {
+     "type": 1,
+     "amount": 49
+    }
+   },
+   {
+    "free": {
+     "type": 6,
+     "amount": 1,
+     "target": "gold"
+    },
+    "premium": {
+     "type": 6,
+     "amount": 1,
+     "target": "legendary"
+    }
+   }
+  ]
+ },
+ "weekendEvent": {
+  "id": "weekend",
+  "nameKey": "event.weekend",
+  "tokenKey": "event.tokens",
+  "startUtc": "",
+  "endUtc": "",
+  "levelCount": 30,
+  "difficulty": 1.0,
+  "tokensPerStar": 2,
+  "minPlayerLevel": 5,
+  "track": [
+   {
+    "tokens": 5,
+    "reward": {
+     "type": 5,
+     "amount": 5
+    }
+   },
+   {
+    "tokens": 12,
+    "reward": {
+     "type": 1,
+     "amount": 30
+    }
+   },
+   {
+    "tokens": 25,
+    "reward": {
+     "type": 2,
+     "amount": 2
+    }
+   },
+   {
+    "tokens": 40,
+    "reward": {
+     "type": 4,
+     "amount": 10,
+     "target": "random"
+    }
+   },
+   {
+    "tokens": 60,
+    "reward": {
+     "type": 6,
+     "amount": 1,
+     "target": "gold"
+    }
+   },
+   {
+    "tokens": 90,
+    "reward": {
+     "type": 1,
+     "amount": 100
+    }
+   },
+   {
+    "tokens": 120,
+    "reward": {
+     "type": 6,
+     "amount": 1,
+     "target": "legendary"
+    }
+   }
+  ]
+ }
+}

@@ -311,6 +311,230 @@
     {
       "key": "spin.shards",
       "value": "Commander shards"
+    },
+    {
+      "key": "iap.no_ads",
+      "value": "Remove Ads"
+    },
+    {
+      "key": "iap.no_ads.desc",
+      "value": "No more interstitials or banners. Rewarded ads stay optional. +150 gems!"
+    },
+    {
+      "key": "iap.starter_pack",
+      "value": "Starter Pack"
+    },
+    {
+      "key": "iap.starter_pack.desc",
+      "value": "Coins, gems, shards and keys. One time only!"
+    },
+    {
+      "key": "iap.gems_small",
+      "value": "Handful of Gems"
+    },
+    {
+      "key": "iap.gems_small.desc",
+      "value": "100 gems"
+    },
+    {
+      "key": "iap.gems_med",
+      "value": "Pouch of Gems"
+    },
+    {
+      "key": "iap.gems_med.desc",
+      "value": "550 gems"
+    },
+    {
+      "key": "iap.gems_large",
+      "value": "Chest of Gems"
+    },
+    {
+      "key": "iap.gems_large.desc",
+      "value": "1200 gems"
+    },
+    {
+      "key": "iap.gems_huge",
+      "value": "Vault of Gems"
+    },
+    {
+      "key": "iap.gems_huge.desc",
+      "value": "2600 gems"
+    },
+    {
+      "key": "iap.gems_mega",
+      "value": "Mountain of Gems"
+    },
+    {
+      "key": "iap.gems_mega.desc",
+      "value": "7000 gems"
+    },
+    {
+      "key": "iap.battle_pass_premium",
+      "value": "Battle Pass Premium"
+    },
+    {
+      "key": "iap.battle_pass_premium.desc",
+      "value": "Unlock the premium reward track for this season"
+    },
+    {
+      "key": "iap.vip_weekly",
+      "value": "VIP (weekly)"
+    },
+    {
+      "key": "iap.vip_weekly.desc",
+      "value": "50 gems daily, 2x offline coins, no forced ads, VIP badge"
+    },
+    {
+      "key": "iap.piggy_bank",
+      "value": "Break the Piggy Bank"
+    },
+    {
+      "key": "iap.piggy_bank.desc",
+      "value": "Collect all the gems you saved up"
+    },
+    {
+      "key": "iap.commander_bundle_selene",
+      "value": "Selene Bundle"
+    },
+    {
+      "key": "iap.commander_bundle_selene.desc",
+      "value": "Unlock Selene + shards and gems"
+    },
+    {
+      "key": "iap.commander_bundle_voltra",
+      "value": "Voltra Bundle"
+    },
+    {
+      "key": "iap.commander_bundle_voltra.desc",
+      "value": "Unlock Voltra + shards, gems and keys"
+    },
+    {
+      "key": "iap.commander_bundle_nyx",
+      "value": "Nyx Bundle"
+    },
+    {
+      "key": "iap.commander_bundle_nyx.desc",
+      "value": "Unlock Nyx + shards, gems and a Legendary chest"
+    },
+    {
+      "key": "iap.offer_comeback",
+      "value": "Comeback Pack"
+    },
+    {
+      "key": "iap.offer_comeback.desc",
+      "value": "Coins, gems and keys to get you back on track"
+    },
+    {
+      "key": "iap.offer_chapter",
+      "value": "Chapter Victory Pack"
+    },
+    {
+      "key": "iap.offer_chapter.desc",
+      "value": "Celebrate clearing a chapter"
+    },
+    {
+      "key": "iap.offer_welcome_back",
+      "value": "Welcome Back Pack"
+    },
+    {
+      "key": "iap.offer_welcome_back.desc",
+      "value": "Good to see you again!"
+    },
+    {
+      "key": "offer.starter",
+      "value": "Starter Pack"
+    },
+    {
+      "key": "offer.comeback",
+      "value": "Comeback Pack"
+    },
+    {
+      "key": "offer.chapter",
+      "value": "Chapter Pack"
+    },
+    {
+      "key": "offer.welcome_back",
+      "value": "Welcome Back"
+    },
+    {
+      "key": "event.weekend",
+      "value": "Weekend Showdown"
+    },
+    {
+      "key": "event.tokens",
+      "value": "Trophies"
+    },
+    {
+      "key": "cmd.ignis",
+      "value": "Ignis the Flame"
+    },
+    {
+      "key": "cmd.selene",
+      "value": "Selene the Healer"
+    },
+    {
+      "key": "cmd.kaz",
+      "value": "Kaz Warbringer"
+    },
+    {
+      "key": "cmd.bastion",
+      "value": "Bastion Ironwall"
+    },
+    {
+      "key": "cmd.voltra",
+      "value": "Voltra Stormcaller"
+    },
+    {
+      "key": "cmd.nyx",
+      "value": "Nyx Shadowmother"
+    },
+    {
+      "key": "passive.ranged_damage",
+      "value": "Ranged units deal more damage"
+    },
+    {
+      "key": "passive.all_hp",
+      "value": "All units have more HP"
+    },
+    {
+      "key": "passive.melee_damage",
+      "value": "Melee units deal more damage"
+    },
+    {
+      "key": "passive.tank_hp",
+      "value": "Tanks have more HP"
+    },
+    {
+      "key": "passive.all_damage",
+      "value": "All units deal more damage"
+    },
+    {
+      "key": "passive.coin_bonus",
+      "value": "More coins from battles"
+    },
+    {
+      "key": "skill.meteor",
+      "value": "Meteor"
+    },
+    {
+      "key": "skill.heal_wave",
+      "value": "Heal Wave"
+    },
+    {
+      "key": "skill.rally",
+      "value": "Rally Speed"
+    },
+    {
+      "key": "skill.shield_wall",
+      "value": "Shield Wall"
+    },
+    {
+      "key": "skill.lightning",
+      "value": "Lightning Chain"
+    },
+    {
+      "key": "skill.summon",
+      "value": "Reinforcements"
     }
   ]
 }

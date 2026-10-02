@@ -66,6 +66,25 @@ namespace MergeLegion.Save
         public DailyData daily = new DailyData();
         public List<LongEntry> lastAdTicks = new List<LongEntry>();
 
+        // Monetization state
+        public List<string> purchasedSkus = new List<string>();
+        public long piggyGems;
+        public List<OfferState> offers = new List<OfferState>();
+        public long lastSeenUtcTicks;
+        public int vipClaimDayKey;
+
+        // Battle pass (xp itself lives in battlePassXp and resets each season)
+        public int bpSeasonId = -1;
+        public bool bpPremium;
+        public long bpClaimedFree;
+        public long bpClaimedPremium;
+
+        // Weekend event
+        public string eventId = "";
+        public long eventTokens;
+        public int eventLevelIndex;
+        public long eventClaimedMask;
+
         // Entitlements
         public bool noAds;
         public long vipUntilUtcTicks;
@@ -114,6 +133,17 @@ namespace MergeLegion.Save
         public bool claimed;
         public int period;   // 0 daily, 1 weekly
         public int slot;
+    }
+
+    [Serializable]
+    public sealed class OfferState
+    {
+        public string id;
+        public long expiresUtcTicks;
+        public long lastActivatedUtcTicks;
+        public int activations;
+        public bool presented;    // the popup was shown for the current activation
+        public bool purchased;
     }
 
     [Serializable]

@@ -15,17 +15,22 @@ namespace MergeLegion.Services.Mock
 
         public PurchaseStatus NextStatus = PurchaseStatus.Success;
 
+        /// <summary>Lets the mock show the catalog's real prices instead of a placeholder.</summary>
+        public Func<string, decimal> PriceLookup;
+        public Func<string, ProductKind> KindLookup;
+
         public void Initialize(IReadOnlyList<string> skus, Action onInitialized = null)
         {
             _products.Clear();
             for (int i = 0; i < skus.Count; i++)
             {
+                decimal price = PriceLookup != null ? PriceLookup(skus[i]) : 0.99m;
                 _products[skus[i]] = new ProductInfo
                 {
                     Sku = skus[i],
-                    Kind = ProductKind.Consumable,
-                    LocalizedPrice = "$0.99",
-                    Price = 0.99m,
+                    Kind = KindLookup != null ? KindLookup(skus[i]) : ProductKind.Consumable,
+                    LocalizedPrice = "$" + price.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture),
+                    Price = price,
                     IsoCurrency = "USD"
                 };
             }

@@ -43,7 +43,8 @@ namespace MergeLegion.Services
         }
 
         /// <summary>SKU list for the store catalog (filled in Phase 6 from the shop data).</summary>
-        public static IReadOnlyList<string> IapSkus() => new string[0];
+        public static IReadOnlyList<string> IapSkus() =>
+            ServiceLocator.TryGet<IapManager>(out var iap) ? iap.Skus() : new List<string>();
 
         /// <summary>Game-level services that depend on save, config and platform services.</summary>
         public static void InstallGameplay(SaveService save)
@@ -97,6 +98,42 @@ namespace MergeLegion.Services
             ServiceLocator.Register(new MissionService(save, meta.missions, daily, granter, analytics, () => campaign.CurrentLevel));
             ServiceLocator.Register(new LoginService(save, meta.login, daily, granter, time));
             ServiceLocator.Register(new SpinService(meta.spin, daily, granter, ads, rng));
+
+            // ---- monetization
+            var shop = MonetizationConfig.Load(remote);
+            ServiceLocator.Register(shop);
+            var commanders = ServiceLocator.Get<CommanderService>();
+
+            var bp = new BattlePassService(save, shop.battlePass, time, granter, analytics);
+            var piggy = new PiggyService(save, shop.piggy, currency);
+            var vip = new VipService(save, shop.vip, time, daily, granter);
+            var offers = new OfferService(save, shop, time);
+            ServiceLocator.Register(bp);
+            ServiceLocator.Register(piggy);
+            ServiceLocator.Register(vip);
+            ServiceLocator.Register(offers);
+            ServiceLocator.Register(new WeekendEventService(save, shop.weekendEvent, remote, time, granter, db, analytics, () => campaign.CurrentLevel));
+
+            var iapService = ServiceLocator.Get<IIAPService>();
+            if (iapService is MockIAPService mockIap)
+            {
+                mockIap.PriceLookup = sku => shop.Product(sku) != null ? (decimal)shop.Product(sku).priceUsd : 0.99m;
+                mockIap.KindLookup = sku => shop.Product(sku) != null ? shop.Product(sku).kind : ProductKind.Consumable;
+            }
+            var iap = new IapManager(iapService, shop, granter, save, analytics, ServiceLocator.Get<IAttributionService>(),
+                new MockReceiptValidator(), ads);
+            iap.RegisterSpecial(shop.battlePass.premiumSku, def => bp.UnlockPremium());
+            iap.RegisterSpecial(shop.vip.sku, def => vip.Activate());
+            iap.RegisterSpecial(shop.piggy.sku, def => piggy.Break());
+            foreach (var p in shop.products)
+            {
+                if (string.IsNullOrEmpty(p.commanderId)) continue;
+                string cid = p.commanderId;
+                iap.RegisterSpecial(p.sku, def => commanders.GrantUnlock(cid));
+            }
+            iap.RegisterSpecial("no_ads", def => { /* RemoveAds reward flips the flag */ });
+            ServiceLocator.Register(iap);
+
         }
 
         public static void InstallPlatformServices(SaveService save, IReadOnlyList<string> iapSkus = null)

@@ -87,6 +87,15 @@ namespace MergeLegion.Meta
             return c == null || lv <= 0 ? 0 : lv * c.shardsPerLevel;
         }
 
+        /// <summary>Unlocks a commander outright (purchased bundle), no shards spent.</summary>
+        public void GrantUnlock(string id)
+        {
+            if (_db.GetCommander(id) == null || IsUnlocked(id)) return;
+            IntEntries.Set(_save.Data.commanderLevels, id, 1);
+            _save.MarkDirty();
+            EventBus.Publish(new CommanderChangedEvent());
+        }
+
         public CommanderResult Unlock(string id)
         {
             var c = _db.GetCommander(id);

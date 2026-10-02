@@ -18,6 +18,8 @@ namespace MergeLegion.Core
             var save = ServiceLocator.Get<SaveService>();
             save.Data.sessionCount++;
             save.MarkDirty();
+            if (ServiceLocator.TryGet<Monetization.OfferService>(out var offers))
+                offers.OnSessionStart(ServiceLocator.Get<Economy.CurrencyService>().Get(Economy.CurrencyType.Gems));
             ServiceLocator.Get<IAnalyticsService>().LogEvent(AnalyticsEvents.SessionStart,
                 new Dictionary<string, object> { { "session_index", save.Data.sessionCount } });
         }
@@ -29,6 +31,7 @@ namespace MergeLegion.Core
             int seconds = Mathf.RoundToInt(Time.realtimeSinceStartup - _sessionStart);
             var save = ServiceLocator.Get<SaveService>();
             save.Data.totalPlaytimeSeconds += seconds;
+            if (ServiceLocator.TryGet<Monetization.OfferService>(out var offers)) offers.TouchLastSeen();
             save.MarkDirty();
             ServiceLocator.Get<IAnalyticsService>().LogEvent(AnalyticsEvents.SessionEnd,
                 new Dictionary<string, object> { { AnalyticsParams.DurationSec, seconds } });

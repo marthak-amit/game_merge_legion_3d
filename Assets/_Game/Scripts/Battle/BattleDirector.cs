@@ -38,6 +38,8 @@ namespace MergeLegion.Battle
         private CampaignService _campaign;
         private CommanderService _commanders;
         private LevelRepository _levels;
+        private WeekendEventService _events;
+        private GameMode _mode;
         private AdsManager _ads;
         private SaveService _save;
         private IAnalyticsService _analytics;
@@ -75,6 +77,8 @@ namespace MergeLegion.Battle
             _campaign = ServiceLocator.Get<CampaignService>();
             _commanders = ServiceLocator.Get<CommanderService>();
             _levels = ServiceLocator.Get<LevelRepository>();
+            _events = ServiceLocator.Get<WeekendEventService>();
+            _mode = GameSession.Mode;
             _ads = ServiceLocator.Get<AdsManager>();
             _save = ServiceLocator.Get<SaveService>();
             _analytics = ServiceLocator.Get<IAnalyticsService>();
@@ -101,7 +105,7 @@ namespace MergeLegion.Battle
             _reviveUsed = false;
             _speed = 1f;
             Time.timeScale = 1f;
-            _level = _levels.Get(_campaign.CurrentLevel);
+            _level = _mode == GameMode.Event ? _events.NextLevel() : _levels.Get(_campaign.CurrentLevel);
             _hud.SetLevel(_level.id);
             _theme.Apply(_level.theme);
 
@@ -166,7 +170,7 @@ namespace MergeLegion.Battle
             _view.Rebind(_sim);
 
             _armyPower = BattleFactory.ArmyPower(_db, armyList);
-            _campaign.OnStart(_level.id, _armyPower);
+            if (_mode == GameMode.Campaign) _campaign.OnStart(_level.id, _armyPower);
             _army.Persist();
             _save.Flush();
 
@@ -293,10 +297,19 @@ namespace MergeLegion.Battle
         {
             var reward = RewardService.ForWin(_cfg.rewards, _level.id, result.Stars, _level.isBoss, _bonuses.CoinBonus);
             _currency.Add(CurrencyType.Coins, reward.Coins, "level_win");
-            if (reward.Gems > 0) _currency.Add(CurrencyType.Gems, reward.Gems, "boss_win");
-            if (reward.Keys > 0) _currency.Add(CurrencyType.ChestKeys, reward.Keys, "level_win");
-            if (reward.BattlePassXp > 0) _currency.Add(CurrencyType.BattlePassXp, reward.BattlePassXp, "level_win");
-            _campaign.OnWin(_level.id, result.Stars, _level.isBoss, result.Duration, _armyPower);
+            if (_mode == GameMode.Event)
+            {
+                // event levels pay coins + event tokens but never advance the campaign
+                _events.OnWin(result.Stars);
+                reward.Gems = 0; reward.Keys = 0; reward.BattlePassXp = 0;
+            }
+            else
+            {
+                if (reward.Gems > 0) _currency.Add(CurrencyType.Gems, reward.Gems, "boss_win");
+                if (reward.Keys > 0) _currency.Add(CurrencyType.ChestKeys, reward.Keys, "level_win");
+                if (reward.BattlePassXp > 0) _currency.Add(CurrencyType.BattlePassXp, reward.BattlePassXp, "level_win");
+                _campaign.OnWin(_level.id, result.Stars, _level.isBoss, result.Duration, _armyPower);
+            }
             _save.Save();
 
             var args = new WinPopupArgs
@@ -321,7 +334,7 @@ namespace MergeLegion.Battle
         {
             var reward = RewardService.ForLoss(_cfg.rewards, _level.id, _bonuses.CoinBonus);
             _currency.Add(CurrencyType.Coins, reward.Coins, "level_lose");
-            _campaign.OnLoss(_level.id, _level.isBoss, result.Duration);
+            if (_mode == GameMode.Campaign) _campaign.OnLoss(_level.id, _level.isBoss, result.Duration);
             _save.Save();
 
             var args = new LosePopupArgs
@@ -360,6 +373,7 @@ namespace MergeLegion.Battle
         public void GoHome()
         {
             Time.timeScale = 1f;
+            GameSession.Reset();
             _army.Persist();
             _save.Flush();
             if (ServiceLocator.TryGet<SceneLoader>(out var loader)) loader.Load(SceneNames.Main);
