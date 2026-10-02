@@ -1,0 +1,8 @@
+{
+  "name": "MergeLegion.Editor",
+  "rootNamespace": "MergeLegion.Editor",
+  "references": ["MergeLegion.Runtime", "Unity.TextMeshPro", "Unity.InputSystem", "UnityEngine.UI", "Unity.RenderPipelines.Universal.Runtime"],
+  "includePlatforms": ["Editor"],
+  "excludePlatforms": [],
+  "autoReferenced": false
+}

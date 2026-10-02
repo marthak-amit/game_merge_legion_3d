@@ -1,0 +1,8 @@
+{
+  "entries": [
+    { "key": "game.title", "value": "Merge Legion" },
+    { "key": "home.battle", "value": "BATTLE" },
+    { "key": "home.coming_soon", "value": "Battle arrives in the next phase" },
+    { "key": "home.version", "value": "v{0}" }
+  ]
+}

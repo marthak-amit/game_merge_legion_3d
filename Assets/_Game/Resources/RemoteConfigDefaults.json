@@ -1,0 +1,6 @@
+{
+  "entries": [
+    { "key": "save_autosave_seconds", "value": "30" },
+    { "key": "boot_timeout_seconds", "value": "4" }
+  ]
+}

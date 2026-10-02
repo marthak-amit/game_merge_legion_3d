@@ -1,0 +1,9 @@
+{
+  "name": "MergeLegion.Runtime",
+  "rootNamespace": "MergeLegion",
+  "references": ["Unity.TextMeshPro", "Unity.InputSystem", "UnityEngine.UI"],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "autoReferenced": true
+}
