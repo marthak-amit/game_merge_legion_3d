@@ -535,6 +535,94 @@
     {
       "key": "skill.summon",
       "value": "Reinforcements"
+    },
+    {
+      "key": "hud.arena_vs",
+      "value": "Arena: {0}"
+    },
+    {
+      "key": "hud.event",
+      "value": "Weekend Event"
+    },
+    {
+      "key": "hud.wave",
+      "value": "Endless - Wave {0}"
+    },
+    {
+      "key": "arena.trophies",
+      "value": "trophies"
+    },
+    {
+      "key": "arena.total",
+      "value": "Trophies: {0}"
+    },
+    {
+      "key": "arena.league_up",
+      "value": "League promoted!"
+    },
+    {
+      "key": "arena.league_down",
+      "value": "League demoted"
+    },
+    {
+      "key": "arena.back",
+      "value": "Back"
+    },
+    {
+      "key": "cloud.title",
+      "value": "Cloud save found"
+    },
+    {
+      "key": "cloud.message",
+      "value": "Progress exists on this device and in the cloud. Which one do you want to keep?"
+    },
+    {
+      "key": "cloud.on_cloud",
+      "value": "Cloud"
+    },
+    {
+      "key": "cloud.on_device",
+      "value": "This device"
+    },
+    {
+      "key": "cloud.use_cloud",
+      "value": "Use cloud progress"
+    },
+    {
+      "key": "cloud.keep_device",
+      "value": "Keep this device"
+    },
+    {
+      "key": "cloud.summary",
+      "value": "Level {0}   |   Gems {1}   |   Endless wave {2}"
+    },
+    {
+      "key": "league.bronze",
+      "value": "Bronze"
+    },
+    {
+      "key": "league.silver",
+      "value": "Silver"
+    },
+    {
+      "key": "league.gold",
+      "value": "Gold"
+    },
+    {
+      "key": "league.platinum",
+      "value": "Platinum"
+    },
+    {
+      "key": "league.diamond",
+      "value": "Diamond"
+    },
+    {
+      "key": "league.master",
+      "value": "Master"
+    },
+    {
+      "key": "league.legend",
+      "value": "Legend"
     }
   ]
 }

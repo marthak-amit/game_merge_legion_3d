@@ -75,6 +75,16 @@ namespace MergeLegion.Core
 
             var auth = ServiceLocator.Get<IAuthService>();
             ServiceLocator.Get<IAnalyticsService>().SetUserId(auth.PlayerId);
+
+            // cloud save: adopt a better cloud save (asks the player when both have progress) or upload ours
+            bool syncDone = false;
+            ServiceLocator.Get<CloudSyncService>().SyncOnBoot(_ => syncDone = true);
+            float syncWait = 0f;
+            while (!syncDone && syncWait < 30f) // a conflict prompt may be on screen, so allow time
+            {
+                syncWait += Time.unscaledDeltaTime;
+                yield return null;
+            }
             GetComponent<AppLifecycle>().BeginSession();
 
             EventBus.Publish(new BootCompletedEvent());

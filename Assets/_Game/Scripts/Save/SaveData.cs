@@ -85,6 +85,16 @@ namespace MergeLegion.Save
         public int eventLevelIndex;
         public long eventClaimedMask;
 
+        // Arena (async PvP)
+        public int arenaTrophies;
+        public int arenaAttempts = -1;         // -1 = not initialised (filled to max on first use)
+        public long arenaLastRefillUtcTicks;
+        public int arenaWeekKey;
+        public int arenaWeekPeakTrophies;
+        public int arenaUnclaimedLeague = -1;  // league index earned last week, -1 = nothing to claim
+        public int arenaWins;
+        public int arenaLosses;
+
         // Entitlements
         public bool noAds;
         public long vipUntilUtcTicks;

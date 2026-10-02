@@ -36,7 +36,10 @@ namespace MergeLegion.Grid
             _rng = rng;
             _analytics = analytics;
             _research = research ?? NullResearch.Instance;
+            EventBus.Subscribe<Services.SaveReplacedEvent>(OnSaveReplaced);
         }
+
+        private void OnSaveReplaced(Services.SaveReplacedEvent e) => Load();
 
         /// <summary>The level the player is about to play (1-based).</summary>
         public int CurrentLevel => _save.Data.highestCampaignLevel + 1;

@@ -9,6 +9,7 @@ namespace MergeLegion.Services
         public const string ConfigOverride = "config_override";
         public const string MetaOverride = "meta_override";
         public const string MonetizationOverride = "monetization_override";
+        public const string ArenaOverride = "arena_override";
         public const string EventConfig = "weekend_event_json";
     }
 }

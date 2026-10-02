@@ -39,6 +39,7 @@ namespace MergeLegion.Battle
         private CommanderService _commanders;
         private LevelRepository _levels;
         private WeekendEventService _events;
+        private Meta.Arena.ArenaService _arena;
         private GameMode _mode;
         private AdsManager _ads;
         private SaveService _save;
@@ -78,7 +79,9 @@ namespace MergeLegion.Battle
             _commanders = ServiceLocator.Get<CommanderService>();
             _levels = ServiceLocator.Get<LevelRepository>();
             _events = ServiceLocator.Get<WeekendEventService>();
+            _arena = ServiceLocator.Get<Meta.Arena.ArenaService>();
             _mode = GameSession.Mode;
+            if (_mode == GameMode.Arena && _arena.PendingOpponent == null) _mode = GameMode.Campaign;
             _ads = ServiceLocator.Get<AdsManager>();
             _save = ServiceLocator.Get<SaveService>();
             _analytics = ServiceLocator.Get<IAnalyticsService>();
@@ -105,8 +108,13 @@ namespace MergeLegion.Battle
             _reviveUsed = false;
             _speed = 1f;
             Time.timeScale = 1f;
-            _level = _mode == GameMode.Event ? _events.NextLevel() : _levels.Get(_campaign.CurrentLevel);
+            if (_mode == GameMode.Event) _level = _events.NextLevel();
+            else if (_mode == GameMode.Arena) _level = Meta.Arena.ArenaService.BuildLevel(_arena.PendingOpponent, _campaign.CurrentLevel);
+            else _level = _levels.Get(_campaign.CurrentLevel);
             _hud.SetLevel(_level.id);
+            if (_mode == GameMode.Arena) _hud.SetTitle(Loc.Format("hud.arena_vs", _arena.PendingOpponent.name));
+            else if (_mode == GameMode.Event) _hud.SetTitle(Loc.Get("hud.event"));
+            else if (_level.endless) _hud.SetTitle(Loc.Format("hud.wave", _level.index));
             _theme.Apply(_level.theme);
 
             var preview = new BattleSim(_cfg.battle, 1);
@@ -289,7 +297,8 @@ namespace MergeLegion.Battle
         {
             _hud.SetFightVisible(false);
             var result = _sim.GetResult();
-            if (result.Outcome == BattleOutcome.Win) ShowWin(result); else ShowLose(result);
+            if (_mode == GameMode.Arena) ShowArena(result);
+            else if (result.Outcome == BattleOutcome.Win) ShowWin(result); else ShowLose(result);
             EventBus.Publish(new BattlePhaseEvent(BattlePhase.Result));
         }
 
@@ -351,6 +360,16 @@ namespace MergeLegion.Battle
             };
             if (args.ReviveAvailable) _ads.LogOffered(AdPlacements.Revive);
             PopupManager.Show(() => ResultPopups.ShowLose(args));
+        }
+
+        private void ShowArena(BattleResult result)
+        {
+            bool won = result.Outcome == BattleOutcome.Win;
+            var match = _arena.ReportResult(won);
+            _save.Save();
+            long coins = 0;
+            foreach (var it in match.Rewards) if (it.Type == Meta.RewardType.Coins) coins += it.Amount;
+            PopupManager.Show(() => ResultPopups.ShowArena(match.Won, match.TrophyDelta, match.NewTrophies, coins, match.LeagueChanged, GoHome));
         }
 
         private void Revive()

@@ -120,6 +120,26 @@ namespace MergeLegion.UI
             return popup;
         }
 
+        public static Popup ShowArena(bool won, int trophyDelta, int trophies, long coins, bool leagueChanged, Action onHome)
+        {
+            var popup = PopupManager.Create(Loc.Get(won ? "result.victory" : "result.defeat"), new Vector2(920, 800));
+            var c = popup.Content;
+            string sign = trophyDelta >= 0 ? "+" : "";
+            var t = UIKit.Label(c, sign + trophyDelta + " " + Loc.Get("arena.trophies"), 72, won ? UIKit.Gold : UIKit.Bad, TextAlignmentOptions.Center, FontStyles.Bold);
+            UIKit.Place(t.rectTransform, new Vector2(0.5f, 1f), new Vector2(0, -20), new Vector2(820, 100));
+            var total = UIKit.Label(c, Loc.Format("arena.total", trophies), 44, UIKit.TextDim);
+            UIKit.Place(total.rectTransform, new Vector2(0.5f, 1f), new Vector2(0, -130), new Vector2(820, 70));
+            if (leagueChanged)
+            {
+                var l = UIKit.Label(c, Loc.Get(won ? "arena.league_up" : "arena.league_down"), 48, won ? UIKit.Good : UIKit.Bad, TextAlignmentOptions.Center, FontStyles.Bold);
+                UIKit.Place(l.rectTransform, new Vector2(0.5f, 1f), new Vector2(0, -205), new Vector2(820, 70));
+            }
+            Row(c, UIKit.Gold, "+" + Format(coins), -300);
+            var home = UIKit.Btn(c, Loc.Get("arena.back"), UIKit.Good, () => { popup.Close(); onHome?.Invoke(); }, new Vector2(760, 130), 56);
+            UIKit.Place((RectTransform)home.transform, new Vector2(0.5f, 0f), new Vector2(0, 20), new Vector2(760, 130));
+            return popup;
+        }
+
         private static TMP_Text Row(RectTransform parent, Color iconColor, string text, float y)
         {
             var icon = UIKit.Icon(parent, iconColor, new Vector2(70, 70));

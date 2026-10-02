@@ -8,6 +8,7 @@ using MergeLegion.Economy;
 using MergeLegion.Grid;
 using MergeLegion.Levels;
 using MergeLegion.Meta;
+using MergeLegion.Meta.Arena;
 using MergeLegion.Monetization;
 using MergeLegion.Save;
 using MergeLegion.Services.Mock;
@@ -38,7 +39,10 @@ namespace MergeLegion.Services
                 var asset = Resources.Load<TextAsset>(DefaultsResource);
                 remoteDefaultsJson = asset != null ? asset.text : null;
             }
-            ServiceLocator.Register<IRemoteConfigService>(new MockRemoteConfigService(remoteDefaultsJson));
+            var remote = PlatformServiceOverrides.RemoteConfig != null
+                ? PlatformServiceOverrides.RemoteConfig(remoteDefaultsJson)
+                : new MockRemoteConfigService(remoteDefaultsJson);
+            ServiceLocator.Register(remote);
             return save;
         }
 
@@ -114,6 +118,18 @@ namespace MergeLegion.Services
             ServiceLocator.Register(offers);
             ServiceLocator.Register(new WeekendEventService(save, shop.weekendEvent, remote, time, granter, db, analytics, () => campaign.CurrentLevel));
 
+            // ---- online features (mock backends by default)
+            var arenaCfg = ArenaConfig.Load(remote);
+            ServiceLocator.Register(arenaCfg);
+            ServiceLocator.Register(PlatformServiceOverrides.ArenaBackend != null
+                ? PlatformServiceOverrides.ArenaBackend(db, arenaCfg)
+                : (IArenaBackend)new MockArenaBackend(db, arenaCfg));
+            ServiceLocator.Register(new ArenaService(save, arenaCfg, ServiceLocator.Get<IArenaBackend>(), army, research,
+                commanders, db, granter, daily, time, analytics, ServiceLocator.Get<IAuthService>(), ServiceLocator.Get<ILeaderboardService>()));
+            var sync = new CloudSyncService(save, ServiceLocator.Get<ICloudSaveService>(), ServiceLocator.Get<IAuthService>(), time, analytics);
+            ServiceLocator.Register(sync);
+            ServiceLocator.Register(new LeaderboardReporter(save, ServiceLocator.Get<ILeaderboardService>()));
+
             var iapService = ServiceLocator.Get<IIAPService>();
             if (iapService is MockIAPService mockIap)
             {
@@ -121,7 +137,7 @@ namespace MergeLegion.Services
                 mockIap.KindLookup = sku => shop.Product(sku) != null ? shop.Product(sku).kind : ProductKind.Consumable;
             }
             var iap = new IapManager(iapService, shop, granter, save, analytics, ServiceLocator.Get<IAttributionService>(),
-                new MockReceiptValidator(), ads);
+                ServiceLocator.Get<IReceiptValidator>(), ads);
             iap.RegisterSpecial(shop.battlePass.premiumSku, def => bp.UnlockPremium());
             iap.RegisterSpecial(shop.vip.sku, def => vip.Activate());
             iap.RegisterSpecial(shop.piggy.sku, def => piggy.Break());
@@ -138,18 +154,29 @@ namespace MergeLegion.Services
 
         public static void InstallPlatformServices(SaveService save, IReadOnlyList<string> iapSkus = null)
         {
-            // Phase 9: swap these for real implementations under #if MERGELEGION_* defines.
-            var auth = new MockAuthService(save.Data.playerId);
-            ServiceLocator.Register<IAuthService>(auth);
-            ServiceLocator.Register<IAnalyticsService>(new MockAnalyticsService());
-            ServiceLocator.Register<IAdsService>(new MockAdsService());
-            ServiceLocator.Register<IIAPService>(new MockIAPService());
-            ServiceLocator.Register<ICloudSaveService>(new MockCloudSaveService(
-                new FileSaveStorage(Path.Combine(Application.persistentDataPath, "cloud_mock.json"))));
-            ServiceLocator.Register<ILeaderboardService>(new MockLeaderboardService(auth));
-            ServiceLocator.Register<IPushService>(new MockPushService());
-            ServiceLocator.Register<IAttributionService>(new MockAttributionService());
-            ServiceLocator.Register<IConsentService>(new MockConsentService());
+            var auth = PlatformServiceOverrides.Auth != null ? PlatformServiceOverrides.Auth(save.Data) : new MockAuthService(save.Data.playerId);
+            ServiceLocator.Register(auth);
+
+            if (PlatformServiceOverrides.AnalyticsSinks.Count > 0)
+            {
+                var sinks = new List<IAnalyticsService>();
+                foreach (var f in PlatformServiceOverrides.AnalyticsSinks) sinks.Add(f());
+                ServiceLocator.Register<IAnalyticsService>(new CompositeAnalyticsService(sinks));
+            }
+            else ServiceLocator.Register<IAnalyticsService>(new MockAnalyticsService());
+
+            ServiceLocator.Register(PlatformServiceOverrides.Ads != null ? PlatformServiceOverrides.Ads() : new MockAdsService());
+            ServiceLocator.Register(PlatformServiceOverrides.Iap != null ? PlatformServiceOverrides.Iap() : new MockIAPService());
+            ServiceLocator.Register(PlatformServiceOverrides.Receipts != null ? PlatformServiceOverrides.Receipts() : new MockReceiptValidator());
+            ServiceLocator.Register(PlatformServiceOverrides.CloudSave != null
+                ? PlatformServiceOverrides.CloudSave()
+                : new MockCloudSaveService(new FileSaveStorage(Path.Combine(Application.persistentDataPath, "cloud_mock.json"))));
+            ServiceLocator.Register(PlatformServiceOverrides.Leaderboards != null
+                ? PlatformServiceOverrides.Leaderboards(auth)
+                : new MockLeaderboardService(auth));
+            ServiceLocator.Register(PlatformServiceOverrides.Push != null ? PlatformServiceOverrides.Push() : new MockPushService());
+            ServiceLocator.Register(PlatformServiceOverrides.Attribution != null ? PlatformServiceOverrides.Attribution() : new MockAttributionService());
+            ServiceLocator.Register(PlatformServiceOverrides.Consent != null ? PlatformServiceOverrides.Consent() : new MockConsentService());
             ServiceLocator.Register<IAudioService>(new NullAudioService());
         }
     }

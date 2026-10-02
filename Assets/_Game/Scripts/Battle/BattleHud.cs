@@ -123,6 +123,8 @@ namespace MergeLegion.Battle
 
         public void SetLevel(int level) => _levelLabel.text = Loc.Format("hud.level", level);
 
+        public void SetTitle(string text) => _levelLabel.text = text;
+
         private void BuildTopBar(int level)
         {
             var pill = UIKit.PanelImage(Root, new Color(0, 0, 0, 0.55f), "CoinPill");

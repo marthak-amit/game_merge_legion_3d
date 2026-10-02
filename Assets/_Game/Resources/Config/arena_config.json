@@ -1,0 +1,156 @@
+{
+ "unlockLevel": 15,
+ "maxAttempts": 5,
+ "attemptRefillMinutes": 30,
+ "opponentChoices": 3,
+ "trophyK": 36,
+ "eloScale": 400,
+ "minLoss": 8,
+ "minGain": 10,
+ "winCoinsInWins": 2,
+ "loseCoinsInWins": 0.5,
+ "botPowerEasy": 0.8,
+ "botPowerEven": 1.0,
+ "botPowerHard": 1.25,
+ "leagues": [
+  {
+   "id": "bronze",
+   "nameKey": "league.bronze",
+   "minTrophies": 0,
+   "weeklyRewards": [
+    {
+     "type": 5,
+     "amount": 4
+    },
+    {
+     "type": 1,
+     "amount": 20
+    }
+   ]
+  },
+  {
+   "id": "silver",
+   "nameKey": "league.silver",
+   "minTrophies": 300,
+   "weeklyRewards": [
+    {
+     "type": 5,
+     "amount": 8
+    },
+    {
+     "type": 1,
+     "amount": 40
+    },
+    {
+     "type": 2,
+     "amount": 1
+    }
+   ]
+  },
+  {
+   "id": "gold",
+   "nameKey": "league.gold",
+   "minTrophies": 700,
+   "weeklyRewards": [
+    {
+     "type": 5,
+     "amount": 14
+    },
+    {
+     "type": 1,
+     "amount": 70
+    },
+    {
+     "type": 6,
+     "amount": 1,
+     "target": "silver"
+    }
+   ]
+  },
+  {
+   "id": "platinum",
+   "nameKey": "league.platinum",
+   "minTrophies": 1200,
+   "weeklyRewards": [
+    {
+     "type": 5,
+     "amount": 24
+    },
+    {
+     "type": 1,
+     "amount": 110
+    },
+    {
+     "type": 4,
+     "amount": 10,
+     "target": "random"
+    }
+   ]
+  },
+  {
+   "id": "diamond",
+   "nameKey": "league.diamond",
+   "minTrophies": 1900,
+   "weeklyRewards": [
+    {
+     "type": 5,
+     "amount": 40
+    },
+    {
+     "type": 1,
+     "amount": 170
+    },
+    {
+     "type": 6,
+     "amount": 1,
+     "target": "gold"
+    }
+   ]
+  },
+  {
+   "id": "master",
+   "nameKey": "league.master",
+   "minTrophies": 2800,
+   "weeklyRewards": [
+    {
+     "type": 5,
+     "amount": 70
+    },
+    {
+     "type": 1,
+     "amount": 250
+    },
+    {
+     "type": 6,
+     "amount": 1,
+     "target": "gold"
+    },
+    {
+     "type": 4,
+     "amount": 20,
+     "target": "random"
+    }
+   ]
+  },
+  {
+   "id": "legend",
+   "nameKey": "league.legend",
+   "minTrophies": 4000,
+   "weeklyRewards": [
+    {
+     "type": 5,
+     "amount": 120
+    },
+    {
+     "type": 1,
+     "amount": 400
+    },
+    {
+     "type": 6,
+     "amount": 1,
+     "target": "legendary"
+    }
+   ]
+  }
+ ]
+}

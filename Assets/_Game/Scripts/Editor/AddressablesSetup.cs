@@ -1,6 +1,4 @@
 using UnityEditor;
-using UnityEditor.Build;
-using UnityEngine;
 
 namespace MergeLegion.Editor
 {
@@ -19,17 +17,6 @@ namespace MergeLegion.Editor
         [MenuItem("Tools/Merge Legion/Addressables Themes/Disable")]
         public static void Disable() => SetDefine(false);
 
-        private static void SetDefine(bool on)
-        {
-            foreach (var target in new[] { NamedBuildTarget.Android, NamedBuildTarget.iOS, NamedBuildTarget.Standalone })
-            {
-                PlayerSettings.GetScriptingDefineSymbols(target, out string[] defines);
-                var list = new System.Collections.Generic.List<string>(defines);
-                if (on && !list.Contains(Define)) list.Add(Define);
-                if (!on) list.Remove(Define);
-                PlayerSettings.SetScriptingDefineSymbols(target, list.ToArray());
-            }
-            Debug.Log("[MergeLegion] " + Define + (on ? " enabled" : " disabled"));
-        }
+        private static void SetDefine(bool on) => ScriptingDefines.Set(Define, on);
     }
 }

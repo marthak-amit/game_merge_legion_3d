@@ -211,5 +211,8 @@ namespace MergeLegion.Monetization
     {
         public static GameMode Mode = GameMode.Campaign;
         public static void Reset() => Mode = GameMode.Campaign;
+
+        /// <summary>Starts a battle in the given mode (the caller then loads the Battle scene).</summary>
+        public static void Begin(GameMode mode) => Mode = mode;
     }
 }
