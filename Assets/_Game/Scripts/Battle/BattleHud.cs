@@ -31,8 +31,18 @@ namespace MergeLegion.Battle
         private RectTransform _prepareGroup;
         private Button _fight;
 
+        private Button _freeUnit;
+        private RectTransform _fightGroup;
+        private Image _skillFill;
+        private TMP_Text _skillLabel;
+        private Button _skillButton;
+        private Button _speedButton;
+
         public event Action FightClicked;
         public event Action HomeClicked;
+        public event Action FreeUnitClicked;
+        public event Action SkillClicked;
+        public event Action SpeedClicked;
 
         public RectTransform Root { get; private set; }
         public Canvas Canvas { get; private set; }
@@ -50,6 +60,7 @@ namespace MergeLegion.Battle
 
             BuildTopBar(level);
             BuildPrepareGroup();
+            BuildFightGroup();
             EventBus.Subscribe<CurrencyChangedEvent>(OnCurrency);
             EventBus.Subscribe<UnitSpawnedEvent>(OnGridChanged);
             EventBus.Subscribe<UnitMergedEvent>(OnMergedEvt);
@@ -64,6 +75,49 @@ namespace MergeLegion.Battle
         }
 
         public void SetPrepareVisible(bool visible) => _prepareGroup.gameObject.SetActive(visible);
+
+        public void SetFightVisible(bool visible) => _fightGroup.gameObject.SetActive(visible);
+
+        public void SetFreeUnit(bool available, string text)
+        {
+            _freeUnit.interactable = available;
+            UIKit.SetButtonText(_freeUnit, text);
+        }
+
+        public void SetSpeedText(string text) => UIKit.SetButtonText(_speedButton, text);
+
+        public void SetSkill(string name, float readyFraction, bool ready)
+        {
+            _skillFill.fillAmount = readyFraction;
+            _skillLabel.text = name;
+            _skillButton.interactable = ready;
+            _skillFill.color = ready ? UIKit.Good : UIKit.Blue;
+        }
+
+        private void BuildFightGroup()
+        {
+            _fightGroup = UIKit.Rect("Fight", Root);
+            UIKit.Stretch(_fightGroup);
+
+            _skillButton = UIKit.Btn(_fightGroup, "", UIKit.PanelLight, () => SkillClicked?.Invoke(), new Vector2(230, 230), 30);
+            var rt = (RectTransform)_skillButton.transform;
+            UIKit.Place(rt, new Vector2(0.5f, 0f), new Vector2(0, 60), new Vector2(230, 230));
+            _skillButton.GetComponent<Image>().sprite = UIKit.Circle;
+
+            _skillFill = UIKit.PanelImage(rt, UIKit.Blue, "Cooldown");
+            UIKit.Stretch(_skillFill.rectTransform, 10, 10, 10, 10);
+            _skillFill.sprite = UIKit.Circle;
+            _skillFill.type = Image.Type.Filled;
+            _skillFill.fillMethod = Image.FillMethod.Radial360;
+            _skillFill.fillOrigin = (int)Image.Origin360.Top;
+            _skillFill.raycastTarget = false;
+            _skillLabel = UIKit.Label(rt, "", 30, Color.white, TextAlignmentOptions.Center, FontStyles.Bold);
+            UIKit.Stretch(_skillLabel.rectTransform, 24, 24, 24, 24);
+
+            _speedButton = UIKit.Btn(_fightGroup, "x1", UIKit.PanelLight, () => SpeedClicked?.Invoke(), new Vector2(170, 90), 44);
+            UIKit.Place((RectTransform)_speedButton.transform, new Vector2(0f, 0f), new Vector2(30, 120), new Vector2(170, 90));
+            _fightGroup.gameObject.SetActive(false);
+        }
 
         public void SetFightInteractable(bool interactable) => _fight.interactable = interactable;
 
@@ -93,6 +147,10 @@ namespace MergeLegion.Battle
 
             _fight = UIKit.Btn(_prepareGroup, Loc.Get("hud.fight"), UIKit.Good, () => FightClicked?.Invoke(), new Vector2(760, 140), 64);
             UIKit.Place((RectTransform)_fight.transform, new Vector2(0.5f, 0f), new Vector2(0, 275), new Vector2(760, 140));
+
+            _freeUnit = UIKit.Btn(_prepareGroup, "", UIKit.Blue, () => FreeUnitClicked?.Invoke(), new Vector2(420, 90), 34);
+            UIKit.Place((RectTransform)_freeUnit.transform, new Vector2(0f, 1f), new Vector2(20, -125), new Vector2(420, 90));
+            SetFreeUnit(false, Loc.Get("hud.free_unit"));
 
             const float w = 245f, gap = 12f;
             float total = UnitLines.Count * w + (UnitLines.Count - 1) * gap;
@@ -127,11 +185,16 @@ namespace MergeLegion.Battle
             {
                 case BuyResult.NoCoins:
                     Toast.Show(Loc.Get("toast.no_coins"));
+                    Audio.Sfx.Play(Audio.SfxId.Error);
                     Tween.Punch(slot.Button.transform, -0.08f, 0.2f);
                     Audio.Haptics.Medium();
                     break;
                 case BuyResult.GridFull:
                     Toast.Show(Loc.Get("toast.grid_full"));
+                    Audio.Sfx.Play(Audio.SfxId.Error);
+                    break;
+                case BuyResult.Ok:
+                    Audio.Sfx.Play(Audio.SfxId.Buy);
                     break;
             }
         }

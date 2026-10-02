@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using MergeLegion.Levels;
 using MergeLegion.Services;
 using UnityEngine;
 
@@ -50,6 +52,31 @@ namespace MergeLegion.Data
         public int battlePassXpPerBossWin = 120;
     }
 
+    [Serializable]
+    public sealed class AdPlacementConfig
+    {
+        public string id;
+        public bool enabled = true;
+        public int dailyCap;            // 0 = unlimited
+        public float cooldownSeconds;   // 0 = none
+    }
+
+    [Serializable]
+    public sealed class AdsConfig
+    {
+        public int interstitialMinLevel = 5;
+        public float interstitialGapSeconds = 60f;
+        public float interstitialAfterRewardedBlockSeconds = 90f;
+        public List<AdPlacementConfig> placements = new List<AdPlacementConfig>();
+
+        public AdPlacementConfig Find(string id)
+        {
+            for (int i = 0; i < placements.Count; i++)
+                if (placements[i].id == id) return placements[i];
+            return null;
+        }
+    }
+
     /// <summary>
     /// All tunable numbers. Loaded from Resources/Config/game_config.json, then partially overridden by the
     /// Remote Config string "config_override" (JsonUtility.FromJsonOverwrite), so any value can change without an app update.
@@ -60,6 +87,8 @@ namespace MergeLegion.Data
         public GridConfig grid = new GridConfig();
         public BattleConfig battle = new BattleConfig();
         public RewardConfig rewards = new RewardConfig();
+        public EndlessConfig endless = new EndlessConfig();
+        public AdsConfig ads = new AdsConfig();
 
         public static GameConfig FromJson(string json, string overrideJson = null)
         {

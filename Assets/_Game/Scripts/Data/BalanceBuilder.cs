@@ -50,6 +50,36 @@ namespace MergeLegion.Data
             return result;
         }
 
+        public static List<CommanderData> BuildCommanders(string csv)
+        {
+            var result = new List<CommanderData>();
+            var t = CsvTable.Parse(csv);
+            for (int r = 0; r < t.RowCount; r++)
+            {
+                var c = ScriptableObject.CreateInstance<CommanderData>();
+                c.id = t.Str(r, "id");
+                c.name = c.id;
+                c.nameKey = t.Str(r, "name_key");
+                c.passiveKey = t.Str(r, "passive_key");
+                c.skillKey = t.Str(r, "skill_key");
+                c.passiveType = (PassiveType)Enum.Parse(typeof(PassiveType), t.Str(r, "passive_type", "None"), true);
+                c.passiveValue = t.Float(r, "passive_value");
+                c.skillType = (SkillType)Enum.Parse(typeof(SkillType), t.Str(r, "skill_type", "None"), true);
+                c.cooldown = t.Float(r, "cooldown", 25f);
+                c.power = t.Float(r, "power", 1f);
+                c.radius = t.Float(r, "radius", 3f);
+                c.duration = t.Float(r, "duration", 6f);
+                c.count = t.Int(r, "count", 1);
+                c.unlockShards = t.Int(r, "unlock_shards");
+                c.shardsPerLevel = t.Int(r, "shards_per_level", 10);
+                c.maxLevel = t.Int(r, "max_level", 10);
+                c.levelScale = t.Float(r, "level_scale", 0.1f);
+                c.tint = ParseColor(t.Str(r, "tint"));
+                result.Add(c);
+            }
+            return result;
+        }
+
         public static Color ParseColor(string hex)
         {
             if (string.IsNullOrEmpty(hex) || hex[0] != '#' || hex.Length < 7) return Color.white;

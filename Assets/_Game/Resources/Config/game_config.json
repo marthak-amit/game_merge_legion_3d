@@ -13,5 +13,21 @@
     "levelCoinBase": 60, "levelCoinGrowth": 1.09, "starBonusPct": 0.15, "loseConsolationPct": 0.25,
     "adMultiplier": 3, "keyProgressPerWin": 1, "keysPerChestCycle": 3, "bossBonusGems": 10,
     "battlePassXpPerWin": 40, "battlePassXpPerBossWin": 120
+  },
+  "endless": {
+    "basePower": 900, "growth": 1.12, "firstEndlessLevel": 201, "bossEvery": 10, "wavesPerNewLine": 5
+  },
+  "ads": {
+    "interstitialMinLevel": 5, "interstitialGapSeconds": 60, "interstitialAfterRewardedBlockSeconds": 90,
+    "placements": [
+      { "id": "win_3x", "enabled": true, "dailyCap": 0, "cooldownSeconds": 0 },
+      { "id": "revive", "enabled": true, "dailyCap": 0, "cooldownSeconds": 0 },
+      { "id": "free_unit", "enabled": true, "dailyCap": 0, "cooldownSeconds": 180 },
+      { "id": "silver_chest", "enabled": true, "dailyCap": 3, "cooldownSeconds": 0 },
+      { "id": "offline_2x", "enabled": true, "dailyCap": 0, "cooldownSeconds": 0 },
+      { "id": "spin", "enabled": true, "dailyCap": 5, "cooldownSeconds": 0 },
+      { "id": "mission_reroll", "enabled": true, "dailyCap": 3, "cooldownSeconds": 0 },
+      { "id": "event_bonus", "enabled": true, "dailyCap": 5, "cooldownSeconds": 0 }
+    ]
   }
 }

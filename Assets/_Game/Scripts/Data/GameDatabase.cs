@@ -10,6 +10,7 @@ namespace MergeLegion.Data
     public sealed class GameDatabase : ScriptableObject
     {
         public List<UnitLineData> lines = new List<UnitLineData>();
+        public List<CommanderData> commanders = new List<CommanderData>();
 
         private static GameDatabase _instance;
 
@@ -31,10 +32,21 @@ namespace MergeLegion.Data
             return null;
         }
 
+        public CommanderData GetCommander(string id)
+        {
+            for (int i = 0; i < commanders.Count; i++)
+                if (commanders[i].id == id) return commanders[i];
+            return null;
+        }
+
         private static GameDatabase Load()
         {
             var baked = Resources.Load<GameDatabase>("GameDatabase");
-            if (baked != null && baked.lines.Count > 0) return baked;
+            if (baked != null && baked.lines.Count > 0)
+            {
+                if (baked.commanders.Count == 0) baked.commanders = BuildFromCsv().commanders;
+                return baked;
+            }
             return BuildFromCsv();
         }
 
@@ -44,6 +56,8 @@ namespace MergeLegion.Data
             var linesCsv = Resources.Load<TextAsset>("Balance/lines");
             var unitsCsv = Resources.Load<TextAsset>("Balance/units");
             db.lines = BalanceBuilder.BuildLines(linesCsv != null ? linesCsv.text : "", unitsCsv != null ? unitsCsv.text : "");
+            var cmdCsv = Resources.Load<TextAsset>("Balance/commanders");
+            db.commanders = BalanceBuilder.BuildCommanders(cmdCsv != null ? cmdCsv.text : "");
             return db;
         }
     }

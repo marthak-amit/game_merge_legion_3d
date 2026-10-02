@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using MergeLegion.Audio;
 using MergeLegion.Core;
 using MergeLegion.Data;
 using MergeLegion.Economy;
 using MergeLegion.Grid;
+using MergeLegion.Levels;
+using MergeLegion.Meta;
+using MergeLegion.Monetization;
 using MergeLegion.Save;
 using MergeLegion.Services.Mock;
 using UnityEngine;
@@ -62,6 +66,19 @@ namespace MergeLegion.Services
                 new DeterministicRng(Environment.TickCount), analytics);
             army.Load();
             ServiceLocator.Register(army);
+
+            var time = ServiceLocator.Get<ITimeService>();
+            var daily = new DailyService(save, time);
+            ServiceLocator.Register(daily);
+
+            var ads = new AdsManager(ServiceLocator.Get<IAdsService>(), config, daily, save, time, analytics,
+                ServiceLocator.Get<IAttributionService>());
+            ads.RefreshEntitlements();
+            ServiceLocator.Register(ads);
+
+            ServiceLocator.Register(new CampaignService(save, analytics));
+            ServiceLocator.Register(new LevelRepository(db, config.endless));
+            ServiceLocator.Register(new CommanderService(save, currency, db));
         }
 
         public static void InstallPlatformServices(SaveService save, IReadOnlyList<string> iapSkus = null)
@@ -78,6 +95,7 @@ namespace MergeLegion.Services
             ServiceLocator.Register<IPushService>(new MockPushService());
             ServiceLocator.Register<IAttributionService>(new MockAttributionService());
             ServiceLocator.Register<IConsentService>(new MockConsentService());
+            ServiceLocator.Register<IAudioService>(new NullAudioService());
         }
     }
 }

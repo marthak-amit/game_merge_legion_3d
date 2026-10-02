@@ -75,6 +75,82 @@
     {
       "key": "role.flyer",
       "value": "Hunts the backline"
+    },
+    {
+      "key": "hud.free_unit",
+      "value": "Free unit (AD)"
+    },
+    {
+      "key": "hud.free_unit_cd",
+      "value": "Free unit in {0}"
+    },
+    {
+      "key": "hud.speed",
+      "value": "x{0}"
+    },
+    {
+      "key": "hud.boss",
+      "value": "BOSS FIGHT!"
+    },
+    {
+      "key": "hud.revive_used",
+      "value": "Already revived this level"
+    },
+    {
+      "key": "result.victory",
+      "value": "VICTORY!"
+    },
+    {
+      "key": "result.defeat",
+      "value": "DEFEAT"
+    },
+    {
+      "key": "result.collect",
+      "value": "Collect"
+    },
+    {
+      "key": "result.collect_x3",
+      "value": "Collect x{0}"
+    },
+    {
+      "key": "result.next",
+      "value": "Next level"
+    },
+    {
+      "key": "result.retry",
+      "value": "Retry"
+    },
+    {
+      "key": "result.revive",
+      "value": "Revive 50% army"
+    },
+    {
+      "key": "result.home",
+      "value": "Home"
+    },
+    {
+      "key": "result.coins",
+      "value": "Coins"
+    },
+    {
+      "key": "result.gems",
+      "value": "Gems"
+    },
+    {
+      "key": "result.keys",
+      "value": "Chest keys"
+    },
+    {
+      "key": "result.ad_unavailable",
+      "value": "Ad not available right now"
+    },
+    {
+      "key": "result.stars",
+      "value": "Stars"
+    },
+    {
+      "key": "toast.no_units",
+      "value": "Buy a unit first!"
     }
   ]
 }

@@ -34,3 +34,17 @@ with open(os.path.join(OUT, "units.csv"), "w") as f:
             tint = tuple(c + (1 - c) * t for c in col)
             f.write("%s,%d,%.1f,%.1f,%.2f,%.2f,%.2f,%.2f,%s\n" % (name, lv, hp * m, dmg * m, aspd, rng, ms, 0.7 + 0.08 * (lv - 1), hexc(tint)))
 print("balance csv written")
+
+commanders = [
+    # id, name_key, passive_key, skill_key, passive_type, passive_value, skill_type, cooldown, power, radius, duration, count, unlock_shards, shards_per_level, max_level, level_scale, tint
+    ("ignis", "cmd.ignis", "passive.ranged_damage", "skill.meteor", "RangedDamage", 0.10, "Meteor", 25, 3.0, 3.4, 0, 1, 0, 10, 10, 0.10, "#FF6A2B"),
+    ("selene", "cmd.selene", "passive.all_hp", "skill.heal_wave", "AllHp", 0.08, "HealWave", 30, 0.35, 0, 0, 1, 20, 10, 10, 0.10, "#6FE3A8"),
+    ("kaz", "cmd.kaz", "passive.melee_damage", "skill.rally", "MeleeDamage", 0.12, "Rally", 28, 0.5, 0, 8, 1, 20, 10, 10, 0.10, "#F2C230"),
+    ("bastion", "cmd.bastion", "passive.tank_hp", "skill.shield_wall", "TankHp", 0.15, "ShieldWall", 35, 0.5, 0, 7, 1, 40, 12, 10, 0.10, "#5B8DEF"),
+    ("voltra", "cmd.voltra", "passive.all_damage", "skill.lightning", "AllDamage", 0.06, "LightningChain", 22, 2.0, 4.0, 0, 6, 60, 14, 10, 0.10, "#9B6BFF"),
+    ("nyx", "cmd.nyx", "passive.coin_bonus", "skill.summon", "CoinBonus", 0.10, "Summon", 40, 1.0, 0, 0, 4, 80, 16, 10, 0.10, "#B04BD6"),
+]
+with open(os.path.join(OUT, "commanders.csv"), "w") as f:
+    f.write("id,name_key,passive_key,skill_key,passive_type,passive_value,skill_type,cooldown,power,radius,duration,count,unlock_shards,shards_per_level,max_level,level_scale,tint\n")
+    for c in commanders:
+        f.write(",".join(str(x) for x in c) + "\n")

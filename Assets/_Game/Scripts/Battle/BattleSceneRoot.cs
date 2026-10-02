@@ -14,11 +14,10 @@ namespace MergeLegion.Battle
     {
         private ArmyService _army;
         private GameConfig _config;
-        private BattleHud _hud;
-        private GridView _gridView;
-        private DragController _drag;
         private ArenaLayout _layout;
         private Camera _camera;
+
+        public static BattleDirector Director { get; private set; }
 
         private void Awake()
         {
@@ -35,30 +34,32 @@ namespace MergeLegion.Battle
             BuildGround();
 
             var db = GameDatabase.Instance;
-            _gridView = new GameObject("GridView").AddComponent<GridView>();
-            _gridView.Init(_army, _layout, db, _camera.transform.rotation);
+            var gridView = new GameObject("GridView").AddComponent<GridView>();
+            gridView.Init(_army, _layout, db, _camera.transform.rotation);
 
-            _drag = new GameObject("DragController").AddComponent<DragController>();
-            _drag.Init(_army, _gridView, _camera);
+            var drag = new GameObject("DragController").AddComponent<DragController>();
+            drag.Init(_army, gridView, _camera);
 
-            _hud = new GameObject("Hud").AddComponent<BattleHud>();
-            _hud.Init(_army, ServiceLocator.Get<CurrencyService>(), db, _army.CurrentLevel);
-            _hud.HomeClicked += GoHome;
-            _hud.FightClicked += OnFight;
+            var numbers = new GameObject("DamageNumbers").AddComponent<DamageNumbers>();
+            numbers.Init(_camera.transform.rotation);
+
+            var view = new GameObject("BattleView").AddComponent<BattleView>();
+            view.Init(db, _config.battle, numbers);
+
+            var bars = new GameObject("HealthBars").AddComponent<HealthBarBatch>();
+            bars.Init(_camera, view);
+
+            var hud = new GameObject("Hud").AddComponent<BattleHud>();
+            hud.Init(_army, ServiceLocator.Get<CurrencyService>(), db, _army.CurrentLevel);
+            hud.HomeClicked += () => Director.GoHome();
+
+            Director = new GameObject("BattleDirector").AddComponent<BattleDirector>();
+            Director.Init(_layout, view, bars, hud, gridView, drag);
         }
 
-        private void OnFight()
+        private void OnDestroy()
         {
-            // Wired up in the battle phase.
-            Toast.Show(Loc.Get("toast.fight_soon"));
-        }
-
-        private void GoHome()
-        {
-            _army.Persist();
-            ServiceLocator.Get<Save.SaveService>().Flush();
-            if (ServiceLocator.TryGet<SceneLoader>(out var loader)) loader.Load(SceneNames.Main);
-            else UnityEngine.SceneManagement.SceneManager.LoadScene(SceneNames.Main);
+            Director = null;
         }
 
         private void BuildCamera()
