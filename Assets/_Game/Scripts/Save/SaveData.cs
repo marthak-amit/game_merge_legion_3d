@@ -35,6 +35,26 @@ namespace MergeLegion.Save
         public int highestMergedLevel = 1;
         public long lastFreeUnitUtcTicks;
 
+        // Castle (idle income)
+        public int castleLevel = 1;
+        public long castleLastCollectTicks;
+
+        // Chests
+        public long woodenReadyTicks;
+
+        // Missions / achievements
+        public List<MissionState> missions = new List<MissionState>();
+        public int missionDayKey;
+        public int missionWeekKey;
+        public bool dailyBonusClaimed;
+        public bool weeklyBonusClaimed;
+        public List<IntEntry> achievementProgress = new List<IntEntry>();
+        public List<IntEntry> achievementClaimed = new List<IntEntry>();
+
+        // Daily login + spin
+        public int loginIndex;
+        public int loginLastDayKey;
+
         // Research Lab: key "{line}_{stat}" -> level
         public List<IntEntry> research = new List<IntEntry>();
 
@@ -84,6 +104,16 @@ namespace MergeLegion.Save
         public int row;
         public int line;
         public int level;
+    }
+
+    [Serializable]
+    public sealed class MissionState
+    {
+        public string id;
+        public int progress;
+        public bool claimed;
+        public int period;   // 0 daily, 1 weekly
+        public int slot;
     }
 
     [Serializable]

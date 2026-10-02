@@ -7,5 +7,8 @@ namespace MergeLegion.Services
         public const string BootTimeoutSeconds = "boot_timeout_seconds";
         /// <summary>JSON merged over game_config.json (partial overrides allowed).</summary>
         public const string ConfigOverride = "config_override";
+        public const string MetaOverride = "meta_override";
+        public const string MonetizationOverride = "monetization_override";
+        public const string EventConfig = "weekend_event_json";
     }
 }

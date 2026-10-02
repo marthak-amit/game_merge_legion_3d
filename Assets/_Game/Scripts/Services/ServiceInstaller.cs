@@ -80,9 +80,23 @@ namespace MergeLegion.Services
             ads.RefreshEntitlements();
             ServiceLocator.Register(ads);
 
-            ServiceLocator.Register(new CampaignService(save, analytics));
+            var campaign = new CampaignService(save, analytics);
+            ServiceLocator.Register(campaign);
             ServiceLocator.Register(new LevelRepository(db, config.endless));
             ServiceLocator.Register(new CommanderService(save, currency, db));
+
+            var meta = MetaConfig.Load(remote);
+            ServiceLocator.Register(meta);
+            var rng = new DeterministicRng(Environment.TickCount * 31 + 7);
+            var granter = new RewardGranter(save, currency, config, db, time, rng, () => campaign.CurrentLevel);
+            granter.EntitlementsChanged = ads.RefreshEntitlements;
+            ServiceLocator.Register(granter);
+
+            ServiceLocator.Register(new CastleService(save, meta.castle, config, time, currency, () => ads.IsVip));
+            ServiceLocator.Register(new ChestService(save, meta, currency, granter, time, rng, analytics, ads));
+            ServiceLocator.Register(new MissionService(save, meta.missions, daily, granter, analytics, () => campaign.CurrentLevel));
+            ServiceLocator.Register(new LoginService(save, meta.login, daily, granter, time));
+            ServiceLocator.Register(new SpinService(meta.spin, daily, granter, ads, rng));
         }
 
         public static void InstallPlatformServices(SaveService save, IReadOnlyList<string> iapSkus = null)

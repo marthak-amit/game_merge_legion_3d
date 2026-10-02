@@ -20,6 +20,8 @@ namespace MergeLegion.Battle
         public BattlePhaseEvent(BattlePhase phase) { Phase = phase; }
     }
 
+    public readonly struct SkillUsedEvent { }
+
     public enum BattlePhase { Prepare, Fighting, Result }
 
     /// <summary>
@@ -191,6 +193,8 @@ namespace MergeLegion.Battle
                 { "skill", _skills.Type.ToString() },
                 { AnalyticsParams.Level, _level.id }
             });
+            EventBus.Publish(new SkillUsedEvent());
+            EventBus.Publish(new MergeLegion.Meta.SkillUsedEventProxy());
             Sfx.Play(SfxId.Skill);
             Haptics.Medium();
             if (ArenaCamera.Instance != null) ArenaCamera.Instance.Shake(0.15f, 0.2f);

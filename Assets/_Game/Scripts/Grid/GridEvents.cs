@@ -26,4 +26,11 @@ namespace MergeLegion.Grid
 
     /// <summary>Whole grid replaced (load, revive, reset): views must rebuild.</summary>
     public readonly struct GridResetEvent { }
+
+    public readonly struct UnitBoughtEvent
+    {
+        public readonly int Line;
+        public readonly long Cost;
+        public UnitBoughtEvent(int line, long cost) { Line = line; Cost = cost; }
+    }
 }

@@ -8,6 +8,12 @@ using MergeLegion.Services;
 
 namespace MergeLegion.Monetization
 {
+    public readonly struct AdRewardedEvent
+    {
+        public readonly string Placement;
+        public AdRewardedEvent(string placement) { Placement = placement; }
+    }
+
     public enum AdBlockReason { None, Disabled, DailyCap, Cooldown, NotReady }
 
     /// <summary>
@@ -95,6 +101,7 @@ namespace MergeLegion.Monetization
                     LongEntries.Set(_save.Data.lastAdTicks, placement, _time.UtcNow.Ticks);
                     _save.MarkDirty();
                     _analytics.LogEvent(AnalyticsEvents.AdRewarded, Params(placement));
+                    EventBus.Publish(new AdRewardedEvent(placement));
                 }
                 onResult?.Invoke(earned);
             });

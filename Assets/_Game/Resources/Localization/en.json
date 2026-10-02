@@ -203,6 +203,114 @@
     {
       "key": "home.boss_next",
       "value": "Boss level!"
+    },
+    {
+      "key": "chest.wooden",
+      "value": "Wooden Chest"
+    },
+    {
+      "key": "chest.silver",
+      "value": "Silver Chest"
+    },
+    {
+      "key": "chest.gold",
+      "value": "Gold Chest"
+    },
+    {
+      "key": "chest.legendary",
+      "value": "Legendary Chest"
+    },
+    {
+      "key": "mission.win_levels",
+      "value": "Win levels"
+    },
+    {
+      "key": "mission.merge_units",
+      "value": "Merge units"
+    },
+    {
+      "key": "mission.buy_units",
+      "value": "Buy units"
+    },
+    {
+      "key": "mission.use_skill",
+      "value": "Use your commander skill"
+    },
+    {
+      "key": "mission.watch_ads",
+      "value": "Watch rewarded ads"
+    },
+    {
+      "key": "mission.open_chests",
+      "value": "Open chests"
+    },
+    {
+      "key": "mission.three_star",
+      "value": "Win with 3 stars"
+    },
+    {
+      "key": "mission.upgrade_research",
+      "value": "Upgrade research"
+    },
+    {
+      "key": "mission.win_boss",
+      "value": "Defeat bosses"
+    },
+    {
+      "key": "ach.wins",
+      "value": "Veteran: win levels"
+    },
+    {
+      "key": "ach.merges",
+      "value": "Master Merger: merge units"
+    },
+    {
+      "key": "ach.bosses",
+      "value": "Giant Slayer: defeat bosses"
+    },
+    {
+      "key": "ach.three_stars",
+      "value": "Flawless: 3-star wins"
+    },
+    {
+      "key": "ach.chests",
+      "value": "Treasure Hunter: open chests"
+    },
+    {
+      "key": "ach.research",
+      "value": "Scholar: upgrade research"
+    },
+    {
+      "key": "spin.coins_small",
+      "value": "Coins"
+    },
+    {
+      "key": "spin.coins_mid",
+      "value": "Coin pile"
+    },
+    {
+      "key": "spin.coins_big",
+      "value": "Coin hoard"
+    },
+    {
+      "key": "spin.gems_small",
+      "value": "Gems"
+    },
+    {
+      "key": "spin.gems_mid",
+      "value": "Gem pouch"
+    },
+    {
+      "key": "spin.gems_big",
+      "value": "Gem jackpot"
+    },
+    {
+      "key": "spin.key",
+      "value": "Chest key"
+    },
+    {
+      "key": "spin.shards",
+      "value": "Commander shards"
     }
   ]
 }

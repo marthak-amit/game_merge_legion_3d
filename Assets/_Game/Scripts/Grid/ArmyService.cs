@@ -63,6 +63,7 @@ namespace MergeLegion.Grid
             IntEntries.Add(_save.Data.buyCounts, line.ToString(), 1);
             if (partner >= 0) AutoMerge(partner, line);
             else SpawnAt(_grid.PickRandomEmpty(_rng), line, 1);
+            EventBus.Publish(new UnitBoughtEvent((int)line, cost));
             _analytics?.LogEvent(AnalyticsEvents.UnitBuy, new Dictionary<string, object>
             {
                 { AnalyticsParams.Line, line.ToString() },
