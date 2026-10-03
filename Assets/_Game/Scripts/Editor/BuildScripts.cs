@@ -16,7 +16,17 @@ namespace MergeLegion.Editor
     /// </summary>
     public static class BuildScripts
     {
-        private static string[] Scenes => EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
+        private static readonly string[] SceneOrder = { "Boot", "Main", "Battle" };
+
+        /// <summary>Scene paths resolved from disk (Boot first), so a stale or unsaved EditorBuildSettings can't produce an empty build.</summary>
+        private static string[] Scenes
+        {
+            get
+            {
+                var found = SceneOrder.Select(n => $"{SceneGenerator.SceneFolder}/{n}.unity").Where(File.Exists).ToArray();
+                return found.Length > 0 ? found : EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
+            }
+        }
 
         [MenuItem("Tools/Merge Legion/Build/Android AAB")]
         public static void BuildAndroidAab()
@@ -69,6 +79,8 @@ namespace MergeLegion.Editor
             PlayerSettings.SetManagedStrippingLevel(NamedBuildTarget.Android, ManagedStrippingLevel.Medium);
             PlayerSettings.SetManagedStrippingLevel(NamedBuildTarget.iOS, ManagedStrippingLevel.Medium);
             if (Scenes.Length == 0) SceneGenerator.GenerateScenes();
+            EditorBuildSettings.scenes = Scenes.Select(p => new EditorBuildSettingsScene(p, true)).ToArray();
+            AssetDatabase.SaveAssets();
         }
 
         private static string Output()
