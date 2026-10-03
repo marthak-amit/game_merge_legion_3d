@@ -34,8 +34,10 @@ namespace MergeLegion.Core
 
         private IEnumerator Start()
         {
+            Debug.Log("[Shots] started, dir=" + _dir + " scene=" + SceneManager.GetActiveScene().name);
             Directory.CreateDirectory(_dir);
-            yield return Wait(SceneNames.Battle, 25f);
+            yield return Wait(SceneNames.Battle, 40f);
+            Debug.Log("[Shots] scene now " + SceneManager.GetActiveScene().name);
             yield return Shot("01_intro_battle");
 
             ServiceLocator.Get<TutorialService>().SkipAll();
@@ -81,6 +83,7 @@ namespace MergeLegion.Core
             yield return new WaitForEndOfFrame();
             var tex = ScreenCapture.CaptureScreenshotAsTexture();
             File.WriteAllBytes(Path.Combine(_dir, name + ".png"), tex.EncodeToPNG());
+            Debug.Log("[Shots] saved " + name);
             Destroy(tex);
         }
     }
