@@ -40,7 +40,7 @@ namespace MergeLegion.Core
             Application.targetFrameRate = s.TargetFps;
             QualitySettings.vSyncCount = 0;
             QualitySettings.antiAliasing = s.Tier == DeviceTier.High ? 2 : 0;
-            if (s.ResolutionScale < 0.99f && !Application.isEditor)
+            if (s.ResolutionScale < 0.99f && Application.isMobilePlatform && !Application.isEditor)
             {
                 int w = Mathf.RoundToInt(Screen.width * s.ResolutionScale), h = Mathf.RoundToInt(Screen.height * s.ResolutionScale);
                 Screen.SetResolution(w, h, true);
