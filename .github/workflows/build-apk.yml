@@ -55,37 +55,43 @@ jobs:
           buildMethod: MergeLegion.Editor.BuildScripts.BuildLinuxPlayer
           allowDirtyBuild: true
           versioning: None
-      - name: Run player (batchmode) under xvfb and capture screenshots
+      - name: Run player windowed under xvfb with a window manager
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y xvfb libgl1-mesa-dri libglu1-mesa
+          sudo apt-get install -y xvfb libgl1-mesa-dri libglu1-mesa openbox imagemagick x11-utils
           sudo chown -R "$(id -u):$(id -g)" Builds || true
           chmod +x Builds/linux/MergeLegion.x86_64
-          mkdir -p shots
-          timeout 240 env vblank_mode=0 xvfb-run -a -s "-screen 0 540x960x24" Builds/linux/MergeLegion.x86_64 \
-            -batchmode -screen-width 540 -screen-height 960 -screen-fullscreen 0 -force-glcore \
-            -logFile "$PWD/player.log" -mlshots "$PWD/shots" || true
-          ls -la shots || true
-          grep -E "Exception|NullReference" player.log | head -20 || true
-      - name: Analyse screenshots (are they blank?)
-        run: |
-          python3 -m pip install --quiet pillow
-          python3 - <<'PY'
-          import glob, os
-          from PIL import Image
-          for f in sorted(glob.glob("shots/*.png")):
-              im = Image.open(f).convert("RGB")
-              colors = im.getcolors(1000000)
-              n = len(colors) if colors else 999999
-              print(f"{os.path.basename(f):28s} {im.size} bytes={os.path.getsize(f):7d} distinct_colors={n}")
-          PY
+          mkdir -p shots_f shots_g
+          cat > /tmp/runwm.sh <<'SH'
+          #!/bin/bash
+          # $1 = out dir, $2 = log name, rest = extra player args
+          out="$1"; log="$2"; shift 2
+          openbox >/tmp/openbox.log 2>&1 &
+          sleep 2
+          Builds/linux/MergeLegion.x86_64 -screen-width 540 -screen-height 960 -screen-fullscreen 0 "$@" \
+            -logFile "$PWD/$log" -mlshots "$PWD/$out" &
+          pid=$!
+          for i in 1 2 3 4 5 6; do
+            sleep 15
+            import -window root "$PWD/$out/xroot_$i.png" 2>/dev/null || true
+            grep -E "heartbeat" "$PWD/$log" | tail -1 || true
+          done
+          kill $pid 2>/dev/null || true
+          SH
+          chmod +x /tmp/runwm.sh
+          echo "=== variant f: windowed GL + openbox"
+          timeout 150 env vblank_mode=0 xvfb-run -a -s "-screen 0 540x960x24" /tmp/runwm.sh shots_f player_f.log -force-glcore || true
+          ls shots_f | head -30
+          echo "=== variant g: windowed GL + openbox + 1 llvmpipe thread"
+          timeout 150 env vblank_mode=0 LP_NUM_THREADS=1 xvfb-run -a -s "-screen 0 540x960x24" /tmp/runwm.sh shots_g player_g.log -force-glcore || true
+          ls shots_g | head -30
       - name: Publish screenshots to branch ci-screenshots
         if: always()
         run: |
           git config user.name "ci"; git config user.email "ci@users.noreply.github.com"
           rm -rf /tmp/shotsrepo && mkdir -p /tmp/shotsrepo/docs/screenshots
-          cp shots/*.png /tmp/shotsrepo/docs/screenshots/ 2>/dev/null || true
-          cp player.log /tmp/shotsrepo/docs/screenshots/player.log 2>/dev/null || true
+          for d in shots_f shots_g; do for f in $d/*.png; do [ -f "$f" ] && cp "$f" "/tmp/shotsrepo/docs/screenshots/${d}_$(basename $f)"; done; done
+          cp player_f.log player_g.log /tmp/shotsrepo/docs/screenshots/ 2>/dev/null || true
           git checkout --orphan ci-screenshots
           git rm -rf --quiet . || true
           mkdir -p docs && cp -r /tmp/shotsrepo/docs/screenshots docs/
@@ -97,8 +103,10 @@ jobs:
         with:
           name: screenshots
           path: |
-            shots
-            player.log
+            shots_f
+            shots_g
+            player_f.log
+            player_g.log
           if-no-files-found: warn
 
   apk:
