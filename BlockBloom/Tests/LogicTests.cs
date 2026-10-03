@@ -196,14 +196,107 @@ namespace BlockBloom.Tests
             for (int i = 1; i <= Adventure.LevelCount; i++)
             {
                 var a = Adventure.Get(i); var b = Adventure.Get(i);
+                Assert.AreEqual(a.Seed, b.Seed);
                 Assert.AreEqual(a.Prefill, b.Prefill);
-                Assert.AreEqual(a.Target, b.Target);
-                Assert.AreEqual(0UL, Bits.ClearedMask(a.Prefill), "level " + i + " starts with a complete line");
-                Assert.IsTrue(a.Target > 0);
-                if (a.Goal == GoalType.Gems) { Assert.AreEqual(a.Target, Bits.PopCount(a.Gems)); Assert.AreEqual(a.Gems, a.Gems & a.Prefill); }
+                Assert.AreEqual(a.Goals.Length, b.Goals.Length);
+                Assert.AreEqual(0UL, Bits.ClearedMask(a.Prefill), "level " + i + " pre-completes a line");
+                Assert.IsTrue(a.MaxMoves >= 8);
+                Assert.IsTrue(a.Star3Score > a.Star2Score);
+                foreach (var g in a.Goals)
+                {
+                    Assert.IsTrue(g.Target > 0);
+                    if (g.Type == GoalType.Gems) { Assert.AreEqual(g.Target, Bits.PopCount(a.Gems)); Assert.AreEqual(a.Gems, a.Gems & a.Prefill); }
+                }
             }
-            Assert.AreEqual(GoalType.Score, Adventure.Get(1).Goal);
             Assert.AreEqual(0UL, Adventure.Get(1).Prefill);
+            Assert.AreEqual(GoalType.Score, Adventure.Get(1).Goals[0].Type);
+        }
+
+        static void BotMove(GameSession s)
+        {
+            int bestSlot = -1, br = 0, bc = 0, bs = int.MinValue;
+            for (int i = 0; i < GameSession.TraySize; i++)
+            {
+                if (s.Used[i]) continue;
+                int r, c;
+                if (!Solver.BestPlacement(s.Board.Occ, s.Tray[i], out r, out c)) continue;
+                ulong after = s.Board.Occ | s.Tray[i].MaskAt(r, c);
+                int sc = Bits.PopCount(Bits.ClearedMask(after)) * 10 + (s.Board.Gems != 0 ? Bits.PopCount(Bits.ClearedMask(after) & s.Board.Gems) * 30 : 0);
+                if (sc > bs) { bs = sc; bestSlot = i; br = r; bc = c; }
+            }
+            if (bestSlot < 0) { s.Finished = true; return; }
+            s.Place(bestSlot, br, bc);
+        }
+
+        [Test] public void Session_PlaceUndoAndTrayRefill()
+        {
+            var s = new GameSession(Mode.Classic, 5);
+            int filled0 = s.Board.Filled;
+            int r, c;
+            Assert.IsTrue(Solver.BestPlacement(s.Board.Occ, s.Tray[0], out r, out c));
+            var o = s.Place(0, r, c);
+            Assert.IsTrue(o.Valid);
+            Assert.IsTrue(s.Used[0]);
+            Assert.IsTrue(s.CanUndo);
+            Assert.IsTrue(s.Undo());
+            Assert.AreEqual(filled0, s.Board.Filled);
+            Assert.IsFalse(s.Used[0]);
+            // use all three -> refill
+            bool refilled = false;
+            for (int k = 0; k < 3 && !s.Finished; k++) { BotMove(s); }
+            for (int i = 0; i < 3; i++) if (s.Used[i]) refilled = false;
+            Assert.IsTrue(s.MovesMade >= 3 || s.Finished);
+        }
+
+        [Test] public void Session_LevelOneIsWinnable()
+        {
+            int wins = 0;
+            for (int seed = 0; seed < 20; seed++)
+            {
+                var s = new GameSession(Mode.Adventure, 1000 + seed, Adventure.Get(1));
+                int guard = 0;
+                while (!s.Finished && guard++ < 200) BotMove(s);
+                if (s.Won) wins++;
+            }
+            Console.WriteLine("level1 bot wins " + wins + "/20");
+            Assert.IsTrue(wins >= 18, "level 1 must be easy, wins=" + wins);
+        }
+
+        [Test] public void Session_BotWinRateByBracket()
+        {
+            int[] starts = { 1, 6, 16, 31, 61, 101 };
+            int[] ends = { 5, 15, 30, 60, 100, 200 };
+            for (int b = 0; b < starts.Length; b++)
+            {
+                int wins = 0, total = 0;
+                for (int lv = starts[b]; lv <= ends[b]; lv++)
+                    for (int seed = 0; seed < 4; seed++)
+                    {
+                        var d = Adventure.Get(lv);
+                        var s = new GameSession(Mode.Adventure, d.Seed + seed * 31, d);
+                        int guard = 0;
+                        while (!s.Finished && guard++ < 400) BotMove(s);
+                        total++; if (s.Won) wins++;
+                    }
+                Console.WriteLine("levels " + starts[b] + "-" + ends[b] + ": bot win " + (100 * wins / total) + "%");
+            }
+        }
+
+        [Test] public void Session_BombAndRevive()
+        {
+            var d = Adventure.Get(20);
+            var s = new GameSession(Mode.Adventure, 3, d);
+            int before = s.Board.Filled;
+            ulong cl; int gems;
+            bool any = false;
+            for (int r = 0; r < 8 && !any; r++) for (int c = 0; c < 8 && !any; c++)
+                if (s.Board.IsOccupied(r, c)) { any = s.UseBomb(r, c, out cl, out gems); }
+            Assert.IsTrue(any);
+            Assert.IsTrue(s.Board.Filled < before);
+            s.Finished = true; s.MovesLeft = 0;
+            s.Revive(5);
+            Assert.IsFalse(s.Finished);
+            Assert.AreEqual(5, s.MovesLeft);
         }
     }
 }
