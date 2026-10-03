@@ -67,9 +67,6 @@ namespace BlockBloom
         public static void Shop()
         {
             var p = Popup.Create(new Vector2(960, 1560), "SHOP", true, Palette.Green);
-            var top = CoinPill.Create(p.Card, false, null);
-            Ui.At((RectTransform)top.transform, new Vector2(0.5f, 1f), new Vector2(0, -170), new Vector2(330, 84));
-
             // starter pack + no ads banners
             float y = 560;
             var starter = Economy.Products[0];
