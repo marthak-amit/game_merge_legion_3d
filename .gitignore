@@ -25,3 +25,12 @@ crashlytics-build.properties
 # real SDK keys (copy sdk_keys.example.json to sdk_keys.json)
 /Assets/_Game/Resources/Config/sdk_keys.json
 /Assets/_Game/Resources/Config/sdk_keys.json.meta
+
+# Block Bloom Unity project
+/BlockBloom/[Ll]ibrary/
+/BlockBloom/[Tt]emp/
+/BlockBloom/[Ll]ogs/
+/BlockBloom/[Oo]bj/
+/BlockBloom/[Uu]ser[Ss]ettings/
+/BlockBloom/Assets/_Game/Resources/Config/sdk_keys.json
+/BlockBloom/Assets/TextMesh Pro/

@@ -1,0 +1,155 @@
+name: Block Bloom - APK + Screenshots
+
+# Needs repo secrets UNITY_LICENSE, UNITY_EMAIL, UNITY_PASSWORD. Runs on push to claude/** (BlockBloom changes) or manually.
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "claude/**" ]
+    paths: [ "BlockBloom/**", ".github/workflows/blockbloom.yml", "tools/extract_unitypackage.py" ]
+
+permissions:
+  contents: write
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+  UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+  UNITY_VERSION: 6000.0.58f2
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: BlockBloom/Library
+          key: BB-Library-shots-${{ hashFiles('BlockBloom/Packages/manifest.json', 'BlockBloom/ProjectSettings/ProjectVersion.txt') }}
+          restore-keys: BB-Library-shots-
+      - name: Resolve packages
+        uses: game-ci/unity-builder@v4
+        with:
+          projectPath: BlockBloom
+          unityVersion: ${{ env.UNITY_VERSION }}
+          targetPlatform: StandaloneLinux64
+          buildMethod: BlockBloom.Editor.CiSetup.ResolvePackages
+          allowDirtyBuild: true
+          versioning: None
+      - name: Install TMP essential resources
+        run: |
+          pkg=$(sudo find BlockBloom/Library/PackageCache -name "TMP Essential Resources.unitypackage" | head -1)
+          echo "package: $pkg"
+          sudo python3 tools/extract_unitypackage.py "$pkg" BlockBloom
+          sudo chown -R "$(id -u):$(id -g)" BlockBloom/Assets || true
+      - name: Prepare project
+        uses: game-ci/unity-builder@v4
+        with:
+          projectPath: BlockBloom
+          unityVersion: ${{ env.UNITY_VERSION }}
+          targetPlatform: StandaloneLinux64
+          buildMethod: BlockBloom.Editor.CiSetup.Prepare
+          allowDirtyBuild: true
+          versioning: None
+      - name: Build Linux player
+        uses: game-ci/unity-builder@v4
+        with:
+          projectPath: BlockBloom
+          unityVersion: ${{ env.UNITY_VERSION }}
+          targetPlatform: StandaloneLinux64
+          buildMethod: BlockBloom.Editor.BuildScripts.BuildLinuxPlayer
+          allowDirtyBuild: true
+          versioning: None
+      - name: Run player windowed under xvfb with a window manager
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y xvfb libgl1-mesa-dri libglu1-mesa openbox
+          sudo chown -R "$(id -u):$(id -g)" Builds || true
+          chmod +x Builds/linux/BlockBloom.x86_64
+          mkdir -p shots
+          cat > /tmp/runwm.sh <<'SH'
+          #!/bin/bash
+          openbox >/tmp/openbox.log 2>&1 &
+          sleep 2
+          Builds/linux/BlockBloom.x86_64 -screen-width 540 -screen-height 960 -screen-fullscreen 0 -force-glcore \
+            -logFile "$PWD/player.log" -bbshots "$PWD/shots"
+          SH
+          chmod +x /tmp/runwm.sh
+          timeout 300 env vblank_mode=0 xvfb-run -a -s "-screen 0 540x960x24" /tmp/runwm.sh || true
+          ls -la shots | head -40
+          grep -nE "Exception|NullReference|\\[Shots\\]" player.log | head -60 || true
+      - name: Publish screenshots to branch bb-screenshots
+        if: always()
+        run: |
+          git config user.name "ci"; git config user.email "ci@users.noreply.github.com"
+          rm -rf /tmp/shotsrepo && mkdir -p /tmp/shotsrepo/docs/screenshots
+          cp shots/*.png /tmp/shotsrepo/docs/screenshots/ 2>/dev/null || true
+          cp player.log /tmp/shotsrepo/docs/screenshots/ 2>/dev/null || true
+          git checkout --orphan bb-screenshots
+          git rm -rf --quiet . || true
+          mkdir -p docs && cp -r /tmp/shotsrepo/docs/screenshots docs/
+          git add docs/screenshots
+          git commit -q -m "Block Bloom CI screenshots [skip ci]" || true
+          git push -f origin bb-screenshots || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bb-screenshots
+          path: |
+            shots
+            player.log
+          if-no-files-found: warn
+
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: BlockBloom/Library
+          key: BB-Library-apk-${{ hashFiles('BlockBloom/Packages/manifest.json', 'BlockBloom/ProjectSettings/ProjectVersion.txt') }}
+          restore-keys: BB-Library-apk-
+      - name: Resolve packages
+        uses: game-ci/unity-builder@v4
+        with:
+          projectPath: BlockBloom
+          unityVersion: ${{ env.UNITY_VERSION }}
+          targetPlatform: Android
+          buildMethod: BlockBloom.Editor.CiSetup.ResolvePackages
+          allowDirtyBuild: true
+          versioning: None
+      - name: Install TMP essential resources
+        run: |
+          pkg=$(sudo find BlockBloom/Library/PackageCache -name "TMP Essential Resources.unitypackage" | head -1)
+          echo "package: $pkg"
+          sudo python3 tools/extract_unitypackage.py "$pkg" BlockBloom
+          sudo chown -R "$(id -u):$(id -g)" BlockBloom/Assets || true
+      - name: Prepare project
+        uses: game-ci/unity-builder@v4
+        with:
+          projectPath: BlockBloom
+          unityVersion: ${{ env.UNITY_VERSION }}
+          targetPlatform: Android
+          buildMethod: BlockBloom.Editor.CiSetup.Prepare
+          allowDirtyBuild: true
+          versioning: None
+      - name: Build debug APK
+        uses: game-ci/unity-builder@v4
+        with:
+          projectPath: BlockBloom
+          unityVersion: ${{ env.UNITY_VERSION }}
+          targetPlatform: Android
+          buildMethod: BlockBloom.Editor.BuildScripts.BuildAndroidApk
+          allowDirtyBuild: true
+          versioning: None
+      - uses: actions/upload-artifact@v4
+        with:
+          name: BlockBloom-debug-apk
+          path: Builds/*.apk
+      - name: Publish as pre-release (easy phone download)
+        continue-on-error: true
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          gh release delete latest-blockbloom --yes --cleanup-tag || true
+          gh release create latest-blockbloom Builds/BlockBloom.apk --prerelease --target "$GITHUB_SHA" \
+            --title "Block Bloom debug APK ($GITHUB_SHA)" --notes "Debug-signed build for testing. Mock ads/IAP (no real SDK keys)."

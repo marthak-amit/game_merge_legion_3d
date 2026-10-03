@@ -1,9 +1,7 @@
 name: CI
 
 on:
-  push:
-    branches: [ main, "claude/**" ]
-  pull_request:
+  workflow_dispatch:
 
 # Required repository secrets: UNITY_LICENSE (or UNITY_SERIAL/UNITY_EMAIL/UNITY_PASSWORD), and for signed builds
 # ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASS, ANDROID_KEY_ALIAS, ANDROID_KEY_PASS.
