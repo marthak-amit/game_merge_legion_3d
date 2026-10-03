@@ -93,10 +93,41 @@ namespace MergeLegion.Core
             yield return new WaitForSeconds(1f);
         }
 
+        private const int W = 540, H = 960;
+        private RenderTexture _rt;
+
+        /// <summary>Batch mode has no real back buffer, so render the cameras (and the UI, switched to camera space) into a texture.</summary>
+        private void PrepareRenderTarget()
+        {
+            if (_rt == null) _rt = new RenderTexture(W, H, 24, RenderTextureFormat.ARGB32) { name = "ShotsRT" };
+            Camera main = Camera.main;
+            if (main == null && Camera.allCamerasCount > 0) main = Camera.allCameras[0];
+            foreach (var cam in Camera.allCameras) { if (cam.enabled) cam.targetTexture = _rt; }
+            if (main == null) return;
+            foreach (var canvas in FindObjectsByType<Canvas>(FindObjectsSortMode.None))
+            {
+                if (!canvas.isRootCanvas) continue;
+                if (canvas.renderMode == RenderMode.ScreenSpaceOverlay)
+                {
+                    canvas.renderMode = RenderMode.ScreenSpaceCamera;
+                    canvas.worldCamera = main;
+                    canvas.planeDistance = main.nearClipPlane + 0.6f;
+                }
+                else if (canvas.renderMode == RenderMode.ScreenSpaceCamera && canvas.worldCamera == null) canvas.worldCamera = main;
+            }
+        }
+
         private IEnumerator Shot(string name)
         {
+            PrepareRenderTarget();
+            yield return null;
             yield return new WaitForEndOfFrame();
-            var tex = ScreenCapture.CaptureScreenshotAsTexture();
+            var prev = RenderTexture.active;
+            RenderTexture.active = _rt;
+            var tex = new Texture2D(W, H, TextureFormat.RGB24, false);
+            tex.ReadPixels(new Rect(0, 0, W, H), 0, 0);
+            tex.Apply();
+            RenderTexture.active = prev;
             File.WriteAllBytes(Path.Combine(_dir, name + ".png"), tex.EncodeToPNG());
             Debug.Log("[Shots] saved " + name);
             _stage = "after " + name;
