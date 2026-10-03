@@ -55,26 +55,42 @@ jobs:
           buildMethod: MergeLegion.Editor.BuildScripts.BuildLinuxPlayer
           allowDirtyBuild: true
           versioning: None
-      - name: Run player under xvfb and capture screenshots
+      - name: Run player under xvfb (GL) with hang diagnostics
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y xvfb libgl1-mesa-dri libglu1-mesa
+          sudo apt-get install -y xvfb libgl1-mesa-dri libglu1-mesa mesa-vulkan-drivers vulkan-tools
           sudo chown -R "$(id -u):$(id -g)" Builds || true
           chmod +x Builds/linux/MergeLegion.x86_64
           mkdir -p Screenshots
-          timeout 900 xvfb-run -a -s "-screen 0 540x960x24" Builds/linux/MergeLegion.x86_64 \
+          xvfb-run -a -s "-screen 0 540x960x24" Builds/linux/MergeLegion.x86_64 \
             -screen-width 540 -screen-height 960 -screen-fullscreen 0 -force-glcore \
-            -logFile "$PWD/player.log" -mlshots "$PWD/Screenshots" || true
+            -logFile "$PWD/player.log" -mlshots "$PWD/Screenshots" &
+          sleep 100
+          echo "---- processes"; pgrep -fa MergeLegion || true
+          pkill -QUIT -f "Builds/linux/MergeLegion.x86_64" || true
+          sleep 10
+          echo "---- player.log after SIGQUIT (managed thread dump if frozen)"; tail -150 player.log || true
+          sleep 120
           ls -la Screenshots || true
-          grep -nE "Exception|NullReference|Error|\[Shots\]|\[Boot\]|\[MergeLegion\]" player.log | head -80 || true
-          echo "---- tail of player.log"; tail -60 player.log || true
+          pkill -f "Builds/linux/MergeLegion.x86_64" || true
+          sleep 3
+      - name: Run player under xvfb (Vulkan / lavapipe)
+        run: |
+          mkdir -p ShotsVk
+          timeout 200 xvfb-run -a -s "-screen 0 540x960x24" Builds/linux/MergeLegion.x86_64 \
+            -screen-width 540 -screen-height 960 -screen-fullscreen 0 -force-vulkan \
+            -logFile "$PWD/player_vk.log" -mlshots "$PWD/ShotsVk" || true
+          ls -la ShotsVk || true
+          grep -nE "heartbeat|\[Shots\]|Exception|Vulkan" player_vk.log | head -40 || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots
           path: |
             Screenshots
+            ShotsVk
             player.log
+            player_vk.log
           if-no-files-found: warn
 
   apk:
