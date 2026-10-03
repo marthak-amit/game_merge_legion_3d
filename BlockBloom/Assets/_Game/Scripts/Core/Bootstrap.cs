@@ -7,7 +7,10 @@ namespace BlockBloom
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Start()
         {
-            Debug.Log("[BlockBloom] bootstrap");
+            if (Object.FindFirstObjectByType<App>() != null) return;
+            var go = new GameObject("[App]");
+            Object.DontDestroyOnLoad(go);
+            go.AddComponent<App>();
         }
     }
 }

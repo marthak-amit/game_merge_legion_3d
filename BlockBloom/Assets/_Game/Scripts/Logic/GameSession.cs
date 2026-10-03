@@ -179,11 +179,13 @@ namespace BlockBloom.Logic
             return t <= 0 ? 1f : System.Math.Min(1f, GoalProgress[g] / t);
         }
 
+        /// <summary>Stars if the level ended now: efficiency = moves left over the budget (3 stars: 40%+, 2 stars: 15%+).</summary>
         public int StarsNow()
         {
-            if (Level == null || !GoalsMet()) return 0;
-            if (Keeper.Score >= Level.Star3Score) return 3;
-            if (Keeper.Score >= Level.Star2Score) return 2;
+            if (Level == null) return 0;
+            float left = Level.MaxMoves <= 0 ? 0f : (float)MovesLeft / Level.MaxMoves;
+            if (left >= 0.40f) return 3;
+            if (left >= 0.15f) return 2;
             return 1;
         }
 

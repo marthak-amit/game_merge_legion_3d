@@ -75,7 +75,7 @@ jobs:
             -logFile "$PWD/player.log" -bbshots "$PWD/shots"
           SH
           chmod +x /tmp/runwm.sh
-          timeout 300 env vblank_mode=0 xvfb-run -a -s "-screen 0 540x960x24" /tmp/runwm.sh || true
+          timeout 420 env vblank_mode=0 xvfb-run -a -s "-screen 0 540x960x24" /tmp/runwm.sh || true
           ls -la shots | head -40
           grep -nE "Exception|NullReference|\\[Shots\\]" player.log | head -60 || true
       - name: Publish screenshots to branch bb-screenshots
