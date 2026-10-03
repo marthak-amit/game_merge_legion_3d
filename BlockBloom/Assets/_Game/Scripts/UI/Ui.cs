@@ -10,25 +10,23 @@ namespace BlockBloom
     public sealed class PressFx : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler
     {
         private bool _down;
-        private float _k = 1f;
-        private Vector3 _base = Vector3.one;
-        private bool _inited;
+        private float _k = 1f, _v;
 
-        private void Awake() { _base = transform.localScale; _inited = true; }
-        public void OnPointerDown(PointerEventData e) { _down = true; }
-        public void OnPointerUp(PointerEventData e) { _down = false; }
+        public void OnPointerDown(PointerEventData e) { _down = true; _v = -2f; }
+        public void OnPointerUp(PointerEventData e) { if (_down) _v = 5f; _down = false; }
         public void OnPointerExit(PointerEventData e) { _down = false; }
-        private void OnDisable() { _down = false; _k = 1f; }
+        private void OnDisable() { _down = false; _k = 1f; _v = 0f; }
 
         private void Update()
         {
-            float target = _down ? 0.93f : 1f;
-            _k = Mathf.Lerp(_k, target, 1f - Mathf.Exp(-22f * Time.unscaledDeltaTime));
-            if (Mathf.Abs(_k - 1f) > 0.0005f || _down)
-            {
-                if (!_inited) return;
-                transform.localScale = Vector3.one * _k * 1f;
-            }
+            // critically-underdamped spring towards the pressed (0.92) or resting (1.0) size: squash on press, overshoot on release
+            float target = _down ? 0.92f : 1f;
+            if (!_down && Mathf.Abs(_k - 1f) < 0.0008f && Mathf.Abs(_v) < 0.01f) return;
+            float dt = Mathf.Min(Time.unscaledDeltaTime, 0.033f);
+            _v += (target - _k) * 420f * dt;
+            _v *= Mathf.Exp(-17f * dt);
+            _k += _v * dt;
+            transform.localScale = Vector3.one * _k;
         }
     }
 

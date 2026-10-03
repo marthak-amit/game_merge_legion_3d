@@ -87,8 +87,18 @@ namespace BlockBloom
             yield return new WaitForSeconds(0.8f);
             yield return Shot("08_classic");
 
-            App.I.ShowHome();
+            App.I.StartLevel(11);
+            yield return new WaitForSeconds(2f);
+            g = App.I.Current as GameScreen;
+            for (int n = 0; n < 5 && g != null; n++) { g.AutoMove(); yield return new WaitForSeconds(0.5f); }
+            if (g != null) g.ForceOutOfMoves();
             yield return new WaitForSeconds(1.8f);
+            yield return Shot("15_out_of_moves");
+
+            App.I.ShowHome();
+            yield return new WaitForSeconds(2f);
+            Save.Data.questProgress[0] = Economy.Quests[0].Target; Save.Data.questProgress[1] = 2; Save.Commit();
+            Popups.QuestsPopup(null); yield return new WaitForSeconds(1.4f); yield return Shot("16_quests"); App.I.Back(); yield return new WaitForSeconds(0.5f);
             Popups.Shop(); yield return new WaitForSeconds(0.9f); yield return Shot("09_shop"); App.I.Back(); yield return new WaitForSeconds(0.5f);
             Popups.DailyReward(null); yield return new WaitForSeconds(0.9f); yield return Shot("10_daily_reward"); App.I.Back(); yield return new WaitForSeconds(0.5f);
             Popups.Spin(null); yield return new WaitForSeconds(0.9f); yield return Shot("11_lucky_spin"); App.I.Back(); yield return new WaitForSeconds(0.5f);

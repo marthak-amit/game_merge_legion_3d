@@ -31,6 +31,7 @@ namespace BlockBloom
         public string questDay = "";
         public int[] questProgress = new int[3];
         public bool[] questClaimed = new bool[3];
+        public bool questBonusClaimed;
         public int sessionCount;
         public long firstRunTicks;
     }

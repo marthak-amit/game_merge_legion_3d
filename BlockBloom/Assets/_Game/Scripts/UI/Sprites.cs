@@ -8,7 +8,7 @@ namespace BlockBloom
     {
         private static readonly Dictionary<string, Sprite> Cache = new Dictionary<string, Sprite>();
 
-        private static Sprite Make(string key, int w, int h, System.Func<float, float, Color> px, Vector4 border = default(Vector4), int supersample = 2)
+        internal static Sprite Make(string key, int w, int h, System.Func<float, float, Color> px, Vector4 border = default(Vector4), int supersample = 2)
         {
             Sprite s;
             if (Cache.TryGetValue(key, out s) && s != null) return s;
@@ -39,7 +39,7 @@ namespace BlockBloom
         }
 
         // signed distance to a rounded box centred in (w,h)
-        private static float RoundBox(float x, float y, float w, float h, float r)
+        internal static float RoundBox(float x, float y, float w, float h, float r)
         {
             float px = Mathf.Abs(x - w * 0.5f) - (w * 0.5f - r);
             float py = Mathf.Abs(y - h * 0.5f) - (h * 0.5f - r);
@@ -47,7 +47,7 @@ namespace BlockBloom
             return Mathf.Sqrt(ox * ox + oy * oy) + Mathf.Min(Mathf.Max(px, py), 0) - r;
         }
 
-        private static float Cov(float d) { return Mathf.Clamp01(0.5f - d); }
+        internal static float Cov(float d) { return Mathf.Clamp01(0.5f - d); }
 
         /// <summary>Flat white rounded rectangle (9-sliced) - tint it with Image.color.</summary>
         public static Sprite Round(int radius = 24)
@@ -149,7 +149,7 @@ namespace BlockBloom
             return Make("vertical", 2, 64, (x, y) => new Color(1, 1, 1, 1), default(Vector4), 1);
         }
 
-        private static bool InPoly(float x, float y, Vector2[] p)
+        internal static bool InPoly(float x, float y, Vector2[] p)
         {
             bool c = false;
             for (int i = 0, j = p.Length - 1; i < p.Length; j = i++)
@@ -363,7 +363,7 @@ namespace BlockBloom
             return Make("pause", S, S, (x, y) => new Color(1, 1, 1, Mathf.Max(Cov(RoundBox(x - 14f, y - 12f, 14f, 40f, 4f)), Cov(RoundBox(x - 36f, y - 12f, 14f, 40f, 4f)))));
         }
 
-        private static float DistSeg(float px, float py, float ax, float ay, float bx, float by)
+        internal static float DistSeg(float px, float py, float ax, float ay, float bx, float by)
         {
             float abx = bx - ax, aby = by - ay;
             float t = Mathf.Clamp01(((px - ax) * abx + (py - ay) * aby) / (abx * abx + aby * aby));

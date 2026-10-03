@@ -33,6 +33,11 @@ namespace BlockBloom
         private RectTransform _finger; private Text _tutorialText;
         private int _placements;
         private float _startTime;
+        private RectTransform _comboPill; private Text _comboText; private RectTransform _comboFill; private int _comboShown;
+        private readonly float[] _goalShown = new float[2];
+        private readonly bool[] _goalDone = new bool[2];
+        private int _prevScore, _prevMoves;
+        private RectTransform _movesBox;
 
         // ---------- setup ----------
         public void Begin(Mode mode, int level)
@@ -51,8 +56,10 @@ namespace BlockBloom
             _startTime = Time.realtimeSinceStartup;
             BuildUi();
             _board.Sync(S.Board);
+            _board.IntroWave();
             _tray.Show(S, true);
             UpdateHud(true);
+            _prevScore = S.Score; _prevMoves = S.MovesLeft;
             Monet.Log("level_start", "mode", mode.ToString(), "level", level);
             if (mode == Mode.Adventure && !Save.Data.tutorialDone && level == 1) StartTutorial();
             if (mode == Mode.Adventure) Economy.QuestAdd(1, 0);
@@ -74,7 +81,7 @@ namespace BlockBloom
 
             if (_mode == Mode.Adventure)
             {
-                var mv = Ui.RoundImg(card, new Color(0, 0, 0, 0.28f), 34, "movesbox"); mv.rectTransform.sizeDelta = new Vector2(210, 180); mv.PosA(0f, 0.5f, 120, 0);
+                var mv = Ui.RoundImg(card, new Color(0, 0, 0, 0.28f), 34, "movesbox"); _movesBox = mv.rectTransform; mv.rectTransform.sizeDelta = new Vector2(210, 180); mv.PosA(0f, 0.5f, 120, 0);
                 Ui.LabelAt(mv.transform, "MOVES", 30, Palette.Hex("#bdb6ff"), new Vector2(0.5f, 1), new Vector2(0, -34), new Vector2(200, 40), TextAnchor.MiddleCenter, false);
                 _moves = Ui.LabelAt(mv.transform, "0", 100, Color.white, new Vector2(0.5f, 0.5f), new Vector2(0, -22), new Vector2(200, 120));
                 for (int i = 0; i < _def.Goals.Length; i++)
@@ -120,6 +127,17 @@ namespace BlockBloom
             _tray.PosA(0.5f, 0.5f, 0, -635);
             _tray.Dropped = OnDropped;
 
+            // combo pill (appears from a x2 streak)
+            _comboPill = Ui.Rect(Rt, "comboPill");
+            _comboPill.sizeDelta = new Vector2(250, 92);
+            _comboPill.PosA(0.5f, 0.5f, 330, _mode == Mode.Adventure ? 462 : 478);
+            var cpb = Ui.RoundImg(_comboPill, Palette.Alpha(Palette.Hex("#ff6a1f"), 0.95f), 46, "bg"); Ui.Stretch(cpb.rectTransform);
+            var cpf = Ui.Img(_comboPill, Icons.Flame(), Color.white, "flame"); Ui.At(cpf.rectTransform, new Vector2(0, 0.5f), new Vector2(46, 4), new Vector2(76, 76));
+            _comboText = Ui.Label(_comboPill, "x2", 54, Color.white, TextAnchor.MiddleCenter); Ui.At(_comboText.rectTransform, new Vector2(0, 0.5f), new Vector2(128, 6), new Vector2(110, 70));
+            var cbar = Widgets.Bar(_comboPill, new Vector2(70, 18), new Color(0, 0, 0, 0.35f), Palette.Hex("#ffe27a"), out _comboFill);
+            Ui.At(cbar.rectTransform, new Vector2(1, 0.5f), new Vector2(-52, 0), new Vector2(70, 18));
+            _comboPill.gameObject.SetActive(false);
+
             // boosters
             string[] names = { "UNDO", "BOMB", "SHUFFLE" };
             Sprite[] icons = { Sprites.Undo(), Sprites.Bomb(), Sprites.Shuffle() };
@@ -161,18 +179,62 @@ namespace BlockBloom
             if (_mode == Mode.Adventure)
             {
                 _moves.text = Mathf.Max(0, S.MovesLeft).ToString();
-                _moves.color = S.MovesLeft <= 3 ? Palette.Hex("#ff6b6b") : Color.white;
+                bool low = S.MovesLeft <= 3;
+                _moves.color = low ? Palette.Hex("#ff6b6b") : Color.white;
+                if (!instant && S.MovesLeft != _prevMoves)
+                {
+                    Tween.Punch(_moves.transform, 0.3f, 0.25f);
+                    if (low && S.MovesLeft > 0) { Sfx.Warn(); Anim.Shake(_movesBox, 8f, 0.35f); }
+                }
+                _prevMoves = S.MovesLeft;
                 for (int i = 0; i < _def.Goals.Length; i++)
                 {
                     var g = _def.Goals[i];
                     int p = Mathf.Min(S.GoalProgress[i], g.Target);
                     _goalText[i].text = Adventure.ShortGoal(g) + "  " + p + "/" + g.Target;
-                    Widgets.SetBar(_goalFill[i], _goalFillW[i], S.GoalFraction(i));
+                    if (instant) { _goalShown[i] = S.GoalFraction(i); Widgets.SetBar(_goalFill[i], _goalFillW[i], _goalShown[i]); }
+                    if (!instant && !_goalDone[i] && S.GoalFraction(i) >= 1f && !S.Won)
+                    {
+                        _goalDone[i] = true;
+                        if (_def.Goals.Length > 1 && Fx.I != null)
+                        {
+                            Fx.I.Float(_goalText[i].transform.position, "GOAL DONE!", 64, Palette.Green, 120f, 1.1f);
+                            Fx.I.Burst(_goalIcon[i].transform.position, LevelUi.GoalColour(g), 14, 520f, 28f);
+                            Sfx.Star(2);
+                        }
+                    }
                 }
                 int st = S.StarsNow();
-                for (int i = 0; i < _stars.Count; i++) _stars[i].color = i < st ? Palette.Gold : new Color(0.1f, 0.06f, 0.3f, 0.55f);
+                for (int i = 0; i < _stars.Count; i++)
+                {
+                    bool on = i < st;
+                    var want = on ? Palette.Gold : new Color(0.1f, 0.06f, 0.3f, 0.55f);
+                    if (_stars[i].color != want)
+                    {
+                        _stars[i].color = want;
+                        if (!instant && !on) { Tween.Punch(_stars[i].transform, -0.3f, 0.3f); }
+                    }
+                }
             }
-            if (instant) { _shownScore = S.Score; _score.text = Ui.Num(S.Score); }
+            if (instant) { _shownScore = S.Score; _score.text = Ui.Num(S.Score); _prevScore = S.Score; }
+            else if (S.Score > _prevScore) { Tween.Punch(_score.transform, 0.22f, 0.25f); _prevScore = S.Score; }
+
+            // combo streak pill
+            int combo = S.Keeper.Combo;
+            bool show = combo >= 2;
+            if (show != _comboPill.gameObject.activeSelf)
+            {
+                _comboPill.gameObject.SetActive(show);
+                if (show) Anim.PopIn(_comboPill, 0f, 0.4f, 0.35f);
+            }
+            if (show)
+            {
+                _comboText.text = "x" + combo;
+                if (combo != _comboShown) { Tween.Punch(_comboPill, 0.22f, 0.3f); }
+                float grace = 1f - S.Keeper.MovesSinceClear / (float)ScoreKeeper.ComboGraceMoves;
+                Widgets.SetBar(_comboFill, 70, grace);
+            }
+            _comboShown = combo;
         }
 
         private void RefreshBoosters()
@@ -192,6 +254,18 @@ namespace BlockBloom
             {
                 _shownScore = Mathf.MoveTowards(_shownScore, S.Score, Mathf.Max(1f, (S.Score - _shownScore) * 8f * Time.unscaledDeltaTime + 1f));
                 _score.text = Ui.Num(Mathf.RoundToInt(_shownScore));
+            }
+            if (_mode == Mode.Adventure && _def != null)
+            {
+                for (int i = 0; i < _def.Goals.Length; i++)
+                {
+                    float target = S.GoalFraction(i);
+                    if (Mathf.Abs(_goalShown[i] - target) > 0.001f)
+                    {
+                        _goalShown[i] = Mathf.MoveTowards(_goalShown[i], target, Time.unscaledDeltaTime * 0.9f);
+                        Widgets.SetBar(_goalFill[i], _goalFillW[i], _goalShown[i]);
+                    }
+                }
             }
             if (_mode != Mode.Adventure && _best != null)
             {
@@ -263,6 +337,7 @@ namespace BlockBloom
             for (int i = 0; i < Bits.Cells; i++)
                 if ((placed & (1UL << i)) != 0) _board.SetCell(i, colour + 1, false);
             _board.PopCells(placed);
+            _board.Ripple(r, c, r + shape.Height - 1, c + shape.Width - 1);
             if (Fx.I != null) Fx.I.Ring(_board.CellWorld(r + shape.Height / 2, c + shape.Width / 2), Palette.Block(colour), 200f);
             if (_tutorialStage == 1) TutorialAdvance(2, "FILL A FULL ROW OR COLUMN TO CLEAR IT");
 
@@ -464,57 +539,109 @@ namespace BlockBloom
         private void LoseAdventure()
         {
             bool noMoves = S.MovesLeft <= 0;
-            var p = Popup.Create(new Vector2(920, 1060), noMoves ? "OUT OF MOVES!" : "NO SPACE LEFT!", false, Palette.Red);
+            var p = Popup.Create(new Vector2(940, 1300), noMoves ? "OUT OF MOVES!" : "NO SPACE LEFT!", false, Palette.Red);
+            float total = 0, got = 0;
+            for (int i = 0; i < _def.Goals.Length; i++) { total += 1f; got += S.GoalFraction(i); }
+            float overall = total > 0 ? got / total : 0f;
+
+            // hero
+            var glow = Ui.Img(p.Card, Sprites.Glow(), Palette.Alpha(Palette.Red, 0.55f), "heroGlow"); glow.rectTransform.sizeDelta = new Vector2(420, 420); glow.Pos(0, 430);
+            var hero = Ui.Img(p.Card, noMoves ? Icons.Hourglass() : Sprites.Block(), noMoves ? Color.white : Palette.Red, "hero");
+            hero.rectTransform.sizeDelta = new Vector2(230, 230); hero.Pos(0, 430);
+            if (!noMoves)
+            {
+                var x = Ui.Img(hero.transform, Sprites.Cross(), Color.white, "x"); Ui.At(x.rectTransform, C0, Vector2.zero, new Vector2(120, 120));
+            }
+            else
+            {
+                var zero = Ui.Label(hero.transform, "0", 90, Color.white, TextAnchor.MiddleCenter); zero.rectTransform.sizeDelta = new Vector2(200, 120); zero.rectTransform.anchoredPosition = new Vector2(0, -6);
+                zero.gameObject.SetActive(false);
+            }
+            Anim.Wiggle(hero.transform, 10f, 0.9f);
+            Ui.Later(1.6f, () => { if (hero != null) Anim.Wiggle(hero.transform, 8f, 0.8f); });
+
+            string sub = overall >= 0.66f ? "SO CLOSE!" : (overall >= 0.33f ? "KEEP GOING!" : "DON'T GIVE UP!");
+            Ui.Label(p.Card, sub, 70, Palette.Gold, TextAnchor.MiddleCenter).Pos(0, 275);
+
+            // goal progress with animated bars
             for (int i = 0; i < _def.Goals.Length; i++)
             {
                 var g = _def.Goals[i];
-                var row = Ui.RoundImg(p.Card, new Color(0, 0, 0, 0.3f), 34, "row"); row.rectTransform.sizeDelta = new Vector2(700, 90); row.Pos(0, 330 - i * 100);
-                var ic = Ui.Img(row.transform, LevelUi.GoalSprite(g), LevelUi.GoalColour(g), "ic"); Ui.At(ic.rectTransform, new Vector2(0, 0.5f), new Vector2(60, 0), new Vector2(60, 60));
-                Ui.LabelAt(row.transform, Adventure.ShortGoal(g) + "  " + Mathf.Min(S.GoalProgress[i], g.Target) + "/" + g.Target, 40, Color.white, new Vector2(0.5f, 0.5f), new Vector2(50, 0), new Vector2(520, 70));
+                float frac = S.GoalFraction(i);
+                float y = 165 - i * 118;
+                var row = Ui.RoundImg(p.Card, new Color(0, 0, 0, 0.3f), 36, "row"); row.rectTransform.sizeDelta = new Vector2(800, 104); row.Pos(0, y);
+                var ic = Ui.Img(row.transform, LevelUi.GoalSprite(g), LevelUi.GoalColour(g), "ic"); Ui.At(ic.rectTransform, new Vector2(0, 0.5f), new Vector2(66, 0), new Vector2(68, 68));
+                RectTransform fill;
+                var bar = Widgets.Bar(row.transform, new Vector2(470, 44), new Color(0, 0, 0, 0.45f), LevelUi.GoalColour(g), out fill);
+                Ui.At(bar.rectTransform, new Vector2(0, 0.5f), new Vector2(340, -14), new Vector2(470, 44));
+                Ui.LabelAt(row.transform, Adventure.ShortGoal(g), 28, Palette.Alpha(Color.white, 0.8f), new Vector2(0, 0.5f), new Vector2(340, 24), new Vector2(470, 34), TextAnchor.MiddleLeft, false);
+                var txt = Ui.Label(row.transform, Mathf.Min(S.GoalProgress[i], g.Target) + "/" + g.Target, 44, Color.white, TextAnchor.MiddleCenter);
+                Ui.At(txt.rectTransform, new Vector2(1, 0.5f), new Vector2(-100, 0), new Vector2(180, 70));
+                Widgets.SetBar(fill, 470, 0f);
+                Tween.Value(0.8f, k => { if (fill != null) Widgets.SetBar(fill, 470, frac * k); }, Ease.OutCubic, null, 0.5f + i * 0.15f, fill);
             }
+
             int cost = Economy.ReviveCost * (S.Revives + 1);
-            string vtxt = noMoves ? "+" + Economy.ExtraMovesAmount + " MOVES  (VIDEO)" : "CONTINUE  (VIDEO)";
-            Action revive = () =>
-            {
-                p.Close(true);
-                ReviveNow();
-            };
-            Ui.Btn(p.Card, vtxt, Palette.Green, Palette.GreenDark, new Vector2(740, 130), () =>
+            Action revive = () => { p.Close(true); ReviveNow(); };
+
+            // primary: rewarded video
+            var vb = Ui.Btn(p.Card, "", Palette.Green, Palette.GreenDark, new Vector2(800, 150), () =>
             {
                 Monet.Rewarded(noMoves ? "extra_moves" : "revive", revive);
-            }, 54).Pos(0, 60);
-            Ui.Btn(p.Card, (noMoves ? "+" + Economy.ExtraMovesAmount + " MOVES  " : "CONTINUE  ") + cost + " COINS", Palette.Gold, Palette.GoldDark, new Vector2(740, 130), () =>
+            }, 60);
+            vb.Pos(0, -100);
+            var vi = Ui.Img(vb.transform, Icons.Video(), Color.white, "vi"); Ui.At(vi.rectTransform, new Vector2(0, 0.5f), new Vector2(92, 0), new Vector2(96, 96));
+            Ui.LabelAt(vb.transform, noMoves ? "+" + Economy.ExtraMovesAmount + " MOVES" : "CONTINUE", 70, Color.white, new Vector2(0.5f, 0.5f), new Vector2(50, 20), new Vector2(560, 90));
+            Ui.LabelAt(vb.transform, "WATCH A SHORT VIDEO", 30, Palette.Hex("#d9ffe3"), new Vector2(0.5f, 0.5f), new Vector2(50, -36), new Vector2(560, 40), TextAnchor.MiddleCenter, false);
+            Anim.AddShine(vb, 2.4f);
+            Ui.Later(0.9f, () => { if (vb != null) Anim.Breathe(vb.transform, 0.04f, 1.2f); });
+
+            // secondary: coins
+            var cb = Ui.Btn(p.Card, "", Palette.Gold, Palette.GoldDark, new Vector2(800, 120), () =>
             {
                 if (!Economy.Spend(cost)) { Popups.Shop(); return; }
                 revive();
-            }, 48).Pos(0, -110);
-            Ui.Btn(p.Card, "GIVE UP", Palette.Hex("#7a76a8"), Palette.Hex("#4c4880"), new Vector2(380, 100), () =>
+            }, 50);
+            cb.Pos(0, -285);
+            Ui.LabelAt(cb.transform, noMoves ? "+" + Economy.ExtraMovesAmount + " MOVES" : "CONTINUE", 56, Color.white, new Vector2(0.5f, 0.5f), new Vector2(-70, 0), new Vector2(440, 80));
+            var cc = Ui.Img(cb.transform, Sprites.Coin(), Palette.Gold, "coin"); Ui.At(cc.rectTransform, new Vector2(1, 0.5f), new Vector2(-200, 0), new Vector2(70, 70));
+            Ui.LabelAt(cb.transform, cost.ToString(), 56, Color.white, new Vector2(1, 0.5f), new Vector2(-105, 0), new Vector2(140, 80));
+
+            // footer
+            var give = Ui.Btn(p.Card, "GIVE UP", Palette.Hex("#7a76a8"), Palette.Hex("#4c4880"), new Vector2(380, 96), () =>
             {
                 _ended = true;
-                Economy.LoseHeart(); Save.Data.gamesPlayed++; Save.Commit();
+                Economy.LoseHeart(); Sfx.Break(); Save.Data.gamesPlayed++; Save.Commit();
                 Monet.Log("level_fail", "level", _levelIndex, "score", S.Score);
                 p.Close(true);
                 Monet.MaybeInterstitial(() => App.I.ShowMap());
-            }, 44).Pos(-190, -300);
-            Ui.Btn(p.Card, "RETRY", Palette.Blue, Palette.BlueDark, new Vector2(380, 100), () =>
+            }, 44);
+            give.Pos(-210, -440);
+            var retry = Ui.Btn(p.Card, "RETRY", Palette.Blue, Palette.BlueDark, new Vector2(380, 96), () =>
             {
                 _ended = true;
-                Economy.LoseHeart(); Save.Data.gamesPlayed++; Save.Commit();
+                Economy.LoseHeart(); Sfx.Break(); Save.Data.gamesPlayed++; Save.Commit();
                 p.Close(true);
                 Economy.TickHearts();
                 if (Save.Data.hearts <= 0) { App.I.ShowMap(); Ui.Later(0.6f, () => Popups.NoHearts(null)); return; }
                 App.I.StartLevel(_levelIndex);
-            }, 44).Pos(190, -300);
-            Ui.Label(p.Card, "Leaving costs 1 heart", 30, Palette.Alpha(Color.white, 0.65f), TextAnchor.MiddleCenter, false).Pos(0, -400);
+            }, 44);
+            retry.Pos(210, -440);
+            var hi = Ui.Img(p.Card, Sprites.Heart(), Palette.Red, "h"); Ui.At(hi.rectTransform, C0, new Vector2(-150, -535), new Vector2(46, 46));
+            Ui.Label(p.Card, "Leaving costs 1 heart  (" + Save.Data.hearts + " left)", 30, Palette.Alpha(Color.white, 0.75f), TextAnchor.MiddleCenter, false).Pos(40, -535);
         }
+
+        private static readonly Vector2 C0 = new Vector2(0.5f, 0.5f);
 
         private void ReviveNow()
         {
             ulong band = S.Revive(Economy.ExtraMovesAmount);
             _ended = false; _tray.InputEnabled = true;
             _board.Sync(S.Board);
+            _board.IntroWave();
             _tray.Show(S, true);
             UpdateHud(true);
+            _prevScore = S.Score; _prevMoves = S.MovesLeft;
             Sfx.Star(2); Fx.I.Confetti(30);
             Fx.I.Float(_board.Rt.position, "BACK IN!", 110, Palette.Green, 160f, 1.2f);
             Monet.Log("revive", "mode", _mode.ToString());
@@ -581,6 +708,14 @@ namespace BlockBloom
         }
 
         public bool Ended { get { return _ended; } }
+
+        /// <summary>Screenshot helper: jumps straight to the out-of-moves pop-up.</summary>
+        public void ForceOutOfMoves()
+        {
+            S.MovesLeft = 0; S.Finished = true; S.Won = false;
+            UpdateHud(false);
+            Lose();
+        }
 
         // ---------- pause ----------
         private void PausePopup()

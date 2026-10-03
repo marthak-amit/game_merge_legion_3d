@@ -13,21 +13,22 @@ namespace BlockBloom
         // ---------- settings ----------
         public static void Settings(Action onChanged)
         {
-            var p = Popup.Create(new Vector2(900, 1020), "SETTINGS", true, Palette.Purple);
+            var p = Popup.Create(new Vector2(900, 1100), "SETTINGS", true, Palette.Purple);
             float y = 270;
-            Toggle(p.Card, "SOUND FX", Sprites.Speaker(), y, () => Save.Data.sfxOn, v => { Save.Data.sfxOn = v; Save.Commit(); });
-            Toggle(p.Card, "MUSIC", Sprites.Note(), y - 150, () => Save.Data.musicOn, v => { Save.Data.musicOn = v; Save.Commit(); Sfx.ApplyMusicSetting(); });
-            Toggle(p.Card, "VIBRATION", Sprites.Pause(), y - 300, () => Save.Data.hapticsOn, v => { Save.Data.hapticsOn = v; Save.Commit(); Sfx.Haptic(30); });
+            Toggle(p.Card, "SOUND FX", Sprites.Speaker(), y + 20, () => Save.Data.sfxOn, v => { Save.Data.sfxOn = v; Save.Commit(); });
+            Toggle(p.Card, "MUSIC", Sprites.Note(), y - 130, () => Save.Data.musicOn, v => { Save.Data.musicOn = v; Save.Commit(); Sfx.ApplyMusicSetting(); });
+            Toggle(p.Card, "VIBRATION", Sprites.Pause(), y - 280, () => Save.Data.hapticsOn, v => { Save.Data.hapticsOn = v; Save.Commit(); Sfx.Haptic(30); });
+            Ui.Btn(p.Card, "THEMES", Palette.Hex("#ff5a96"), Palette.Hex("#b82d62"), new Vector2(640, 100), () => Themes(null), 44).Pos(0, -140);
             var restore = Ui.Btn(p.Card, "RESTORE PURCHASES", Palette.Blue, Palette.BlueDark, new Vector2(640, 100), () =>
             {
                 var iap = Monet.Iap; if (iap != null) iap.RestorePurchases(ok => App.I.Toast(ok ? "Purchases restored" : "Nothing to restore"));
-            }, 40).Pos(0, -250);
+            }, 40).Pos(0, -270);
             var reset = Ui.Btn(p.Card, "RESET PROGRESS", Palette.Red, Palette.RedDark, new Vector2(640, 100), () =>
             {
                 Confirm("Erase all progress?", "This cannot be undone.", "ERASE", () => { Save.Wipe(); p.Close(true); App.I.ShowHome(); });
-            }, 40).Pos(0, -390);
+            }, 40).Pos(0, -400);
             var v = Ui.Label(p.Card, "Block Bloom  v" + Application.version, 30, Palette.Alpha(Color.white, 0.6f), TextAnchor.MiddleCenter, false);
-            v.Pos(0, -470);
+            v.Pos(0, -490);
             p.OnClosed = onChanged;
         }
 
@@ -67,47 +68,64 @@ namespace BlockBloom
         public static void Shop()
         {
             var p = Popup.Create(new Vector2(960, 1560), "SHOP", true, Palette.Green);
-            // starter pack + no ads banners
-            float y = 560;
-            var starter = Economy.Products[0];
-            if (!Save.Data.starterBought) { Banner(p, starter, y, Palette.Hex("#ff9f1c"), Palette.Hex("#c06a00"), "800 coins + 3 of every booster + full hearts"); y -= 190; }
-            var noads = Economy.Products[1];
-            if (!Save.Data.adsRemoved) { Banner(p, noads, y, Palette.Blue, Palette.BlueDark, "No more pop-up ads. Rewarded videos stay optional."); y -= 190; }
+            var top = CoinPill.Create(p.Card, false, null);
+            Ui.At((RectTransform)top.transform, new Vector2(0.5f, 1f), new Vector2(0, -196), new Vector2(330, 84));
+            top.gameObject.AddComponent<NoStagger>();
 
-            // coin tiles
+            float y = 470;
+            var starter = Economy.Products[0];
+            if (!Save.Data.starterBought) { Banner(p, starter, y, Palette.Hex("#ff9f1c"), Palette.Hex("#c06a00"), "800 coins + 3 of every booster + full hearts", Icons.Gift()); y -= 190; }
+            var noads = Economy.Products[1];
+            if (!Save.Data.adsRemoved) { Banner(p, noads, y, Palette.Blue, Palette.BlueDark, "No more pop-up ads. Rewarded videos stay optional.", Icons.Video()); y -= 190; }
+
             float tileY = y - 130 + 20;
             for (int i = 2; i < Economy.Products.Length; i++)
             {
                 var prod = Economy.Products[i];
                 int k = i - 2;
-                float x = (k % 2 == 0) ? -230 : 230;
-                float ty = tileY - (k / 2) * 330;
-                Tile(p, prod, x, ty);
+                Tile(p, prod, (k % 2 == 0) ? -230 : 230, tileY - (k / 2) * 330);
             }
 
-            // free coins via video
-            var free = Ui.Btn(p.Card, "FREE +50 COINS  (VIDEO)", Palette.Green, Palette.GreenDark, new Vector2(780, 110), () =>
+            var free = Ui.Btn(p.Card, "", Palette.Green, Palette.GreenDark, new Vector2(780, 120), () =>
             {
-                Monet.Rewarded("shop_free", () => { Economy.AddCoins(50); Sfx.Coin(); App.I.Toast("+50 coins!"); });
-            }, 42).Pos(0, -650);
+                Monet.Rewarded("shop_free", () => { Economy.AddCoins(50); Sfx.Reward(); App.I.Toast("+50 coins!"); });
+            }, 42);
+            free.Pos(0, -650);
+            var vi = Ui.Img(free.transform, Icons.Video(), Color.white, "vi"); Ui.At(vi.rectTransform, new Vector2(0, 0.5f), new Vector2(80, 0), new Vector2(84, 84));
+            Ui.LabelAt(free.transform, "FREE +50 COINS", 50, Color.white, new Vector2(0.5f, 0.5f), new Vector2(50, 0), new Vector2(560, 80));
+            Anim.AddShine(free);
         }
 
-        private static void Banner(Popup p, Economy.Product prod, float y, Color face, Color lip, string sub)
+        private static void Banner(Popup p, Economy.Product prod, float y, Color face, Color lip, string sub, Sprite icon)
         {
-            var b = Ui.Btn(p.Card, "", face, lip, new Vector2(820, 160), () => Monet.Buy(prod, () => { p.Close(true); Shop(); }), 40);
+            Button b = null;
+            b = Ui.Btn(p.Card, "", face, lip, new Vector2(820, 160), () => Monet.Buy(prod, () =>
+            {
+                Sfx.Reward();
+                if (Fx.I != null) { Fx.I.Burst(b.transform.position, Palette.Gold, 26, 700f, 34f); Fx.I.Float(b.transform.position, "PURCHASED!", 80, Palette.Gold); }
+                b.gameObject.SetActive(false);
+            }), 40);
             b.transform.localPosition = new Vector3(0, y, 0);
-            var t = Ui.Label(b.transform, prod.Title, 56, Color.white, TextAnchor.MiddleLeft);
-            Ui.At(t.rectTransform, new Vector2(0, 0.5f), new Vector2(40, 34), new Vector2(480, 70)); t.rectTransform.pivot = new Vector2(0, 0.5f);
-            var s = Ui.Label(b.transform, sub, 27, Palette.Alpha(Color.white, 0.9f), TextAnchor.MiddleLeft, false);
-            Ui.At(s.rectTransform, new Vector2(0, 0.5f), new Vector2(40, -28), new Vector2(520, 70)); s.rectTransform.pivot = new Vector2(0, 0.5f);
+            var ic = Ui.Img(b.transform, icon, Color.white, "icon"); Ui.At(ic.rectTransform, new Vector2(0, 0.5f), new Vector2(86, 0), new Vector2(110, 110));
+            Anim.Wiggle(ic.transform, 10f, 0.9f);
+            var t = Ui.Label(b.transform, prod.Title, 54, Color.white, TextAnchor.MiddleLeft);
+            Ui.At(t.rectTransform, new Vector2(0, 0.5f), new Vector2(160, 34), new Vector2(380, 70)); t.rectTransform.pivot = new Vector2(0, 0.5f);
+            var s = Ui.Label(b.transform, sub, 26, Palette.Alpha(Color.white, 0.92f), TextAnchor.MiddleLeft, false);
+            Ui.At(s.rectTransform, new Vector2(0, 0.5f), new Vector2(160, -28), new Vector2(380, 70)); s.rectTransform.pivot = new Vector2(0, 0.5f);
             s.horizontalOverflow = HorizontalWrapMode.Wrap;
-            var price = Widgets.Pill(b.transform, "Rs " + prod.Price, Palette.Alpha(Palette.Ink, 0.75f), new Vector2(210, 84), 44);
-            Ui.At(price.transform.parent.GetComponent<RectTransform>(), new Vector2(1, 0.5f), new Vector2(-135, 0), new Vector2(210, 84));
+            var price = Widgets.Pill(b.transform, "Rs " + prod.Price, Palette.Alpha(Palette.Ink, 0.75f), new Vector2(190, 84), 44);
+            Ui.At(price.transform.parent.GetComponent<RectTransform>(), new Vector2(1, 0.5f), new Vector2(-120, 0), new Vector2(190, 84));
+            Anim.AddShine(b, 4f);
         }
 
         private static void Tile(Popup p, Economy.Product prod, float x, float y)
         {
-            var b = Ui.Btn(p.Card, "", Palette.Hex("#6f4bd8"), Palette.Hex("#45299c"), new Vector2(420, 290), () => Monet.Buy(prod, null), 40);
+            Button b = null;
+            b = Ui.Btn(p.Card, "", Palette.Hex("#6f4bd8"), Palette.Hex("#45299c"), new Vector2(420, 290), () => Monet.Buy(prod, () =>
+            {
+                Sfx.Reward();
+                if (Fx.I != null) { Fx.I.Burst(b.transform.position, Palette.Gold, 26, 700f, 34f); Fx.I.Float(b.transform.position, "+" + Ui.Num(prod.Coins), 90, Palette.Gold); }
+            }), 40);
             b.transform.localPosition = new Vector3(x, y, 0);
             var t = Ui.Label(b.transform, prod.Title, 38, Palette.Hex("#ffe9a8"), TextAnchor.MiddleCenter);
             Ui.At(t.rectTransform, new Vector2(0.5f, 1), new Vector2(0, -38), new Vector2(380, 60));
@@ -154,14 +172,14 @@ namespace BlockBloom
                 Ui.At(ic.rectTransform, C, new Vector2(0, big ? 20 : 8), new Vector2(big ? 110 : 84, big ? 110 : 84));
                 var amt = Ui.Label(cell, Economy.LoginRewards[i] + (big ? " + BOOSTERS" : ""), big ? 40 : 38, Color.white, TextAnchor.MiddleCenter);
                 Ui.At(amt.rectTransform, new Vector2(0.5f, 0), new Vector2(0, 38), new Vector2(w, 54));
-                if (isToday) Pulse(cell);
+                if (isToday) Ui.Later(0.9f, () => Pulse(cell));
             }
             if (can)
             {
                 Ui.Btn(p.Card, "CLAIM", Palette.Green, Palette.GreenDark, new Vector2(520, 120), () =>
                 {
                     int r = Economy.ClaimLogin();
-                    Sfx.Coin(); Widgets.CoinBurst(p.Card.position, 14);
+                    Sfx.Reward(); Widgets.CoinBurst(p.Card.position, 14);
                     App.I.Toast("+" + r + " coins!");
                     if (onClaimed != null) onClaimed();
                     p.Close();
@@ -244,44 +262,113 @@ namespace BlockBloom
         public static void QuestsPopup(Action onChanged)
         {
             Economy.EnsureQuestDay();
-            var p = Popup.Create(new Vector2(960, 1050), "DAILY QUESTS", true, Palette.Hex("#19b8a6"));
+            var p = Popup.Create(new Vector2(960, 1260), "DAILY QUESTS", true, Palette.Hex("#19b8a6"));
+            var refreshers = new System.Collections.Generic.List<Action>();
+            Sprite[] icons = { Sprites.Check(), Sprites.Block(), Icons.Flame() };
+            Color[] icolors = { Palette.Green, Palette.Block(1), Color.white };
+            Action refreshAll = () => { for (int i = 0; i < refreshers.Count; i++) refreshers[i](); };
+
             for (int i = 0; i < 3; i++)
             {
                 int q = i; var qd = Economy.Quests[q];
-                float y = 300 - i * 250;
-                var row = Ui.RoundImg(p.Card, new Color(0.05f, 0.03f, 0.2f, 0.5f), 40, "row"); row.rectTransform.sizeDelta = new Vector2(820, 210); row.Pos(0, y);
+                float y = 340 - i * 235;
+                var row = Ui.RoundImg(p.Card, new Color(0.05f, 0.03f, 0.2f, 0.5f), 40, "row"); row.rectTransform.sizeDelta = new Vector2(840, 205); row.Pos(0, y);
+                var disc = Ui.Img(row.transform, Sprites.Circle(), Palette.Hex("#2b2370"), "disc"); Ui.At(disc.rectTransform, new Vector2(0, 0.5f), new Vector2(90, 0), new Vector2(120, 120));
+                var ic = Ui.Img(disc.transform, icons[q], icolors[q], "ic"); Ui.At(ic.rectTransform, C, Vector2.zero, new Vector2(78, 78));
                 var t = Ui.Label(row.transform, qd.Text, 46, Color.white, TextAnchor.MiddleLeft);
-                Ui.At(t.rectTransform, new Vector2(0, 1), new Vector2(40, -50), new Vector2(520, 60)); t.rectTransform.pivot = new Vector2(0, 0.5f);
+                Ui.At(t.rectTransform, new Vector2(0, 1), new Vector2(170, -52), new Vector2(430, 60)); t.rectTransform.pivot = new Vector2(0, 0.5f);
+                t.resizeTextForBestFit = true; t.resizeTextMinSize = 26; t.resizeTextMaxSize = 46;
                 RectTransform fill;
-                var bar = Widgets.Bar(row.transform, new Vector2(500, 44), new Color(0, 0, 0, 0.4f), Palette.Green, out fill);
-                Ui.At(bar.rectTransform, new Vector2(0, 0), new Vector2(290, 62), new Vector2(500, 44));
-                int prog = Save.Data.questProgress[q];
-                Widgets.SetBar(fill, 500, prog / (float)qd.Target);
-                var pt = Ui.Label(bar.transform, prog + "/" + qd.Target, 30, Color.white, TextAnchor.MiddleCenter); Ui.Stretch(pt.rectTransform);
-                bool done = prog >= qd.Target, claimed = Save.Data.questClaimed[q];
-                var b = Ui.Btn(row.transform, claimed ? "DONE" : "+" + qd.Reward, done && !claimed ? Palette.Gold : Palette.Hex("#6c6a9a"),
-                    done && !claimed ? Palette.GoldDark : Palette.Hex("#45447a"), new Vector2(210, 100), () =>
+                var bar = Widgets.Bar(row.transform, new Vector2(430, 46), new Color(0, 0, 0, 0.4f), Palette.Green, out fill);
+                Ui.At(bar.rectTransform, new Vector2(0, 0), new Vector2(385, 66), new Vector2(430, 46));
+                var pt = Ui.Label(bar.transform, "", 30, Color.white, TextAnchor.MiddleCenter); Ui.Stretch(pt.rectTransform);
+                var btn = Ui.Btn(row.transform, "", Palette.Gold, Palette.GoldDark, new Vector2(210, 116), null, 48);
+                Ui.At((RectTransform)btn.transform, new Vector2(1, 0.5f), new Vector2(-135, 4), new Vector2(210, 116));
+                var btnText = Ui.Label(btn.transform, "", 48, Color.white, TextAnchor.MiddleCenter); Ui.At(btnText.rectTransform, C, new Vector2(24, 0), new Vector2(150, 70));
+                var coinIc = Ui.Img(btn.transform, Sprites.Coin(), Palette.Gold, "coin"); Ui.At(coinIc.rectTransform, C, new Vector2(-62, 0), new Vector2(56, 56));
+                var checkIc = Ui.Img(btn.transform, Sprites.Check(), Color.white, "check"); Ui.At(checkIc.rectTransform, C, Vector2.zero, new Vector2(70, 70));
+                var face = btn.transform.Find("face").GetComponent<Image>(); var lip = btn.transform.Find("lip").GetComponent<Image>();
+                bool shined = false;
+                float barW = 430;
+                Action refresh = () =>
                 {
-                    if (!done || claimed) return;
-                    Save.Data.questClaimed[q] = true; Economy.AddCoins(qd.Reward); Sfx.Coin();
+                    int prog = Save.Data.questProgress[q];
+                    bool done = prog >= qd.Target, claimed = Save.Data.questClaimed[q];
+                    Widgets.SetBar(fill, barW, prog / (float)qd.Target);
+                    pt.text = Mathf.Min(prog, qd.Target) + " / " + qd.Target;
+                    checkIc.gameObject.SetActive(claimed); coinIc.gameObject.SetActive(!claimed); btnText.gameObject.SetActive(!claimed);
+                    btnText.text = qd.Reward.ToString();
+                    face.color = claimed ? Palette.Hex("#3b8f5b") : (done ? Palette.Gold : Palette.Hex("#6c6a9a"));
+                    lip.color = claimed ? Palette.Hex("#1f6a3b") : (done ? Palette.GoldDark : Palette.Hex("#45447a"));
+                    if (done && !claimed && !shined) { shined = true; Anim.AddShine(btn, 2.2f); Anim.Breathe(btn.transform.Find("face"), 0.04f, 1.1f); }
+                };
+                refreshers.Add(refresh);
+                btn.onClick.AddListener(() =>
+                {
+                    bool done = Save.Data.questProgress[q] >= qd.Target;
+                    if (!done) { Anim.Shake(btn.transform, 10f, 0.3f); Sfx.Invalid(); return; }
+                    if (Save.Data.questClaimed[q]) return;
+                    Save.Data.questClaimed[q] = true; Economy.AddCoins(qd.Reward);
+                    Sfx.Reward();
+                    if (Fx.I != null)
+                    {
+                        Fx.I.Burst(btn.transform.position, Palette.Gold, 22, 650f, 32f);
+                        Fx.I.Float(btn.transform.position + new Vector3(0, 40, 0), "+" + qd.Reward, 78, Palette.Gold, 150f, 1f);
+                    }
+                    Anim.Flash(row, Palette.Alpha(Palette.Green, 0.8f), 0.5f);
+                    Tween.Punch(btn.transform, 0.25f, 0.3f);
+                    refreshAll();
                     if (onChanged != null) onChanged();
-                    p.Close(true); QuestsPopup(onChanged);
-                }, 48);
-                Ui.At((RectTransform)b.transform, new Vector2(1, 0.5f), new Vector2(-135, 0), new Vector2(210, 100));
+                });
+                refresh();
             }
-            var info = Ui.Label(p.Card, "Quests reset every day", 32, Palette.Alpha(Color.white, 0.7f), TextAnchor.MiddleCenter, false); info.Pos(0, -440);
+
+            // bonus for finishing everything
+            var bonus = Ui.RoundImg(p.Card, new Color(1f, 0.78f, 0.2f, 0.18f), 40, "bonus"); bonus.rectTransform.sizeDelta = new Vector2(840, 150); bonus.Pos(0, -395);
+            var gi = Ui.Img(bonus.transform, Icons.Gift(), Color.white, "gift"); Ui.At(gi.rectTransform, new Vector2(0, 0.5f), new Vector2(86, 0), new Vector2(110, 110));
+            Anim.Wiggle(gi.transform, 8f, 1f);
+            Ui.LabelAt(bonus.transform, "FINISH ALL 3", 42, Palette.Gold, new Vector2(0, 0.5f), new Vector2(330, 22), new Vector2(380, 56), TextAnchor.MiddleLeft);
+            Ui.LabelAt(bonus.transform, "BONUS CHEST", 30, Color.white, new Vector2(0, 0.5f), new Vector2(330, -26), new Vector2(380, 40), TextAnchor.MiddleLeft, false);
+            var bb = Ui.Btn(bonus.transform, "", Palette.Gold, Palette.GoldDark, new Vector2(230, 100), null, 44);
+            Ui.At((RectTransform)bb.transform, new Vector2(1, 0.5f), new Vector2(-145, 4), new Vector2(230, 100));
+            var bbText = Ui.Label(bb.transform, "", 46, Color.white, TextAnchor.MiddleCenter); Ui.Stretch(bbText.rectTransform);
+            var bface = bb.transform.Find("face").GetComponent<Image>(); var blip = bb.transform.Find("lip").GetComponent<Image>();
+            Action refreshBonus = () =>
+            {
+                bool all = Save.Data.questClaimed[0] && Save.Data.questClaimed[1] && Save.Data.questClaimed[2];
+                bool got = Save.Data.questBonusClaimed;
+                bbText.text = got ? "CLAIMED" : "+" + Economy.QuestBonusCoins;
+                bbText.fontSize = got ? 34 : 46;
+                bface.color = got ? Palette.Hex("#3b8f5b") : (all ? Palette.Gold : Palette.Hex("#6c6a9a"));
+                blip.color = got ? Palette.Hex("#1f6a3b") : (all ? Palette.GoldDark : Palette.Hex("#45447a"));
+            };
+            refreshers.Add(refreshBonus);
+            bb.onClick.AddListener(() =>
+            {
+                bool all = Save.Data.questClaimed[0] && Save.Data.questClaimed[1] && Save.Data.questClaimed[2];
+                if (!all || Save.Data.questBonusClaimed) { Anim.Shake(bb.transform, 10f, 0.3f); Sfx.Invalid(); return; }
+                Save.Data.questBonusClaimed = true; Economy.AddCoins(Economy.QuestBonusCoins); Economy.AddBooster(1, 1);
+                Sfx.Win();
+                if (Fx.I != null) { Fx.I.Confetti(70); Fx.I.Float(bb.transform.position, "+" + Economy.QuestBonusCoins + " & BOMB!", 70, Palette.Gold, 160f, 1.3f); }
+                refreshAll();
+                if (onChanged != null) onChanged();
+            });
+            refreshBonus();
+            var info = Ui.Label(p.Card, "Quests reset every day", 30, Palette.Alpha(Color.white, 0.7f), TextAnchor.MiddleCenter, false); info.Pos(0, -520);
         }
 
         // ---------- themes ----------
         public static void Themes(Action onChanged)
         {
             var p = Popup.Create(new Vector2(960, 1260), "THEMES", true, Palette.Hex("#ff5a96"));
+            var refreshers = new System.Collections.Generic.List<Action>();
+            Action refreshAll = () => { for (int i = 0; i < refreshers.Count; i++) refreshers[i](); };
             for (int i = 0; i < Palette.Themes.Length; i++)
             {
                 int k = i; var th = Palette.Themes[i];
-                float x = (i % 2 == 0) ? -230 : 230, y = 200 - (i / 2) * 470 + 60;
+                float x = (i % 2 == 0) ? -230 : 230, y = 260 - (i / 2) * 470;
                 var card = Ui.Rect(p.Card, "theme" + i); card.sizeDelta = new Vector2(420, 430); card.localPosition = new Vector3(x, y, 0);
-                var frame = Ui.Img(card, Sprites.Glossy(28), Save.Data.theme == i ? Palette.Gold : Palette.Hex("#5a47b8"), "frame"); Ui.Stretch(frame.rectTransform);
+                var frame = Ui.Img(card, Sprites.Glossy(28), Palette.Hex("#5a47b8"), "frame"); Ui.Stretch(frame.rectTransform);
                 var bgb = Ui.RoundImg(card, th.BgBottom, 24, "bgb"); Ui.Stretch(bgb.rectTransform, 12, 110, 12, 12);
                 var bgt = Ui.Img(card, Sprites.Fade(), th.BgTop, "bgt"); Ui.Stretch(bgt.rectTransform, 12, 110, 12, 12);
                 var brd = Ui.RoundImg(card, th.Board, 20, "brd"); Ui.At(brd.rectTransform, new Vector2(0.5f, 1), new Vector2(0, -150), new Vector2(250, 200));
@@ -292,20 +379,35 @@ namespace BlockBloom
                     Ui.At(ce.rectTransform, C, new Vector2((c - 1) * 70, (1 - r) * 62), new Vector2(60, 60));
                 }
                 var nm = Ui.Label(card, th.Name.ToUpper(), 38, Color.white, TextAnchor.MiddleCenter); Ui.At(nm.rectTransform, new Vector2(0.5f, 0), new Vector2(0, 90), new Vector2(380, 50));
-                bool owned = Save.Data.themeOwned[i];
-                string label = Save.Data.theme == i ? "IN USE" : (owned ? "USE" : th.Price + "");
-                var b = Ui.Btn(card, label, owned ? Palette.Green : Palette.Gold, owned ? Palette.GreenDark : Palette.GoldDark, new Vector2(300, 72), () =>
+                var b = Ui.Btn(card, "", Palette.Green, Palette.GreenDark, new Vector2(300, 72), null, 40);
+                Ui.At((RectTransform)b.transform, new Vector2(0.5f, 0), new Vector2(0, 28), new Vector2(300, 72));
+                var bt = Ui.Label(b.transform, "", 40, Color.white, TextAnchor.MiddleCenter); Ui.At(bt.rectTransform, C, new Vector2(20, 0), new Vector2(200, 60));
+                var bc = Ui.Img(b.transform, Sprites.Coin(), Palette.Gold, "coin"); Ui.At(bc.rectTransform, C, new Vector2(-60, 0), new Vector2(44, 44));
+                var bface = b.transform.Find("face").GetComponent<Image>(); var blip = b.transform.Find("lip").GetComponent<Image>();
+                Action refresh = () =>
+                {
+                    bool owned = Save.Data.themeOwned[k], use = Save.Data.theme == k;
+                    frame.color = use ? Palette.Gold : Palette.Hex("#5a47b8");
+                    bt.text = use ? "IN USE" : (owned ? "USE" : th.Price.ToString());
+                    bt.rectTransform.anchoredPosition = new Vector2(owned ? 0 : 20, 0);
+                    bc.gameObject.SetActive(!owned);
+                    bface.color = use ? Palette.Hex("#7a76a8") : (owned ? Palette.Green : Palette.Gold);
+                    blip.color = use ? Palette.Hex("#4c4880") : (owned ? Palette.GreenDark : Palette.GoldDark);
+                };
+                refreshers.Add(refresh);
+                b.onClick.AddListener(() =>
                 {
                     if (!Save.Data.themeOwned[k])
                     {
-                        if (!Economy.Spend(th.Price)) { App.I.Toast("Not enough coins"); return; }
+                        if (!Economy.Spend(th.Price)) { Anim.Shake(b.transform, 10f, 0.3f); Sfx.Invalid(); App.I.Toast("Not enough coins"); return; }
                         Save.Data.themeOwned[k] = true;
+                        Sfx.Reward(); if (Fx.I != null) Fx.I.Burst(b.transform.position, Palette.Gold, 20, 600f, 30f);
                     }
-                    Save.Data.theme = k; Save.Commit(); App.I.ApplyTheme(); Sfx.Coin();
+                    Save.Data.theme = k; Save.Commit(); App.I.ApplyTheme(); Tween.Punch(card, 0.08f, 0.3f);
+                    refreshAll();
                     if (onChanged != null) onChanged();
-                    p.Close(true); Themes(onChanged);
-                }, 40);
-                Ui.At((RectTransform)b.transform, new Vector2(0.5f, 0), new Vector2(0, 28), new Vector2(300, 72));
+                });
+                refresh();
             }
         }
 

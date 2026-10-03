@@ -170,6 +170,45 @@ namespace BlockBloom
         }
 
         // ---------- animations ----------
+        /// <summary>Cells swell in as a diagonal wave when a game starts.</summary>
+        public void IntroWave()
+        {
+            for (int i = 0; i < Bits.Cells; i++)
+            {
+                int r = i / Bits.N, c = i % Bits.N;
+                float delay = 0.025f * (r + c);
+                var ct = _cells[i].rectTransform; var bt = _blocks[i].rectTransform;
+                ct.localScale = Vector3.zero;
+                Tween.ScaleTo(ct, Vector3.one, 0.35f, Ease.OutBack, delay);
+                if (_blocks[i].gameObject.activeSelf)
+                {
+                    bt.localScale = Vector3.zero;
+                    Tween.ScaleTo(bt, Vector3.one, 0.4f, Ease.OutBack, delay + 0.12f);
+                }
+            }
+        }
+
+        /// <summary>A soft shockwave through the cells around a placement.</summary>
+        public void Ripple(int r0, int c0, int r1, int c1)
+        {
+            for (int i = 0; i < Bits.Cells; i++)
+            {
+                if (_colour[i] <= 0) continue;
+                int r = i / Bits.N, c = i % Bits.N;
+                int dr = r < r0 ? r0 - r : (r > r1 ? r - r1 : 0), dc = c < c0 ? c0 - c : (c > c1 ? c - c1 : 0);
+                int d = dr + dc;
+                if (d == 0 || d > 3) continue;
+                var t = _blocks[i].rectTransform;
+                int idx = i;
+                Tween.Value(0.28f, k =>
+                {
+                    if (t == null || _flash[idx] > 0.01f) return;
+                    float s = 1f + 0.07f / d * Mathf.Sin(k * Mathf.PI);
+                    t.localScale = new Vector3(s, s, 1f);
+                }, Ease.Linear, () => { if (t != null && _flash[idx] <= 0.01f) t.localScale = Vector3.one; }, 0.04f * d, t);
+            }
+        }
+
         public void PopCells(ulong mask)
         {
             for (int i = 0; i < Bits.Cells; i++)

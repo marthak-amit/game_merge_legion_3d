@@ -75,18 +75,25 @@ namespace BlockBloom
         private ScrollRect _scroll;
         private readonly List<Node> _pool = new List<Node>();
         private float _lastY = -99999f;
+        private Text _chapter, _chapterSub;
+        private RectTransform _locate; private Text _locateText; private RectTransform _locateArrow;
+        private static readonly string[] ChapterNames =
+        {
+            "Sunny Meadow", "Candy Hills", "Crystal Caves", "Neon City", "Star Harbor", "Frozen Peaks", "Lava Lake", "Cloud Kingdom",
+            "Toy Workshop", "Midnight Forest", "Golden Desert", "Jelly Reef", "Galaxy Gate", "Rainbow Bridge", "Dragon Valley"
+        };
 
         private sealed class Node
         {
             public RectTransform Rt; public Image Face, Lip; public Text Label; public RectTransform Stars; public Image Lock; public int Level = -1;
-            public List<Image> Dots = new List<Image>(); public Image Ring;
+            public List<Image> Dots = new List<Image>(); public Image Ring; public RectTransform Marker;
         }
 
         public void Build()
         {
             // viewport
             _view = Ui.Rect(Rt, "view");
-            Ui.Stretch(_view, 0, 0, 0, 190);
+            Ui.Stretch(_view, 0, 200, 0, 0);
             _view.gameObject.AddComponent<RectMask2D>();
             _content = Ui.Rect(_view, "content");
             _content.anchorMin = new Vector2(0, 0); _content.anchorMax = new Vector2(1, 0); _content.pivot = new Vector2(0.5f, 0);
@@ -101,16 +108,67 @@ namespace BlockBloom
 
             for (int i = 0; i < PoolSize; i++) _pool.Add(MakeNode());
 
+            // clear navigation: top bar, chapter banner, bottom nav with HOME / PLAY / SHOP
+            var chapterBar = Ui.Rect(Rt, "chapterBar");
+            chapterBar.sizeDelta = new Vector2(720, 112); chapterBar.PosA(0.5f, 1f, 0, -215);
+            var cbg = Ui.RoundImg(chapterBar, new Color(0.06f, 0.03f, 0.22f, 0.82f), 48, "bg"); Ui.Stretch(cbg.rectTransform);
+            _chapter = Ui.LabelAt(chapterBar, "CHAPTER 1", 44, Palette.Gold, new Vector2(0.5f, 0.5f), new Vector2(0, 18), new Vector2(680, 54));
+            _chapterSub = Ui.LabelAt(chapterBar, "Sunny Meadow", 32, Color.white, new Vector2(0.5f, 0.5f), new Vector2(0, -20), new Vector2(680, 40), TextAnchor.MiddleCenter, false);
+
             TopBar.Create(Rt, false);
-            var back = Ui.IconBtn(Rt, Sprites.Home(), Palette.Hex("#6f4bd8"), Palette.Hex("#45299c"), 110, () => App.I.ShowHome());
-            back.PosA(0.5f, 0f, 0, 90);
+
+            var nav = Ui.Rect(Rt, "nav");
+            nav.anchorMin = new Vector2(0, 0); nav.anchorMax = new Vector2(1, 0); nav.pivot = new Vector2(0.5f, 0);
+            nav.sizeDelta = new Vector2(0, 200); nav.anchoredPosition = Vector2.zero;
+            var navBg = Ui.Img(nav, Sprites.Square(), new Color(0.07f, 0.04f, 0.26f, 0.96f), "bg"); Ui.Stretch(navBg.rectTransform);
+            var navTop = Ui.Img(nav, Sprites.Square(), new Color(1, 1, 1, 0.12f), "edge"); navTop.rectTransform.anchorMin = new Vector2(0, 1); navTop.rectTransform.anchorMax = new Vector2(1, 1);
+            navTop.rectTransform.pivot = new Vector2(0.5f, 1); navTop.rectTransform.sizeDelta = new Vector2(0, 4); navTop.rectTransform.anchoredPosition = Vector2.zero;
+
+            NavButton(nav, "HOME", Icons.HomeColour(), Palette.Hex("#6f4bd8"), Palette.Hex("#45299c"), -360, () => App.I.ShowHome());
+            NavButton(nav, "SHOP", Icons.Bag(), Palette.Hex("#6f4bd8"), Palette.Hex("#45299c"), 360, Popups.Shop);
+            int curLv = Mathf.Clamp(Save.Data.unlockedLevel, 1, Adventure.LevelCount);
+            var play = Ui.Btn(nav, "", Palette.Green, Palette.GreenDark, new Vector2(470, 150), () => LevelUi.Open(curLv), 60, "play");
+            Ui.At((RectTransform)play.transform, new Vector2(0.5f, 0.5f), new Vector2(0, 4), new Vector2(470, 150));
+            Ui.LabelAt(play.transform, "PLAY", 66, Color.white, new Vector2(0.5f, 0.5f), new Vector2(0, 22), new Vector2(430, 76));
+            Ui.LabelAt(play.transform, "LEVEL " + curLv, 36, Palette.Hex("#d9ffe3"), new Vector2(0.5f, 0.5f), new Vector2(0, -32), new Vector2(430, 44), TextAnchor.MiddleCenter, false);
+            Anim.AddShine(play, 2.8f);
+            Anim.Breathe(play.transform.Find("face"), 0.03f, 1.4f);
+
+            // jump-to-current pill
+            _locate = Ui.Rect(Rt, "locate");
+            _locate.sizeDelta = new Vector2(300, 90); _locate.PosA(0.5f, 0f, 0, 305);
+            var lbg = Ui.RoundImg(_locate, Palette.Hex("#ff8a34"), 45, "bg", true); Ui.Stretch(lbg.rectTransform);
+            var lbtn = _locate.gameObject.AddComponent<Button>(); lbtn.targetGraphic = lbg; lbtn.transition = Selectable.Transition.None;
+            lbtn.onClick.AddListener(() => { Sfx.Click(); ScrollToCurrent(true); });
+            _locate.gameObject.AddComponent<PressFx>();
+            _locateText = Ui.LabelAt(_locate, "YOU ARE HERE", 34, Color.white, new Vector2(0.5f, 0.5f), new Vector2(24, 0), new Vector2(240, 60));
+            var arrow = Ui.Img(_locate, Sprites.Play(), Color.white, "arrow"); Ui.At(arrow.rectTransform, new Vector2(0, 0.5f), new Vector2(40, 0), new Vector2(46, 46));
+            _locateArrow = arrow.rectTransform;
+            _locate.gameObject.SetActive(false);
 
             Canvas.ForceUpdateCanvases();
-            float viewH = _view.rect.height;
-            int cur = Mathf.Clamp(Save.Data.unlockedLevel, 1, Adventure.LevelCount);
-            float y = YOf(cur);
-            _content.anchoredPosition = new Vector2(0, Mathf.Clamp(viewH * 0.45f - y, viewH - h, 0));
+            ScrollToCurrent(false);
             Refresh();
+        }
+
+        private void NavButton(Transform nav, string label, Sprite icon, Color face, Color lip, float x, Action a)
+        {
+            var b = Ui.Btn(nav, "", face, lip, new Vector2(210, 150), a, 36, label.ToLower());
+            Ui.At((RectTransform)b.transform, new Vector2(0.5f, 0.5f), new Vector2(x, 4), new Vector2(210, 150));
+            var ic = Ui.Img(b.transform, icon, Color.white, "ic"); Ui.At(ic.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0, 26), new Vector2(84, 84));
+            Ui.LabelAt(b.transform, label, 34, Color.white, new Vector2(0.5f, 0f), new Vector2(0, 30), new Vector2(200, 44));
+        }
+
+        private void ScrollToCurrent(bool animate)
+        {
+            float viewH = _view.rect.height;
+            float h = _content.sizeDelta.y;
+            int cur = Mathf.Clamp(Save.Data.unlockedLevel, 1, Adventure.LevelCount);
+            float target = Mathf.Clamp(viewH * 0.42f - YOf(cur), viewH - h, 0);
+            if (_scroll != null) _scroll.StopMovement();
+            if (!animate) { _content.anchoredPosition = new Vector2(0, target); return; }
+            float from = _content.anchoredPosition.y;
+            Tween.Value(0.6f, k => { if (_content != null) _content.anchoredPosition = new Vector2(0, Mathf.LerpUnclamped(from, target, k)); }, Ease.OutCubic, null, 0f, _content);
         }
 
         private static float YOf(int level) { return 240f + (level - 1) * Spacing; }
@@ -139,6 +197,12 @@ namespace BlockBloom
                 var s = Ui.Img(sr, Sprites.Star(), Palette.Gold, "s" + i);
                 Ui.At(s.rectTransform, new Vector2(0.5f, 0.5f), new Vector2((i - 1) * 46, i == 1 ? 8 : 0), new Vector2(i == 1 ? 56 : 46, i == 1 ? 56 : 46));
             }
+            var mk = Ui.Rect(n.Rt, "marker"); mk.sizeDelta = new Vector2(150, 110); mk.anchoredPosition = new Vector2(0, 118);
+            var mkBg = Ui.RoundImg(mk, Palette.Hex("#ff4d6d"), 34, "bg"); mkBg.rectTransform.sizeDelta = new Vector2(120, 62); mkBg.rectTransform.anchoredPosition = new Vector2(0, 14);
+            var mkTip = Ui.Img(mk, Sprites.Play(), Palette.Hex("#ff4d6d"), "tip"); mkTip.rectTransform.sizeDelta = new Vector2(34, 34); mkTip.rectTransform.anchoredPosition = new Vector2(0, -26); mkTip.rectTransform.localRotation = Quaternion.Euler(0, 0, -90);
+            Ui.LabelAt(mk, "YOU", 40, Color.white, new Vector2(0.5f, 0.5f), new Vector2(0, 16), new Vector2(120, 50));
+            n.Marker = mk; mk.gameObject.AddComponent<BobFx>().Amp = 9f;
+            var mkBob = mk.GetComponent<BobFx>(); mkBob.Speed = 4f; mkBob.Base = mk.anchoredPosition;
             var b = n.Rt.gameObject.AddComponent<Button>(); b.transition = Selectable.Transition.None; b.targetGraphic = n.Face;
             n.Rt.gameObject.AddComponent<PressFx>();
             b.onClick.AddListener(() => { if (n.Level > 0) { Sfx.Click(); LevelUi.Open(n.Level); } });
@@ -174,6 +238,7 @@ namespace BlockBloom
                 n.Label.text = locked ? "" : lv.ToString();
                 n.Lock.gameObject.SetActive(locked);
                 n.Ring.gameObject.SetActive(current);
+                n.Marker.gameObject.SetActive(current);
                 n.Stars.gameObject.SetActive(!locked && Save.Data.stars[lv - 1] > 0);
                 if (n.Stars.gameObject.activeSelf)
                     for (int i = 0; i < 3; i++) n.Stars.GetChild(i).GetComponent<Image>().color = i < Save.Data.stars[lv - 1] ? Palette.Gold : new Color(0.1f, 0.06f, 0.3f, 0.6f);
@@ -197,6 +262,7 @@ namespace BlockBloom
             if (_content == null) return;
             float y = _content.anchoredPosition.y;
             if (Mathf.Abs(y - _lastY) > 8f) { _lastY = y; Refresh(); }
+            UpdateChapterAndLocate();
             // pulse the current node ring
             int cur = Save.Data.unlockedLevel;
             for (int i = 0; i < _pool.Count; i++)
@@ -206,6 +272,32 @@ namespace BlockBloom
                     _pool[i].Rt.localScale = Vector3.one * s;
                 }
                 else if (_pool[i].Level > 0) _pool[i].Rt.localScale = Vector3.one;
+        }
+
+        private void UpdateChapterAndLocate()
+        {
+            float viewH = _view.rect.height;
+            float mid = -_content.anchoredPosition.y + viewH * 0.5f;
+            int lv = Mathf.Clamp(Mathf.RoundToInt((mid - 240f) / Spacing) + 1, 1, Adventure.LevelCount);
+            int ch = (lv - 1) / 10;
+            _chapter.text = "CHAPTER " + (ch + 1) + "   •   LEVELS " + (ch * 10 + 1) + "-" + (ch * 10 + 10);
+            _chapterSub.text = ChapterNames[ch % ChapterNames.Length];
+            int cur = Mathf.Clamp(Save.Data.unlockedLevel, 1, Adventure.LevelCount);
+            float curY = YOf(cur) + _content.anchoredPosition.y;     // in viewport space
+            bool visible = curY > 120f && curY < viewH - 120f;
+            if (_locate.gameObject.activeSelf == visible)
+            {
+                _locate.gameObject.SetActive(!visible);
+                if (!visible) Anim.PopIn(_locate, 0f, 0.5f, 0.3f);
+            }
+            if (!visible)
+            {
+                bool above = curY >= viewH - 120f;
+                _locateText.text = above ? "GO TO LEVEL " + cur : "BACK TO LEVEL " + cur;
+                _locateArrow.localRotation = Quaternion.Euler(0, 0, above ? 90 : -90);
+                _locate.sizeDelta = new Vector2(420, 90);
+                _locateText.rectTransform.sizeDelta = new Vector2(340, 60);
+            }
         }
 
         public override void OnBack() { App.I.ShowHome(); }

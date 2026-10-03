@@ -54,10 +54,17 @@ namespace BlockBloom
             app.Popups.Add(p);
             p.Card.localScale = Vector3.one * 0.6f;
             Tween.Value(0.22f, k => { if (p != null) { p._dim.color = new Color(0.03f, 0.01f, 0.12f, 0.72f * Mathf.Clamp01(k)); } }, Ease.Linear, null, 0f, p._dim);
-            Tween.Value(0.34f, k => { if (p != null) p.Card.localScale = Vector3.one * Mathf.LerpUnclamped(0.6f, 1f, k); }, Ease.OutBack, null, 0f, p.Card);
-            Sfx.Whoosh();
+            Tween.Value(0.42f, k =>
+            {
+                if (p == null) return;
+                p.Card.localScale = Vector3.one * Mathf.LerpUnclamped(0.6f, 1f, k);
+                p.Card.anchoredPosition = new Vector2(0, Mathf.LerpUnclamped(-120f, 0f, k));
+            }, Ease.OutBack, null, 0f, p.Card);
+            Sfx.Pop();
             return p;
         }
+
+        private void Start() { Anim.StaggerChildren(Card); }
 
         public void Close(bool instant = false)
         {
@@ -67,6 +74,7 @@ namespace BlockBloom
             var cb = OnClosed;
             if (instant) { Destroy(gameObject); if (cb != null) cb(); return; }
             Tween.Kill(Card);
+            Sfx.Tick();
             Tween.Value(0.16f, k =>
             {
                 if (this == null) return;

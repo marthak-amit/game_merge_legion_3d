@@ -24,7 +24,7 @@ namespace BlockBloom
         private RectTransform _layer;
         private readonly List<P> _ps = new List<P>(256);
         private readonly List<FT> _fts = new List<FT>(16);
-        private Sprite _circle, _square, _star, _glow;
+        private Sprite _circle, _square, _star, _glow, _spark;
 
         public static Fx Create(Transform canvas)
         {
@@ -32,7 +32,7 @@ namespace BlockBloom
             Ui.Stretch(rt);
             var fx = rt.gameObject.AddComponent<Fx>();
             fx._layer = rt;
-            fx._circle = Sprites.Circle(); fx._square = Sprites.Round(8); fx._star = Sprites.Star(); fx._glow = Sprites.Glow();
+            fx._circle = Sprites.Circle(); fx._square = Sprites.Round(8); fx._star = Sprites.Star(); fx._glow = Sprites.Glow(); fx._spark = Icons.Sparkle();
             I = fx;
             return fx;
         }
@@ -92,7 +92,7 @@ namespace BlockBloom
         public void Sparkle(Vector3 world, Color col)
         {
             Vector2 c = Local(world) + Random.insideUnitCircle * 30f;
-            Spawn(_star, c, new Vector2(Random.Range(-40f, 40f), Random.Range(20f, 90f)), col, Random.Range(20f, 36f), Random.Range(0.5f, 0.9f), 0, Random.Range(-200f, 200f), false, 0.96f);
+            Spawn(_spark, c, new Vector2(Random.Range(-40f, 40f), Random.Range(20f, 90f)), col, Random.Range(20f, 36f), Random.Range(0.5f, 0.9f), 0, Random.Range(-200f, 200f), false, 0.96f);
         }
 
         public void Confetti(int count)

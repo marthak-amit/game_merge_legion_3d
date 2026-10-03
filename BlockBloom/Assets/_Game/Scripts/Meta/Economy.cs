@@ -18,6 +18,7 @@ namespace BlockBloom
         public const float InterstitialMinSeconds = 100f;
         public static readonly int[] LoginRewards = { 50, 80, 120, 160, 220, 300, 500 };
         public static readonly int[] SpinPrizes = { 30, 60, 100, 50, 200, 80, 40, 400 };   // coins per wheel sector
+        public const int QuestBonusCoins = 150;
         public const int ChestStars = 15;
         public const int ChestCoins = 250;
 
@@ -128,7 +129,7 @@ namespace BlockBloom
             var d = Save.Data;
             if (d.questDay == Save.Today) return;
             d.questDay = Save.Today;
-            d.questProgress = new int[3]; d.questClaimed = new bool[3];
+            d.questProgress = new int[3]; d.questClaimed = new bool[3]; d.questBonusClaimed = false;
             Save.Commit();
         }
         public static void QuestAdd(int q, int n)

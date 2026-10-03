@@ -39,7 +39,7 @@ namespace BlockBloom
         private void Awake()
         {
             I = this;
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = Mathf.Clamp(Mathf.RoundToInt((float)Screen.currentResolution.refreshRateRatio.value), 60, 120);
             QualitySettings.vSyncCount = 0;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             Save.Load();
@@ -212,14 +212,15 @@ namespace BlockBloom
             Tween.Kill(_fade);
             float from = _fade.color.a;
             _fade.raycastTarget = true;
-            Tween.Value(0.16f * (1f - from) + 0.0001f, k => SetFade(Mathf.Lerp(from, 1f, k)), Ease.Linear, () =>
+            Tween.Value(0.11f * (1f - from) + 0.0001f, k => SetFade(Mathf.Lerp(from, 1f, k)), Ease.Linear, () =>
             {
                 for (int i = Popups.Count - 1; i >= 0; i--) Popups[i].Close(true);
                 if (Current != null) Destroy(Current.gameObject);
                 if (Fx != null) Fx.Clear();
                 Current = null;
                 build();
-                Tween.Value(0.22f, k => SetFade(1f - k), Ease.Linear, () => { _fade.raycastTarget = false; }, 0f, _fade);
+                if (Current != null) Anim.ScreenIn(Current.Rt);
+                Tween.Value(0.26f, k => SetFade(1f - k), Ease.Linear, () => { _fade.raycastTarget = false; }, 0f, _fade);
             }, 0f, _fade);
         }
 
