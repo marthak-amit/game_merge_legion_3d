@@ -41,6 +41,11 @@ jobs:
           testMode: playmode
           customParameters: -testFilter ScreenshotTests -screen-width 1080 -screen-height 1920
           githubToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Show play mode log highlights
+        if: always()
+        run: |
+          ls -la artifacts Screenshots 2>&1 || true
+          grep -nE "Exception|error CS|Error:|\[Screenshot|ScreenshotTests|Fatal|Crash|Assertion" artifacts/playmode.log 2>/dev/null | grep -v "Licens" | head -80 || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -60,6 +65,13 @@ jobs:
           path: Library
           key: Library-apk-${{ hashFiles('Packages/manifest.json', 'ProjectSettings/ProjectVersion.txt') }}
           restore-keys: Library-apk-
+      - name: Prepare project (input handler needs an editor restart before building)
+        uses: game-ci/unity-builder@v4
+        with:
+          unityVersion: ${{ env.UNITY_VERSION }}
+          targetPlatform: Android
+          buildMethod: MergeLegion.Editor.CiSetup.GenerateScenesOnly
+          allowDirtyBuild: true
       - uses: game-ci/unity-builder@v4
         with:
           unityVersion: ${{ env.UNITY_VERSION }}
