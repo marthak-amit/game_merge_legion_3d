@@ -55,26 +55,35 @@ jobs:
           buildMethod: MergeLegion.Editor.BuildScripts.BuildLinuxPlayer
           allowDirtyBuild: true
           versioning: None
-      - name: Run player under xvfb and capture screenshots
+      - name: Try player launch variants under xvfb
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y xvfb libgl1-mesa-dri libglu1-mesa
+          sudo apt-get install -y xvfb libgl1-mesa-dri libglu1-mesa x11-utils
           sudo chown -R "$(id -u):$(id -g)" Builds || true
           chmod +x Builds/linux/MergeLegion.x86_64
-          mkdir -p Screenshots
-          timeout 600 xvfb-run -a -s "-screen 0 540x960x24" Builds/linux/MergeLegion.x86_64 \
-            -screen-width 540 -screen-height 960 -screen-fullscreen 0 -force-glcore \
-            -logFile "$PWD/player.log" -mlshots "$PWD/Screenshots" || true
-          ls -la Screenshots || true
-          grep -nE "Exception|NullReference|\[Shots\] (started|scene|saved)" player.log | head -60 || true
-          echo "---- tail of player.log"; tail -40 player.log || true
+          run_variant() {
+            name="$1"; xvfbargs="$2"; envs="$3"; extra="$4"
+            mkdir -p "shots_$name"
+            echo "=== variant $name (xvfb: $xvfbargs | env: $envs | extra: $extra)"
+            timeout 110 env $envs xvfb-run -a -s "$xvfbargs" Builds/linux/MergeLegion.x86_64 \
+              -screen-width 540 -screen-height 960 -screen-fullscreen 0 $extra \
+              -logFile "$PWD/player_$name.log" -mlshots "$PWD/shots_$name" || true
+            ls "shots_$name" | head -20
+            grep -E "heartbeat" "player_$name.log" | tail -2 || true
+          }
+          S="-screen 0 540x960x24"
+          run_variant a_vblank "$S" "vblank_mode=0" "-force-glcore"
+          run_variant b_batchmode "$S" "vblank_mode=0" "-force-glcore -batchmode"
+          run_variant c_lp1 "$S" "LP_NUM_THREADS=1 vblank_mode=0" "-force-glcore"
+          run_variant d_glx "-screen 0 540x960x24 +extension GLX +render -noreset" "vblank_mode=0" "-force-glcore"
+          run_variant e_gles "$S" "vblank_mode=0" "-force-gles31"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots
           path: |
-            Screenshots
-            player.log
+            shots_*
+            player_*.log
           if-no-files-found: warn
 
   apk:
