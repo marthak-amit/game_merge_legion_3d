@@ -177,7 +177,7 @@ namespace MergeLegion.Battle
                 slot.Cost = UIKit.Label(rt, "", 38, UIKit.Gold, TextAlignmentOptions.Center, FontStyles.Bold);
                 UIKit.Place(slot.Cost.rectTransform, new Vector2(0.5f, 0f), new Vector2(0, 18), new Vector2(w - 10, 54));
 
-                var lockImg = UIKit.PanelImage(rt, new Color(0, 0, 0, 0.72f), "Lock");
+                var lockImg = UIKit.PanelImage(rt, new Color(0.05f, 0.07f, 0.12f, 1f), "Lock");
                 UIKit.Stretch(lockImg.rectTransform);
                 slot.Lock = lockImg.gameObject;
                 slot.LockText = UIKit.Label(lockImg.transform, "", 34, Color.white);

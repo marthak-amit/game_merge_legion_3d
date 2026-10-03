@@ -61,7 +61,7 @@ jobs:
           sudo apt-get install -y xvfb libgl1-mesa-dri libglu1-mesa openbox imagemagick x11-utils
           sudo chown -R "$(id -u):$(id -g)" Builds || true
           chmod +x Builds/linux/MergeLegion.x86_64
-          mkdir -p shots_f shots_g
+          mkdir -p shots_f
           cat > /tmp/runwm.sh <<'SH'
           #!/bin/bash
           # $1 = out dir, $2 = log name, rest = extra player args
@@ -82,16 +82,14 @@ jobs:
           echo "=== variant f: windowed GL + openbox"
           timeout 150 env vblank_mode=0 xvfb-run -a -s "-screen 0 540x960x24" /tmp/runwm.sh shots_f player_f.log -force-glcore || true
           ls shots_f | head -30
-          echo "=== variant g: windowed GL + openbox + 1 llvmpipe thread"
-          timeout 150 env vblank_mode=0 LP_NUM_THREADS=1 xvfb-run -a -s "-screen 0 540x960x24" /tmp/runwm.sh shots_g player_g.log -force-glcore || true
-          ls shots_g | head -30
+          ls shots_f | head -30
       - name: Publish screenshots to branch ci-screenshots
         if: always()
         run: |
           git config user.name "ci"; git config user.email "ci@users.noreply.github.com"
           rm -rf /tmp/shotsrepo && mkdir -p /tmp/shotsrepo/docs/screenshots
-          for d in shots_f shots_g; do for f in $d/*.png; do [ -f "$f" ] && cp "$f" "/tmp/shotsrepo/docs/screenshots/${d}_$(basename $f)"; done; done
-          cp player_f.log player_g.log /tmp/shotsrepo/docs/screenshots/ 2>/dev/null || true
+          for d in shots_f; do for f in $d/*.png; do [ -f "$f" ] && cp "$f" "/tmp/shotsrepo/docs/screenshots/${d}_$(basename $f)"; done; done
+          cp player_f.log /tmp/shotsrepo/docs/screenshots/ 2>/dev/null || true
           git checkout --orphan ci-screenshots
           git rm -rf --quiet . || true
           mkdir -p docs && cp -r /tmp/shotsrepo/docs/screenshots docs/
@@ -104,9 +102,7 @@ jobs:
           name: screenshots
           path: |
             shots_f
-            shots_g
             player_f.log
-            player_g.log
           if-no-files-found: warn
 
   apk:

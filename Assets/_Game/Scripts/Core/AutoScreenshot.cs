@@ -29,6 +29,7 @@ namespace MergeLegion.Core
             if (i < 0 || i + 1 >= args.Length) return false;
             save.consent.ageGatePassed = true;
             save.consent.consentAnswered = true;
+            save.consent.trackingPromptShown = true; // keep the permissions pre-prompt out of the shots
             var shots = host.AddComponent<AutoScreenshot>();
             shots._dir = args[i + 1];
             var watchdog = new System.Threading.Thread(() =>
