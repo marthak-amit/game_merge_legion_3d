@@ -55,13 +55,13 @@ namespace BlockBloom
             }
             var mv = Ui.Label(p.Card, "IN " + d.MaxMoves + " MOVES", 54, Palette.Gold, TextAnchor.MiddleCenter);
             mv.Pos(0, 170 - d.Goals.Length * 130 - 10);
-            var st = Widgets.Stars(p.Card, Save.Data.stars[level - 1], 90, 20);
+            Widgets.Stars(p.Card, Save.Data.stars[level - 1], 90, 20).Pos(0, -190);
             Ui.Btn(p.Card, "PLAY", Palette.Green, Palette.GreenDark, new Vector2(620, 140), () =>
             {
                 Economy.TickHearts();
                 if (Save.Data.hearts <= 0) { p.Close(); Popups.NoHearts(() => App.I.StartLevel(level)); return; }
                 p.Close(true); App.I.StartLevel(level);
-            }, 78).Pos(0, -330);
+            }, 78).Pos(0, -350);
         }
     }
 

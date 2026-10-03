@@ -74,7 +74,7 @@ namespace BlockBloom
 
     public static class Widgets
     {
-        public static Image Stars(Transform parent, int lit, float size, float gap, string name = "stars")
+        public static RectTransform Stars(Transform parent, int lit, float size, float gap, string name = "stars")
         {
             var root = Ui.Rect(parent, name);
             root.sizeDelta = new Vector2(size * 3 + gap * 2, size);
@@ -85,7 +85,7 @@ namespace BlockBloom
                 var im = Ui.Img(root, Sprites.Star(), on ? Palette.Gold : new Color(0.1f, 0.06f, 0.3f, 0.55f), "s" + i);
                 Ui.At(im.rectTransform, new Vector2(0.5f, 0.5f), new Vector2((i - 1) * (size + gap), i == 1 ? size * 0.12f : 0), new Vector2(s, s));
             }
-            return null;
+            return root;
         }
 
         public static Text Pill(Transform parent, string text, Color bg, Vector2 size, int font = 40)
