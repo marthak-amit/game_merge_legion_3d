@@ -1,0 +1,10 @@
+{
+  "maxSdkKey": "",
+  "maxRewardedAndroid": "", "maxRewardedIos": "",
+  "maxInterstitialAndroid": "", "maxInterstitialIos": "",
+  "maxBannerAndroid": "", "maxBannerIos": "",
+  "appsFlyerDevKey": "",
+  "appsFlyerAppIdIos": "",
+  "playGamesLeaderboardCampaign": "", "playGamesLeaderboardEndless": "", "playGamesLeaderboardArena": "",
+  "gameCenterLeaderboardCampaign": "", "gameCenterLeaderboardEndless": "", "gameCenterLeaderboardArena": ""
+}
