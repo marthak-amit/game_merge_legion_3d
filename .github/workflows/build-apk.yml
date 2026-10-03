@@ -62,8 +62,8 @@ jobs:
           sudo chown -R "$(id -u):$(id -g)" Builds || true
           chmod +x Builds/linux/MergeLegion.x86_64
           mkdir -p Screenshots
-          timeout 400 xvfb-run -a -s "-screen 0 720x1280x24" Builds/linux/MergeLegion.x86_64 \
-            -screen-width 720 -screen-height 1280 -screen-fullscreen 0 -force-glcore \
+          timeout 900 xvfb-run -a -s "-screen 0 540x960x24" Builds/linux/MergeLegion.x86_64 \
+            -screen-width 540 -screen-height 960 -screen-fullscreen 0 -force-glcore \
             -logFile "$PWD/player.log" -mlshots "$PWD/Screenshots" || true
           ls -la Screenshots || true
           grep -nE "Exception|NullReference|Error|\[Shots\]|\[Boot\]|\[MergeLegion\]" player.log | head -80 || true

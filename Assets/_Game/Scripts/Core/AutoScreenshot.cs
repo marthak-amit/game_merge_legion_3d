@@ -19,6 +19,8 @@ namespace MergeLegion.Core
     public sealed class AutoScreenshot : MonoBehaviour
     {
         private string _dir;
+        private static volatile int _frames;
+        private static volatile string _stage = "init";
 
         public static bool TryAttach(GameObject host, SaveData save)
         {
@@ -29,8 +31,20 @@ namespace MergeLegion.Core
             save.consent.consentAnswered = true;
             var shots = host.AddComponent<AutoScreenshot>();
             shots._dir = args[i + 1];
+            var watchdog = new System.Threading.Thread(() =>
+            {
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                while (true)
+                {
+                    System.Threading.Thread.Sleep(15000);
+                    Debug.Log("[Shots] heartbeat t=" + (int)sw.Elapsed.TotalSeconds + "s frames=" + _frames + " stage=" + _stage);
+                }
+            }) { IsBackground = true };
+            watchdog.Start();
             return true;
         }
+
+        private void Update() { _frames++; }
 
         private IEnumerator Start()
         {
@@ -38,6 +52,7 @@ namespace MergeLegion.Core
             Directory.CreateDirectory(_dir);
             yield return Wait(SceneNames.Battle, 40f);
             Debug.Log("[Shots] scene now " + SceneManager.GetActiveScene().name);
+            _stage = "in " + SceneManager.GetActiveScene().name;
             yield return Shot("01_intro_battle");
 
             ServiceLocator.Get<TutorialService>().SkipAll();
@@ -84,6 +99,7 @@ namespace MergeLegion.Core
             var tex = ScreenCapture.CaptureScreenshotAsTexture();
             File.WriteAllBytes(Path.Combine(_dir, name + ".png"), tex.EncodeToPNG());
             Debug.Log("[Shots] saved " + name);
+            _stage = "after " + name;
             Destroy(tex);
         }
     }
