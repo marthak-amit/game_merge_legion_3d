@@ -61,6 +61,13 @@ namespace MergeLegion.Editor
             Build(BuildTarget.Android, Path.Combine(Output(), "MergeLegion.apk"));
         }
 
+        /// <summary>Desktop Linux player; CI runs it under xvfb with "-mlshots" to produce screenshots.</summary>
+        public static void BuildLinuxPlayer()
+        {
+            ApplyCommon();
+            Build(BuildTarget.StandaloneLinux64, Path.Combine(Output(), "linux", "MergeLegion.x86_64"));
+        }
+
         [MenuItem("Tools/Merge Legion/Build/iOS Xcode project")]
         public static void BuildIosProject()
         {

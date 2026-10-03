@@ -47,25 +47,33 @@ jobs:
           targetPlatform: StandaloneLinux64
           buildMethod: MergeLegion.Editor.CiSetup.GenerateScenesOnly
           allowDirtyBuild: true
-      - name: Capture screenshots (play mode)
-        uses: game-ci/unity-test-runner@v4
+      - name: Build Linux player
+        uses: game-ci/unity-builder@v4
         with:
           unityVersion: ${{ env.UNITY_VERSION }}
-          testMode: playmode
-          customParameters: -testFilter ScreenshotTests -screen-width 1080 -screen-height 1920
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-      - name: Show play mode log highlights
-        if: always()
+          targetPlatform: StandaloneLinux64
+          buildMethod: MergeLegion.Editor.BuildScripts.BuildLinuxPlayer
+          allowDirtyBuild: true
+          versioning: None
+      - name: Run player under xvfb and capture screenshots
         run: |
-          ls -la artifacts Screenshots 2>&1 || true
-          grep -nE "Exception|error CS|Error:|\[Screenshot|ScreenshotTests|Fatal|Crash|Assertion" artifacts/playmode.log 2>/dev/null | grep -v "Licens" | head -80 || true
+          sudo apt-get update -y
+          sudo apt-get install -y xvfb libgl1-mesa-dri libglu1-mesa
+          sudo chown -R "$(id -u):$(id -g)" Builds || true
+          chmod +x Builds/linux/MergeLegion.x86_64
+          mkdir -p Screenshots
+          timeout 240 xvfb-run -a -s "-screen 0 1080x1920x24" Builds/linux/MergeLegion.x86_64 \
+            -screen-width 1080 -screen-height 1920 -screen-fullscreen 0 -force-glcore \
+            -logFile "$PWD/player.log" -mlshots "$PWD/Screenshots" || true
+          ls -la Screenshots || true
+          grep -nE "Exception|NullReference|Error" player.log | head -60 || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots
           path: |
             Screenshots
-            artifacts
+            player.log
           if-no-files-found: warn
 
   apk:

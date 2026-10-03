@@ -50,6 +50,7 @@ namespace MergeLegion.Core
             ServiceLocator.Register<Audio.IAudioService>(GetComponent<Audio.AudioManager>());
             Tutorial.TutorialOverlay.Create();
             UI.PermissionsFlow.Init();
+            if (!string.IsNullOrEmpty(firstScene)) AutoScreenshot.TryAttach(gameObject, save.Data);
 
             var auth = ServiceLocator.Get<IAuthService>();
             if (!string.IsNullOrEmpty(save.Data.displayName)) auth.DisplayName = save.Data.displayName;
