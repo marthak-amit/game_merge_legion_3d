@@ -24,6 +24,8 @@ namespace BlockBloom
         public int bestCombo;
         public bool sfxOn = true, musicOn = true, hapticsOn = true;
         public bool tutorialDone;
+        public bool ageGateDone, isUnder13, adsPersonalised = true, ratePromptShown;
+        public int bloomsTriggered;
         public bool adsRemoved, starterBought;
         public int theme;
         public bool[] themeOwned = new bool[] { true, false, false, false };

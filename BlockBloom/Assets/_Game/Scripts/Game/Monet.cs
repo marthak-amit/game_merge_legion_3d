@@ -24,6 +24,15 @@ namespace BlockBloom
             a.LogEvent(ev, d);
         }
 
+        /// <summary>Localized store price when available, otherwise the USD price point.</summary>
+        public static string PriceText(Economy.Product p)
+        {
+            var iap = Iap;
+            var info = iap != null ? iap.GetProduct(p.Sku) : null;
+            if (info != null && !string.IsNullOrEmpty(info.LocalizedPrice)) return info.LocalizedPrice;
+            return "$" + p.PriceUsd.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+        }
+
         public static bool RewardedReady(string placement)
         {
             var a = Ads; return a != null && a.IsRewardedReady(placement);
@@ -48,7 +57,7 @@ namespace BlockBloom
         {
             var d = Save.Data; var a = Ads;
             _ends++;
-            bool allowed = a != null && !d.adsRemoved && d.unlockedLevel > Economy.FreeLevelsBeforeAds
+            bool allowed = a != null && !d.adsRemoved && !d.isUnder13 && d.unlockedLevel > Economy.FreeLevelsBeforeAds
                            && _ends % Economy.InterstitialEveryNthEnd == 0
                            && Time.realtimeSinceStartup - _lastInterstitial > Economy.InterstitialMinSeconds
                            && a.IsInterstitialReady("level_end");
@@ -61,12 +70,13 @@ namespace BlockBloom
         {
             var iap = Iap;
             if (iap == null) return;
+            if (Save.Data.isUnder13) { App.I.Toast("Ask a parent to make purchases"); return; }
             Log("iap_start", "sku", p.Sku);
             iap.Purchase(p.Sku, res =>
             {
                 if (!res.Success) { App.I.Toast("Purchase cancelled"); return; }
                 Grant(p);
-                Log("iap_success", "sku", p.Sku, "price_inr", p.Price);
+                Log("iap_success", "sku", p.Sku, "price_usd", (double)p.PriceUsd);
                 if (onDone != null) onDone();
             });
         }

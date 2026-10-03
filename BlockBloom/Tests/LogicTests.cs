@@ -282,6 +282,24 @@ namespace BlockBloom.Tests
             }
         }
 
+        [Test] public void Session_BloomPicksMostCommonColour()
+        {
+            var s = new GameSession(Mode.Classic, 9);
+            s.Board.Occ = 0; s.Board.Gems = 0;
+            for (int i = 0; i < 64; i++) s.Board.Colors[i] = 0;
+            for (int c = 0; c < 5; c++) s.Board.Fill(0, c, 2, false);     // five of colour index 2
+            for (int c = 0; c < 2; c++) s.Board.Fill(7, c, 4, false);     // two of colour index 4
+            ulong mask; int colour;
+            Assert.IsTrue(s.TryBloom(out mask, out colour));
+            Assert.AreEqual(2, colour);
+            Assert.AreEqual(5, Bits.PopCount(mask));
+            // too few blocks -> no bloom
+            var t = new GameSession(Mode.Classic, 10);
+            t.Board.Occ = 0; for (int i = 0; i < 64; i++) t.Board.Colors[i] = 0;
+            t.Board.Fill(3, 3, 1, false);
+            Assert.IsFalse(t.TryBloom(out mask, out colour));
+        }
+
         [Test] public void Session_BombAndRevive()
         {
             var d = Adventure.Get(20);

@@ -27,14 +27,14 @@ namespace BlockBloom.Services.Mock
             _products.Clear();
             for (int i = 0; i < skus.Count; i++)
             {
-                decimal price = PriceLookup != null ? PriceLookup(skus[i]) : 99m;
+                decimal price = PriceLookup != null ? PriceLookup(skus[i]) : 0.99m;
                 _products[skus[i]] = new ProductInfo
                 {
                     Sku = skus[i],
                     Kind = KindLookup != null ? KindLookup(skus[i]) : ProductKind.Consumable,
-                    LocalizedPrice = "Rs " + price.ToString("0", System.Globalization.CultureInfo.InvariantCulture),
+                    LocalizedPrice = "$" + price.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture),
                     Price = price,
-                    IsoCurrency = "INR"
+                    IsoCurrency = "USD"
                 };
             }
             IsInitialized = true;

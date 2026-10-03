@@ -7,7 +7,7 @@ namespace BlockBloom
     public static class Economy
     {
         public const int MaxHearts = 5;
-        public const int HeartRegenMinutes = 20;
+        public const int HeartRegenMinutes = 12;
         public const int HeartRefillCost = 120;
         public const int ReviveCost = 150;
         public const int ExtraMovesCost = 100;
@@ -19,6 +19,7 @@ namespace BlockBloom
         public static readonly int[] LoginRewards = { 50, 80, 120, 160, 220, 300, 500 };
         public static readonly int[] SpinPrizes = { 30, 60, 100, 50, 200, 80, 40, 400 };   // coins per wheel sector
         public const int QuestBonusCoins = 150;
+        public const int BloomEveryLines = 10;
         public const int ChestStars = 15;
         public const int ChestCoins = 250;
 
@@ -154,17 +155,17 @@ namespace BlockBloom
             return t.Year * 10000 + t.Month * 100 + t.Day;
         }
 
-        // ---------- shop catalogue ----------
-        public sealed class Product { public string Sku; public string Title; public string Sub; public int Coins; public int Price; public ProductKindEx Kind; }
+        // ---------- shop catalogue (USD price points; the store supplies the real localized price) ----------
+        public sealed class Product { public string Sku; public string Title; public string Sub; public int Coins; public decimal PriceUsd; public ProductKindEx Kind; }
         public enum ProductKindEx { Coins, RemoveAds, Starter }
         public static readonly Product[] Products =
         {
-            new Product { Sku = "bb_starter",   Title = "STARTER PACK", Sub = "Best value, once only", Coins = 800, Price = 49,  Kind = ProductKindEx.Starter },
-            new Product { Sku = "bb_remove_ads", Title = "NO ADS",       Sub = "Remove all pop-up ads", Coins = 0,   Price = 199, Kind = ProductKindEx.RemoveAds },
-            new Product { Sku = "bb_coins_s",   Title = "HANDFUL",      Sub = "", Coins = 600,  Price = 79,  Kind = ProductKindEx.Coins },
-            new Product { Sku = "bb_coins_m",   Title = "POUCH",        Sub = "", Coins = 1800, Price = 199, Kind = ProductKindEx.Coins },
-            new Product { Sku = "bb_coins_l",   Title = "CHEST",        Sub = "", Coins = 4200, Price = 399, Kind = ProductKindEx.Coins },
-            new Product { Sku = "bb_coins_xl",  Title = "VAULT",        Sub = "", Coins = 10000, Price = 749, Kind = ProductKindEx.Coins },
+            new Product { Sku = "bb_starter",    Title = "STARTER PACK", Sub = "Best value, once only", Coins = 800,   PriceUsd = 1.99m, Kind = ProductKindEx.Starter },
+            new Product { Sku = "bb_remove_ads", Title = "NO ADS",       Sub = "Remove all pop-up ads", Coins = 0,     PriceUsd = 4.99m, Kind = ProductKindEx.RemoveAds },
+            new Product { Sku = "bb_coins_s",    Title = "HANDFUL",      Sub = "", Coins = 500,   PriceUsd = 0.99m, Kind = ProductKindEx.Coins },
+            new Product { Sku = "bb_coins_m",    Title = "POUCH",        Sub = "", Coins = 1600,  PriceUsd = 2.99m, Kind = ProductKindEx.Coins },
+            new Product { Sku = "bb_coins_l",    Title = "CHEST",        Sub = "", Coins = 2800,  PriceUsd = 4.99m, Kind = ProductKindEx.Coins },
+            new Product { Sku = "bb_coins_xl",   Title = "VAULT",        Sub = "", Coins = 6500,  PriceUsd = 9.99m, Kind = ProductKindEx.Coins },
         };
     }
 }

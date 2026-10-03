@@ -12,6 +12,8 @@ namespace BlockBloom.Logic
         public bool TrayRefilled;
         public bool Won, Lost;
         public int[] GoalDeltas;
+        public ulong BloomMask;          // cells removed by a Bloom Burst this move (0 = none)
+        public int BloomColour, BloomGems, BloomPoints;
     }
 
     /// <summary>
@@ -37,6 +39,8 @@ namespace BlockBloom.Logic
         public int Seed;
         public int PerfectClears;
         public int Revives;
+        public int BloomMeter;          // lines cleared towards the next Bloom Burst
+        public const int BloomLines = 10;
 
         private TrayGenerator _gen;
         private BbRng _colourRng;
@@ -45,7 +49,7 @@ namespace BlockBloom.Logic
         private sealed class Snapshot
         {
             public BoardState Board; public ScoreKeeper Keeper; public Shape[] Tray; public bool[] Used; public int[] TrayColour;
-            public int MovesLeft, MovesMade; public int[] Progress; public int Perfect;
+            public int MovesLeft, MovesMade; public int[] Progress; public int Perfect; public int Bloom;
         }
 
         public GameSession(Mode mode, int seed, LevelDef level = null)
@@ -101,7 +105,7 @@ namespace BlockBloom.Logic
             {
                 Board = Board.Clone(), Keeper = Keeper.Clone(), Tray = (Shape[])Tray.Clone(), Used = (bool[])Used.Clone(),
                 TrayColour = (int[])TrayColour.Clone(), MovesLeft = MovesLeft, MovesMade = MovesMade,
-                Progress = (int[])GoalProgress.Clone(), Perfect = PerfectClears
+                Progress = (int[])GoalProgress.Clone(), Perfect = PerfectClears, Bloom = BloomMeter
             };
         }
 
@@ -111,7 +115,7 @@ namespace BlockBloom.Logic
             var s = _undo; _undo = null;
             Board.CopyFrom(s.Board); Keeper.CopyFrom(s.Keeper);
             Tray = s.Tray; Used = s.Used; TrayColour = s.TrayColour;
-            MovesLeft = s.MovesLeft; MovesMade = s.MovesMade; GoalProgress = s.Progress; PerfectClears = s.Perfect;
+            MovesLeft = s.MovesLeft; MovesMade = s.MovesMade; GoalProgress = s.Progress; PerfectClears = s.Perfect; BloomMeter = s.Bloom;
             return true;
         }
 
@@ -134,6 +138,26 @@ namespace BlockBloom.Logic
             if (pr.PerfectClear) PerfectClears++;
             o.Valid = true; o.Place = pr; o.Score = ms;
 
+            // Bloom Burst: every BloomLines cleared lines, all blocks of the most common colour burst away
+            byte[] bloomColours = null;
+            if (pr.Lines > 0)
+            {
+                BloomMeter += pr.Lines;
+                if (BloomMeter >= BloomLines)
+                {
+                    ulong bm; int bc;
+                    if (TryBloom(out bm, out bc))
+                    {
+                        BloomMeter -= BloomLines;
+                        o.BloomMask = bm; o.BloomColour = bc;
+                        o.BloomGems = Bits.PopCount(Board.Gems & bm);
+                        o.BloomPoints = Bits.PopCount(bm) * 5;
+                        Board.Remove(bm, out bloomColours);
+                        Keeper.Score += o.BloomPoints;
+                    }
+                }
+            }
+
             if (Level != null)
             {
                 for (int g = 0; g < Level.Goals.Length; g++)
@@ -144,12 +168,15 @@ namespace BlockBloom.Logic
                     {
                         case GoalType.Score: GoalProgress[g] = Keeper.Score; break;
                         case GoalType.Lines: GoalProgress[g] = Keeper.TotalLines; break;
-                        case GoalType.Gems: GoalProgress[g] += pr.GemsCollected; break;
+                        case GoalType.Gems: GoalProgress[g] += pr.GemsCollected + o.BloomGems; break;
                         case GoalType.Combo: GoalProgress[g] = System.Math.Max(GoalProgress[g], Keeper.BestCombo); break;
                         case GoalType.Colour:
                             if (pr.ClearedColors != null)
                                 for (int i = 0; i < Bits.Cells; i++)
                                     if ((pr.Cleared & (1UL << i)) != 0 && pr.ClearedColors[i] == goal.Colour + 1) GoalProgress[g]++;
+                            if (bloomColours != null)
+                                for (int i = 0; i < Bits.Cells; i++)
+                                    if ((o.BloomMask & (1UL << i)) != 0 && bloomColours[i] == goal.Colour + 1) GoalProgress[g]++;
                             break;
                     }
                     o.GoalDeltas[g] = GoalProgress[g] - before;
@@ -164,6 +191,21 @@ namespace BlockBloom.Logic
                 Finished = true; Won = false; o.Lost = true;
             }
             return o;
+        }
+
+        /// <summary>Finds the most common block colour on the board (needs at least 4 blocks of it).</summary>
+        public bool TryBloom(out ulong mask, out int colour)
+        {
+            var counts = new int[16];
+            for (int i = 0; i < Bits.Cells; i++)
+                if ((Board.Occ & (1UL << i)) != 0) counts[Board.Colors[i] & 15]++;
+            int best = 0, bestCount = 0;
+            for (int c = 1; c < 16; c++) if (counts[c] > bestCount) { bestCount = counts[c]; best = c; }
+            mask = 0; colour = best - 1;
+            if (best == 0 || bestCount < 4) return false;
+            for (int i = 0; i < Bits.Cells; i++)
+                if ((Board.Occ & (1UL << i)) != 0 && Board.Colors[i] == best) mask |= 1UL << i;
+            return true;
         }
 
         public bool GoalsMet()

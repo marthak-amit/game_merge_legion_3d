@@ -56,6 +56,12 @@ namespace BlockBloom
         {
             Monet.Log("session_start", "n", Save.Data.sessionCount);
             if (AutoScreenshot.TryAttach(gameObject)) { ShowHome(); return; }
+            if (!Save.Data.ageGateDone)
+            {
+                ShowHome();
+                Ui.Later(1.0f, () => Popups.AgeGate(() => { if (!Save.Data.tutorialDone) StartLevel(1); }));
+                return;
+            }
             if (!Save.Data.tutorialDone) StartLevel(1);
             else ShowHome();
         }
@@ -74,7 +80,7 @@ namespace BlockBloom
             var skus = new List<string>();
             foreach (var p in Economy.Products)
             {
-                prices[p.Sku] = p.Price; skus.Add(p.Sku);
+                prices[p.Sku] = p.PriceUsd; skus.Add(p.Sku);
                 kinds[p.Sku] = p.Kind == Economy.ProductKindEx.Coins ? ProductKind.Consumable : ProductKind.NonConsumable;
             }
             iap.PriceLookup = s => prices[s];

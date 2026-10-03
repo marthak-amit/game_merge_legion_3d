@@ -13,23 +13,66 @@ namespace BlockBloom
         // ---------- settings ----------
         public static void Settings(Action onChanged)
         {
-            var p = Popup.Create(new Vector2(900, 1100), "SETTINGS", true, Palette.Purple);
-            float y = 270;
-            Toggle(p.Card, "SOUND FX", Sprites.Speaker(), y + 20, () => Save.Data.sfxOn, v => { Save.Data.sfxOn = v; Save.Commit(); });
-            Toggle(p.Card, "MUSIC", Sprites.Note(), y - 130, () => Save.Data.musicOn, v => { Save.Data.musicOn = v; Save.Commit(); Sfx.ApplyMusicSetting(); });
-            Toggle(p.Card, "VIBRATION", Sprites.Pause(), y - 280, () => Save.Data.hapticsOn, v => { Save.Data.hapticsOn = v; Save.Commit(); Sfx.Haptic(30); });
-            Ui.Btn(p.Card, "THEMES", Palette.Hex("#ff5a96"), Palette.Hex("#b82d62"), new Vector2(640, 100), () => Themes(null), 44).Pos(0, -140);
-            var restore = Ui.Btn(p.Card, "RESTORE PURCHASES", Palette.Blue, Palette.BlueDark, new Vector2(640, 100), () =>
+            var p = Popup.Create(new Vector2(920, 1400), "SETTINGS", true, Palette.Purple);
+            float y = 470;
+            Toggle(p.Card, "SOUND FX", Sprites.Speaker(), y, () => Save.Data.sfxOn, v => { Save.Data.sfxOn = v; Save.Commit(); });
+            Toggle(p.Card, "MUSIC", Sprites.Note(), y - 125, () => Save.Data.musicOn, v => { Save.Data.musicOn = v; Save.Commit(); Sfx.ApplyMusicSetting(); });
+            Toggle(p.Card, "VIBRATION", Sprites.Pause(), y - 250, () => Save.Data.hapticsOn, v => { Save.Data.hapticsOn = v; Save.Commit(); Sfx.Haptic(30); });
+            Toggle(p.Card, "PERSONALIZED ADS", Sprites.Star(), y - 375, () => Save.Data.adsPersonalised && !Save.Data.isUnder13,
+                v => { Save.Data.adsPersonalised = v; Save.Commit(); if (v && Save.Data.isUnder13) App.I.Toast("Not available for players under 13"); });
+            Ui.Btn(p.Card, "THEMES", Palette.Hex("#ff5a96"), Palette.Hex("#b82d62"), new Vector2(660, 96), () => Themes(null), 44).Pos(0, -30);
+            Ui.Btn(p.Card, "RESTORE PURCHASES", Palette.Blue, Palette.BlueDark, new Vector2(660, 96), () =>
             {
                 var iap = Monet.Iap; if (iap != null) iap.RestorePurchases(ok => App.I.Toast(ok ? "Purchases restored" : "Nothing to restore"));
-            }, 40).Pos(0, -270);
-            var reset = Ui.Btn(p.Card, "RESET PROGRESS", Palette.Red, Palette.RedDark, new Vector2(640, 100), () =>
+            }, 40).Pos(0, -150);
+            Ui.Btn(p.Card, "PRIVACY", Palette.Hex("#7a76a8"), Palette.Hex("#4c4880"), new Vector2(320, 90), () => Application.OpenURL(Links.PrivacyPolicy), 38).Pos(-170, -265);
+            Ui.Btn(p.Card, "TERMS", Palette.Hex("#7a76a8"), Palette.Hex("#4c4880"), new Vector2(320, 90), () => Application.OpenURL(Links.Terms), 38).Pos(170, -265);
+            Ui.Btn(p.Card, "SUPPORT", Palette.Hex("#7a76a8"), Palette.Hex("#4c4880"), new Vector2(320, 90), () => Application.OpenURL(Links.Support), 38).Pos(-170, -375);
+            Ui.Btn(p.Card, "RESET PROGRESS", Palette.Red, Palette.RedDark, new Vector2(320, 90), () =>
             {
                 Confirm("Erase all progress?", "This cannot be undone.", "ERASE", () => { Save.Wipe(); p.Close(true); App.I.ShowHome(); });
-            }, 40).Pos(0, -400);
-            var v = Ui.Label(p.Card, "Block Bloom  v" + Application.version, 30, Palette.Alpha(Color.white, 0.6f), TextAnchor.MiddleCenter, false);
-            v.Pos(0, -490);
+            }, 30).Pos(170, -375);
+            Ui.Label(p.Card, "Block Bloom  v" + Application.version, 28, Palette.Alpha(Color.white, 0.6f), TextAnchor.MiddleCenter, false).Pos(0, -490);
             p.OnClosed = onChanged;
+        }
+
+        // ---------- first launch: age screen (COPPA) + privacy notice (CCPA) ----------
+        public static void AgeGate(Action done)
+        {
+            var p = Popup.Create(new Vector2(920, 1060), "WELCOME!", false, Palette.Green);
+            Ui.Label(p.Card, "Quick question before you play", 44, Color.white, TextAnchor.MiddleCenter).Pos(0, 330);
+            var hero = Ui.Img(p.Card, Icons.Gift(), Color.white, "hero"); hero.rectTransform.sizeDelta = new Vector2(190, 190); hero.Pos(0, 170);
+            Anim.Wiggle(hero.transform, 8f, 0.8f);
+            var t = Ui.Label(p.Card, "How old are you?\nThis helps us keep ads and purchases age-appropriate.", 36, Palette.Alpha(Color.white, 0.9f), TextAnchor.MiddleCenter, false);
+            t.Pos(0, -10).Size(760, 140); t.horizontalOverflow = HorizontalWrapMode.Wrap;
+            Ui.Btn(p.Card, "I'M 13 OR OLDER", Palette.Green, Palette.GreenDark, new Vector2(740, 130), () =>
+            {
+                Save.Data.ageGateDone = true; Save.Data.isUnder13 = false; Save.Commit(); p.Close(true); if (done != null) done();
+            }, 54).Pos(0, -170);
+            Ui.Btn(p.Card, "I'M UNDER 13", Palette.Blue, Palette.BlueDark, new Vector2(740, 110), () =>
+            {
+                Save.Data.ageGateDone = true; Save.Data.isUnder13 = true; Save.Data.adsPersonalised = false; Save.Commit(); p.Close(true); if (done != null) done();
+            }, 46).Pos(0, -320);
+            var pp = Ui.Label(p.Card, "By continuing you agree to our Terms and Privacy Policy.", 28, Palette.Alpha(Color.white, 0.65f), TextAnchor.MiddleCenter, false);
+            pp.Pos(0, -430).Size(800, 50);
+            Ui.Btn(p.Card, "PRIVACY POLICY", Palette.Hex("#7a76a8"), Palette.Hex("#4c4880"), new Vector2(340, 70), () => Application.OpenURL(Links.PrivacyPolicy), 28).Pos(-190, -490);
+            Ui.Btn(p.Card, "TERMS", Palette.Hex("#7a76a8"), Palette.Hex("#4c4880"), new Vector2(340, 70), () => Application.OpenURL(Links.Terms), 28).Pos(190, -490);
+        }
+
+        // ---------- rate us (asked once, after the player has had real fun) ----------
+        public static void RatePrompt()
+        {
+            if (Save.Data.ratePromptShown) return;
+            Save.Data.ratePromptShown = true; Save.Commit();
+            var p = Popup.Create(new Vector2(880, 800), "ENJOYING BLOCK BLOOM?", true, Palette.Hex("#ff5a96"));
+            var stars = Widgets.Stars(p.Card, 3, 120, 24); stars.Pos(0, 200);
+            Ui.Label(p.Card, "A quick rating helps us a lot!", 42, Color.white, TextAnchor.MiddleCenter).Pos(0, 40);
+            Ui.Btn(p.Card, "RATE 5 STARS", Palette.Green, Palette.GreenDark, new Vector2(640, 120), () =>
+            {
+                Application.OpenURL(Application.platform == RuntimePlatform.IPhonePlayer ? Links.IosStore : Links.AndroidStore);
+                Monet.Log("rate_yes"); p.Close();
+            }, 52).Pos(0, -120);
+            Ui.Btn(p.Card, "NOT NOW", Palette.Hex("#7a76a8"), Palette.Hex("#4c4880"), new Vector2(400, 90), () => { Monet.Log("rate_later"); p.Close(); }, 38).Pos(0, -270);
         }
 
         private static void Toggle(RectTransform card, string label, Sprite icon, float y, Func<bool> get, Action<bool> set)
@@ -113,7 +156,7 @@ namespace BlockBloom
             var s = Ui.Label(b.transform, sub, 26, Palette.Alpha(Color.white, 0.92f), TextAnchor.MiddleLeft, false);
             Ui.At(s.rectTransform, new Vector2(0, 0.5f), new Vector2(160, -28), new Vector2(380, 70)); s.rectTransform.pivot = new Vector2(0, 0.5f);
             s.horizontalOverflow = HorizontalWrapMode.Wrap;
-            var price = Widgets.Pill(b.transform, "Rs " + prod.Price, Palette.Alpha(Palette.Ink, 0.75f), new Vector2(190, 84), 44);
+            var price = Widgets.Pill(b.transform, Monet.PriceText(prod), Palette.Alpha(Palette.Ink, 0.75f), new Vector2(190, 84), 44);
             Ui.At(price.transform.parent.GetComponent<RectTransform>(), new Vector2(1, 0.5f), new Vector2(-120, 0), new Vector2(190, 84));
             Anim.AddShine(b, 4f);
         }
@@ -137,7 +180,7 @@ namespace BlockBloom
             }
             var amt = Ui.Label(b.transform, Ui.Num(prod.Coins), 52, Color.white, TextAnchor.MiddleCenter);
             Ui.At(amt.rectTransform, C, new Vector2(0, -34), new Vector2(380, 70));
-            var price = Widgets.Pill(b.transform, "Rs " + prod.Price, Palette.Green, new Vector2(240, 66), 40);
+            var price = Widgets.Pill(b.transform, Monet.PriceText(prod), Palette.Green, new Vector2(240, 66), 40);
             Ui.At(price.transform.parent.GetComponent<RectTransform>(), new Vector2(0.5f, 0), new Vector2(0, 52), new Vector2(240, 66));
         }
 
@@ -414,7 +457,7 @@ namespace BlockBloom
         // ---------- hearts ----------
         public static void NoHearts(Action onRefilled)
         {
-            var p = Popup.Create(new Vector2(900, 980), "OUT OF HEARTS", true, Palette.Red);
+            var p = Popup.Create(new Vector2(900, 1100), "OUT OF HEARTS", true, Palette.Red);
             var h = Ui.Img(p.Card, Sprites.Heart(), Palette.Red, "h"); h.rectTransform.sizeDelta = new Vector2(240, 240); h.Pos(0, 240);
             Tween.Punch(h.transform, 0.1f, 0.8f);
             var t = Ui.Label(p.Card, Save.Data.hearts >= Economy.MaxHearts ? "Hearts are full!" : "Next heart in " + Ui.Clock(Economy.UntilNextHeart()), 44, Color.white, TextAnchor.MiddleCenter);
@@ -428,7 +471,8 @@ namespace BlockBloom
                 if (!Economy.Spend(Economy.HeartRefillCost)) { p.Close(); Shop(); return; }
                 Economy.AddHearts(Economy.MaxHearts); p.Close(); if (onRefilled != null) onRefilled();
             }, 48).Pos(0, -250);
-            Ui.Label(p.Card, "Hearts come back every " + Economy.HeartRegenMinutes + " minutes", 30, Palette.Alpha(Color.white, 0.7f), TextAnchor.MiddleCenter, false).Pos(0, -380);
+            Ui.Btn(p.Card, "PLAY CLASSIC  (NO HEARTS)", Palette.Blue, Palette.BlueDark, new Vector2(700, 100), () => { p.Close(true); App.I.StartClassic(); }, 38).Pos(0, -385);
+            Ui.Label(p.Card, "Hearts come back every " + Economy.HeartRegenMinutes + " minutes", 30, Palette.Alpha(Color.white, 0.7f), TextAnchor.MiddleCenter, false).Pos(0, -470);
         }
 
         // ---------- booster offer ----------
