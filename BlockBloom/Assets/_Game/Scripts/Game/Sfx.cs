@@ -94,7 +94,9 @@ namespace BlockBloom
         }
 
         // keeps the VIBRATE permission in the manifest (Unity detects Handheld.Vibrate usage)
+        #if UNITY_ANDROID && !UNITY_EDITOR
         private static void PermissionAnchor() { Handheld.Vibrate(); }
+#endif
 
         // ---------- synthesis ----------
         private AudioClip Build(string id)
