@@ -627,8 +627,8 @@ namespace BlockBloom
                 App.I.StartLevel(_levelIndex);
             }, 44);
             retry.Pos(210, -440);
-            var hi = Ui.Img(p.Card, Sprites.Heart(), Palette.Red, "h"); Ui.At(hi.rectTransform, C0, new Vector2(-150, -535), new Vector2(46, 46));
-            Ui.Label(p.Card, "Leaving costs 1 heart  (" + Save.Data.hearts + " left)", 30, Palette.Alpha(Color.white, 0.75f), TextAnchor.MiddleCenter, false).Pos(40, -535);
+            var hi = Ui.Img(p.Card, Sprites.Heart(), Palette.Red, "h"); Ui.At(hi.rectTransform, C0, new Vector2(-250, -535), new Vector2(46, 46));
+            Ui.Label(p.Card, "Leaving costs 1 heart  (" + Save.Data.hearts + " left)", 30, Palette.Alpha(Color.white, 0.75f), TextAnchor.MiddleCenter, false).Pos(30, -535);
         }
 
         private static readonly Vector2 C0 = new Vector2(0.5f, 0.5f);
