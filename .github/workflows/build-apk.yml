@@ -55,35 +55,50 @@ jobs:
           buildMethod: MergeLegion.Editor.BuildScripts.BuildLinuxPlayer
           allowDirtyBuild: true
           versioning: None
-      - name: Try player launch variants under xvfb
+      - name: Run player (batchmode) under xvfb and capture screenshots
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y xvfb libgl1-mesa-dri libglu1-mesa x11-utils
+          sudo apt-get install -y xvfb libgl1-mesa-dri libglu1-mesa
           sudo chown -R "$(id -u):$(id -g)" Builds || true
           chmod +x Builds/linux/MergeLegion.x86_64
-          run_variant() {
-            name="$1"; xvfbargs="$2"; envs="$3"; extra="$4"
-            mkdir -p "shots_$name"
-            echo "=== variant $name (xvfb: $xvfbargs | env: $envs | extra: $extra)"
-            timeout 110 env $envs xvfb-run -a -s "$xvfbargs" Builds/linux/MergeLegion.x86_64 \
-              -screen-width 540 -screen-height 960 -screen-fullscreen 0 $extra \
-              -logFile "$PWD/player_$name.log" -mlshots "$PWD/shots_$name" || true
-            ls "shots_$name" | head -20
-            grep -E "heartbeat" "player_$name.log" | tail -2 || true
-          }
-          S="-screen 0 540x960x24"
-          run_variant a_vblank "$S" "vblank_mode=0" "-force-glcore"
-          run_variant b_batchmode "$S" "vblank_mode=0" "-force-glcore -batchmode"
-          run_variant c_lp1 "$S" "LP_NUM_THREADS=1 vblank_mode=0" "-force-glcore"
-          run_variant d_glx "-screen 0 540x960x24 +extension GLX +render -noreset" "vblank_mode=0" "-force-glcore"
-          run_variant e_gles "$S" "vblank_mode=0" "-force-gles31"
+          mkdir -p shots
+          timeout 240 env vblank_mode=0 xvfb-run -a -s "-screen 0 540x960x24" Builds/linux/MergeLegion.x86_64 \
+            -batchmode -screen-width 540 -screen-height 960 -screen-fullscreen 0 -force-glcore \
+            -logFile "$PWD/player.log" -mlshots "$PWD/shots" || true
+          ls -la shots || true
+          grep -E "Exception|NullReference" player.log | head -20 || true
+      - name: Analyse screenshots (are they blank?)
+        run: |
+          python3 -m pip install --quiet pillow
+          python3 - <<'PY'
+          import glob, os
+          from PIL import Image
+          for f in sorted(glob.glob("shots/*.png")):
+              im = Image.open(f).convert("RGB")
+              colors = im.getcolors(1000000)
+              n = len(colors) if colors else 999999
+              print(f"{os.path.basename(f):28s} {im.size} bytes={os.path.getsize(f):7d} distinct_colors={n}")
+          PY
+      - name: Publish screenshots to branch ci-screenshots
+        if: always()
+        run: |
+          git config user.name "ci"; git config user.email "ci@users.noreply.github.com"
+          rm -rf /tmp/shotsrepo && mkdir -p /tmp/shotsrepo/docs/screenshots
+          cp shots/*.png /tmp/shotsrepo/docs/screenshots/ 2>/dev/null || true
+          cp player.log /tmp/shotsrepo/docs/screenshots/player.log 2>/dev/null || true
+          git checkout --orphan ci-screenshots
+          git rm -rf --quiet . || true
+          mkdir -p docs && cp -r /tmp/shotsrepo/docs/screenshots docs/
+          git add docs/screenshots
+          git commit -q -m "CI screenshots [skip ci]" || true
+          git push -f origin ci-screenshots || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots
           path: |
-            shots_*
-            player_*.log
+            shots
+            player.log
           if-no-files-found: warn
 
   apk:
