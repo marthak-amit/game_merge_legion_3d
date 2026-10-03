@@ -118,6 +118,7 @@ jobs:
           name: MergeLegion-debug-apk
           path: Builds/*.apk
       - name: Publish as pre-release (easy phone download)
+        continue-on-error: true
         env: { GH_TOKEN: "${{ github.token }}" }
         run: |
           gh release delete latest-debug --yes --cleanup-tag || true
