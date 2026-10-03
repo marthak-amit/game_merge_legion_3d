@@ -27,6 +27,19 @@ jobs:
           path: Library
           key: Library-shots-${{ hashFiles('Packages/manifest.json', 'ProjectSettings/ProjectVersion.txt') }}
           restore-keys: Library-shots-
+      - name: Resolve packages
+        uses: game-ci/unity-builder@v4
+        with:
+          unityVersion: ${{ env.UNITY_VERSION }}
+          targetPlatform: StandaloneLinux64
+          buildMethod: MergeLegion.Editor.CiSetup.ResolvePackages
+          allowDirtyBuild: true
+      - name: Install TMP essential resources
+        run: |
+          pkg=$(sudo find Library/PackageCache -name "TMP Essential Resources.unitypackage" | head -1)
+          echo "package: $pkg"
+          sudo python3 tools/extract_unitypackage.py "$pkg" .
+          sudo chown -R "$(id -u):$(id -g)" Assets || true
       - name: Generate scenes
         uses: game-ci/unity-builder@v4
         with:
@@ -65,6 +78,19 @@ jobs:
           path: Library
           key: Library-apk-${{ hashFiles('Packages/manifest.json', 'ProjectSettings/ProjectVersion.txt') }}
           restore-keys: Library-apk-
+      - name: Resolve packages
+        uses: game-ci/unity-builder@v4
+        with:
+          unityVersion: ${{ env.UNITY_VERSION }}
+          targetPlatform: Android
+          buildMethod: MergeLegion.Editor.CiSetup.ResolvePackages
+          allowDirtyBuild: true
+      - name: Install TMP essential resources
+        run: |
+          pkg=$(sudo find Library/PackageCache -name "TMP Essential Resources.unitypackage" | head -1)
+          echo "package: $pkg"
+          sudo python3 tools/extract_unitypackage.py "$pkg" .
+          sudo chown -R "$(id -u):$(id -g)" Assets || true
       - name: Prepare project (input handler needs an editor restart before building)
         uses: game-ci/unity-builder@v4
         with:
