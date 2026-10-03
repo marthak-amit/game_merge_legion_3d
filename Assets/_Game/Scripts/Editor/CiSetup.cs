@@ -10,7 +10,9 @@ namespace MergeLegion.Editor
             ProjectSetup.ApplyProjectSettings();
             BalanceImporter.Import();
             SceneGenerator.GenerateScenes();
-            EditorApplication.Exit(0);
+            bool ok = System.IO.File.Exists(SceneGenerator.SceneFolder + "/Main.unity");
+            if (!ok) UnityEngine.Debug.LogError("[CiSetup] Scene generation produced no scenes.");
+            EditorApplication.Exit(ok ? 0 : 1);
         }
     }
 }

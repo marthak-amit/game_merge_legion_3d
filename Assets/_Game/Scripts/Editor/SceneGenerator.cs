@@ -26,8 +26,9 @@ namespace MergeLegion.Editor
         [MenuItem("Tools/Merge Legion/Generate Scenes")]
         public static void GenerateScenes()
         {
-            if (AssetDatabase.FindAssets("t:TMP_Settings").Length == 0)
+            if (!EnsureTmpEssentials())
             {
+                if (Application.isBatchMode) throw new System.InvalidOperationException("TextMeshPro essential resources could not be imported.");
                 EditorUtility.DisplayDialog("TextMeshPro resources missing",
                     "Run Window > TextMeshPro > Import TMP Essential Resources, then run Generate Scenes again.", "OK");
                 return;
@@ -49,6 +50,16 @@ namespace MergeLegion.Editor
             EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(boot);
             EditorSceneManager.OpenScene(boot);
             Debug.Log("[MergeLegion] Scenes generated. Press Play to boot into the Home screen.");
+        }
+
+        /// <summary>Imports TMP Essential Resources when absent (fresh CI checkouts never have them).</summary>
+        public static bool EnsureTmpEssentials()
+        {
+            if (AssetDatabase.FindAssets("t:TMP_Settings").Length > 0) return true;
+            const string pkg = "Packages/com.unity.ugui/Package Resources/TMP Essential Resources.unitypackage";
+            if (File.Exists(pkg)) AssetDatabase.ImportPackage(pkg, false);
+            AssetDatabase.Refresh();
+            return AssetDatabase.FindAssets("t:TMP_Settings").Length > 0;
         }
 
         private static string BuildBoot()
